@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>you-cloud</name>
-    <description>Demo project for Spring Boot</description>
+    <description>微服务框架</description>
     <packaging>pom</packaging>
 
     <properties>
