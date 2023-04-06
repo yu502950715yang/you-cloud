@@ -16,6 +16,8 @@
 
     <modules>
         <module>you-gateway</module>
+        <module>you-auth</module>
+        <module>you-common</module>
     </modules>
 
     <properties>
@@ -54,6 +56,20 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- 核心模块 -->
+            <dependency>
+                <groupId>com.you</groupId>
+                <artifactId>you-common-core</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>2.0.25</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
