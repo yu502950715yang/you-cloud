@@ -1,0 +1,93 @@
+{{#if template}}
+<template>
+  <el-dialog :visible.sync="dialogVisible" :destroy-on-close="true" :title="dialogOperate">
+    <el-form ref="dataForm" :model="dataForm" label-position="left" :rules="rules" label-width="80px" style="overflow: hidden">
+      <el-row :gutter="30">
+        <el-col :span="12">
+          <el-form-item
+            label="用户姓名"
+            prop="testCol"
+          >
+            <el-input v-model="dataForm.testCol" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button v-waves @click="dialogClose">
+        取消
+      </el-button>
+      <el-button v-waves type="primary" @click="save">
+        提交
+      </el-button>
+    </div>
+  </el-dialog>
+</template>
+{{/if}}
+
+{{#if script}}
+<script>
+export default {
+  name: '{{ properCase name }}',
+  props: {
+    dialogFormVisible: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    dialogOperate: {
+      type: String,
+      required: true
+    },
+    rowData: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {
+          dataForm: {
+            id: undefined,
+            testCol: ''
+          }
+        }
+      }
+    }
+  },
+  data() {
+    return {
+      dataForm: {
+        id: this.rowData.id,
+        testCol: this.rowData.testCol
+      }
+    }
+  },
+  computed: {
+    dialogVisible: {
+      get() {
+        return this.dialogFormVisible
+      },
+      set(val) {
+        this.$emit('form-visible', val)
+      }
+    }
+  },
+  methods: {
+    dialogClose() {
+      this.dialogVisible = false
+    },
+    save() {
+      this.$refs.dataForm.validate((valid) => {
+        if (valid) {
+          this.$emit('save', this.dataForm)
+        }
+      })
+    }
+  }
+}
+</script>
+{{/if}}
+
+{{#if style}}
+<style lang="scss" scoped>
+
+</style>
+{{/if}}
