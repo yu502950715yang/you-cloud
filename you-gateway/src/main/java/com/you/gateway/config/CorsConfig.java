@@ -1,4 +1,4 @@
-package com.you.config;
+package com.you.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -5,3 +5,18 @@ spring:
   application:
     # 应用名称
     name: you-gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.1.56:8848
+        file-extension: yml
+        shared-configs:
+          - ${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        username: nacos
+        password: nacos
+      discovery:
+        server-addr: 192.168.1.56:8848
+        username: nacos
+        password: nacos

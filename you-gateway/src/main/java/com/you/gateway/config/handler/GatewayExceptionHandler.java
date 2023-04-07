@@ -1,4 +1,4 @@
-package com.you.config.handler;
+package com.you.gateway.config.handler;
 
 import com.you.common.core.utils.ServletUtils;
 import org.slf4j.Logger;

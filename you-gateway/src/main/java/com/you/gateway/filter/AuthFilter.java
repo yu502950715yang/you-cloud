@@ -1,4 +1,4 @@
-package com.you.filter;
+package com.you.gateway.filter;
 
 import com.you.common.core.constant.CacheConstants;
 import com.you.common.core.constant.HttpStatus;
@@ -8,7 +8,7 @@ import com.you.common.core.utils.JwtUtil;
 import com.you.common.core.utils.ServletUtils;
 import com.you.common.core.utils.StrUtils;
 import com.you.common.redis.service.RedisService;
-import com.you.config.properties.IgnoreWhiteProperties;
+import com.you.gateway.config.properties.IgnoreWhiteProperties;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
