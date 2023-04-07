@@ -17,6 +17,7 @@
     <modules>
         <module>you-common-security</module>
         <module>you-common-core</module>
+        <module>you-common-redis</module>
     </modules>
 
 </project>

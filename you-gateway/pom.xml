@@ -40,10 +40,10 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- 核心模块 -->
+        <!-- redis -->
         <dependency>
             <groupId>com.you</groupId>
-            <artifactId>you-common-core</artifactId>
+            <artifactId>you-common-redis</artifactId>
         </dependency>
     </dependencies>
 

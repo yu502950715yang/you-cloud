@@ -9,13 +9,15 @@ import java.util.List;
 
 /**
  * Security放行名单
+ * <p>
+ * RefreshScope 动态刷新，根据nacos配置动态变化
  *
  * @author Eric
  * @since 1.0
  * Create with Intellij IDEA on 2023-04-06 14:01
  */
 @Configuration
-@RefreshScope // 动态刷新，根据nacos配置动态变化
+@RefreshScope
 @ConfigurationProperties(prefix = "security.ignore")
 public class IgnoreWhiteProperties {
 

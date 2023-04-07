@@ -1,9 +1,15 @@
 package com.you.filter;
 
+import com.you.common.core.constant.CacheConstants;
 import com.you.common.core.constant.HttpStatus;
+import com.you.common.core.constant.SecurityConstants;
 import com.you.common.core.constant.TokenConstants;
+import com.you.common.core.utils.JwtUtil;
+import com.you.common.core.utils.ServletUtils;
 import com.you.common.core.utils.StrUtils;
+import com.you.common.redis.service.RedisService;
 import com.you.config.properties.IgnoreWhiteProperties;
+import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +36,13 @@ public class AuthFilter implements GlobalFilter, Ordered {
     @Autowired
     private IgnoreWhiteProperties ignoreWhite;
 
+    @Autowired
+    private RedisService redisService;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        ServerHttpRequest.Builder builder = request.mutate();
+        ServerHttpRequest.Builder mutate = request.mutate();
 
         String url = request.getURI().getPath();
         // 跳过不需要验证的url
@@ -42,13 +51,47 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
         String token = getToken(request);
         if (StrUtils.isEmpty(token)) {
+            return unauthorizedResponse(exchange, "令牌不能为空");
         }
-        return null;
+        Claims claims = JwtUtil.parseToken(token);
+        if (null == claims) {
+            return unauthorizedResponse(exchange, "令牌不正确或验证不正确");
+        }
+        String userKey = JwtUtil.getUserKey(claims);
+        boolean isLogin = redisService.hasKey(getTokenKey(userKey));
+        if (!isLogin) {
+            return unauthorizedResponse(exchange, "登录状态已过期");
+        }
+        String userId = JwtUtil.getUserId(claims);
+        String username = JwtUtil.getUsername(claims);
+        if (StrUtils.isEmpty(userId) || StrUtils.isEmpty(username)) {
+            return unauthorizedResponse(exchange, "令牌验证失败");
+        }
+        // 设置用户信息到请求
+        addHeader(mutate, SecurityConstants.USER_KEY, userKey);
+        addHeader(mutate, SecurityConstants.DETAILS_USER_ID, userId);
+        addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
+        // 内部请求来源参数清除
+        removeHeader(mutate, SecurityConstants.FROM_SOURCE);
+        return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
 
     @Override
     public int getOrder() {
         return -200;
+    }
+
+    private void addHeader(ServerHttpRequest.Builder mutate, String name, Object value) {
+        if (value == null) {
+            return;
+        }
+        String valueStr = value.toString();
+        String valueEncode = ServletUtils.urlEncode(valueStr);
+        mutate.header(name, valueEncode);
+    }
+
+    private void removeHeader(ServerHttpRequest.Builder mutate, String name) {
+        mutate.headers(httpHeaders -> httpHeaders.remove(name)).build();
     }
 
     private String getToken(ServerHttpRequest request) {
@@ -63,5 +106,12 @@ public class AuthFilter implements GlobalFilter, Ordered {
     private Mono<Void> unauthorizedResponse(ServerWebExchange exchange, String msg) {
         log.error("[鉴权异常处理]请求路径:{}", exchange.getRequest().getPath());
         return ServletUtils.webFluxResponseWriter(exchange.getResponse(), msg, HttpStatus.UNAUTHORIZED);
+    }
+
+    /**
+     * 获取缓存key
+     */
+    private String getTokenKey(String token) {
+        return CacheConstants.LOGIN_TOKEN_KEY + token;
     }
 }

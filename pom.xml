@@ -58,6 +58,20 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>2.0.25</version>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+
             <!-- 核心模块 -->
             <dependency>
                 <groupId>com.you</groupId>
@@ -65,11 +79,11 @@
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
-            <!-- JSON 解析器和生成器 -->
+            <!-- Redis -->
             <dependency>
-                <groupId>com.alibaba.fastjson2</groupId>
-                <artifactId>fastjson2</artifactId>
-                <version>2.0.25</version>
+                <groupId>com.you</groupId>
+                <artifactId>you-common-redis</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
