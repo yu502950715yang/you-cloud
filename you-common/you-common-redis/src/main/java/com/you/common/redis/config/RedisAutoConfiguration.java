@@ -32,18 +32,23 @@ public class RedisAutoConfiguration {
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        //该方法是指定序列化输入的类型，就是将数据库里的数据按照一定类型存储到redis缓存中。
         om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,
                 ObjectMapper.DefaultTyping.NON_FINAL,
-                JsonTypeInfo.As.WRAPPER_ARRAY);//该方法是指定序列化输入的类型，就是将数据库里的数据按照一定类型存储到redis缓存中。
-        jackson2JsonRedisSerializer.setObjectMapper(om);//完成配置，放在jackson2JsonRedisSerializer序列化中
+                JsonTypeInfo.As.WRAPPER_ARRAY);
+        //完成配置，放在jackson2JsonRedisSerializer序列化中
+        jackson2JsonRedisSerializer.setObjectMapper(om);
 
         //创建一个String类型的序列化对象
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-
-        template.setKeySerializer(stringRedisSerializer);//key采用String的序列化方式
-        template.setValueSerializer(jackson2JsonRedisSerializer);//value采用上面定义的json序列化方式
-        template.setHashKeySerializer(stringRedisSerializer);//hash采用上面定义的string序列化方式
-        template.setHashValueSerializer(jackson2JsonRedisSerializer);//hash的value采用上面定义的json序列化方式
+        //key采用String的序列化方式
+        template.setKeySerializer(stringRedisSerializer);
+        //value采用上面定义的json序列化方式
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        //hash采用上面定义的string序列化方式
+        template.setHashKeySerializer(stringRedisSerializer);
+        //hash的value采用上面定义的json序列化方式
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
         template.afterPropertiesSet();
         return template;
     }

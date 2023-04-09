@@ -1,6 +1,5 @@
 package com.you.common.redis.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,8 +21,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedisService {
 
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
+
+    public RedisService(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
@@ -199,7 +201,7 @@ public class RedisService {
      * @param hKey
      */
     public void delCacheMapValue(final String key, final String hKey) {
-        HashOperations hashOperations = redisTemplate.opsForHash();
+        HashOperations<String, Object, Object> hashOperations = redisTemplate.opsForHash();
         hashOperations.delete(key, hKey);
     }
 

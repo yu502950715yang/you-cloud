@@ -12,7 +12,6 @@ import com.you.gateway.config.properties.IgnoreWhiteProperties;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -33,11 +32,14 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
-    @Autowired
-    private IgnoreWhiteProperties ignoreWhite;
+    private final IgnoreWhiteProperties ignoreWhite;
 
-    @Autowired
-    private RedisService redisService;
+    private final RedisService redisService;
+
+    public AuthFilter(IgnoreWhiteProperties ignoreWhite, RedisService redisService) {
+        this.ignoreWhite = ignoreWhite;
+        this.redisService = redisService;
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -72,7 +74,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         addHeader(mutate, SecurityConstants.DETAILS_USER_ID, userId);
         addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
         // 内部请求来源参数清除
-        removeHeader(mutate, SecurityConstants.FROM_SOURCE);
+        removeHeader(mutate);
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
 
@@ -90,8 +92,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
         mutate.header(name, valueEncode);
     }
 
-    private void removeHeader(ServerHttpRequest.Builder mutate, String name) {
-        mutate.headers(httpHeaders -> httpHeaders.remove(name)).build();
+    private void removeHeader(ServerHttpRequest.Builder mutate) {
+        mutate.headers(httpHeaders -> httpHeaders.remove(SecurityConstants.FROM_SOURCE)).build();
     }
 
     private String getToken(ServerHttpRequest request) {
