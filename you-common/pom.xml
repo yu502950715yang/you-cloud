@@ -15,9 +15,9 @@
     <description>公共模块</description>
 
     <modules>
-        <module>you-common-security</module>
         <module>you-common-core</module>
         <module>you-common-redis</module>
+        <module>you-common-datasource</module>
     </modules>
 
 </project>

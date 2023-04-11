@@ -18,6 +18,7 @@
         <module>you-gateway</module>
         <module>you-auth</module>
         <module>you-common</module>
+        <module>you-modules</module>
     </modules>
 
     <properties>
@@ -27,6 +28,9 @@
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
         <spring-boot.version>2.6.11</spring-boot.version>
+        <druid.version>1.2.16</druid.version>
+        <dynamic-ds.version>3.5.2</dynamic-ds.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
     </properties>
 
     <dependencyManagement>
@@ -92,6 +96,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

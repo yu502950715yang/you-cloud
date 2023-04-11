@@ -3,25 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>you-cloud</artifactId>
+        <artifactId>you-modules</artifactId>
         <groupId>com.you</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>you-gateway</artifactId>
-
-    <description>
-        网关模块
-    </description>
+    <artifactId>system</artifactId>
+    <description>系统模块</description>
 
     <dependencies>
-        <!-- Gateway -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
-
         <!-- SpringCloud Alibaba Nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -34,18 +25,13 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
-        <!-- security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <!-- redis 模块-->
         <dependency>
             <groupId>com.you</groupId>
-            <artifactId>you-common-redis</artifactId>
+            <artifactId>you-common-datasource</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
 
     <build>
         <finalName>${project.artifactId}</finalName>
