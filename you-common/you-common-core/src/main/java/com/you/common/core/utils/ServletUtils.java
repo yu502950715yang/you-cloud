@@ -13,6 +13,7 @@ import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.servlet.ServletRequest;
@@ -278,6 +279,36 @@ public class ServletUtils {
         response.setStatusCode(status);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, contentType);
         R<?> result = R.fail(code, value.toString());
+        DataBuffer dataBuffer = response.bufferFactory().wrap(JSON.toJSONString(result).getBytes());
+        return response.writeWith(Mono.just(dataBuffer));
+    }
+
+    /**
+     * 设置webflux模型响应
+     *
+     * @param exchange ServerWebExchange
+     * @param value    响应内容
+     * @param code     响应状态码
+     * @return Mono<Void>
+     */
+    public static Mono<Void> webFluxResponseWriter(ServerWebExchange exchange, Object value, int code) {
+        ServerHttpResponse response = exchange.getResponse();
+        return webFluxResponseWriter(response, HttpStatus.OK, value, code);
+    }
+
+    /**
+     * 设置webflux模型响应
+     *
+     * @param exchange ServerWebExchange
+     * @param value    响应内容
+     * @param msg      提示信息
+     * @return Mono<Void>
+     */
+    public static Mono<Void> webFluxResponseWriterOk(ServerWebExchange exchange, Object value, String msg) {
+        ServerHttpResponse response = exchange.getResponse();
+        response.setStatusCode(HttpStatus.OK);
+        response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        R<?> result = R.ok(value, msg);
         DataBuffer dataBuffer = response.bufferFactory().wrap(JSON.toJSONString(result).getBytes());
         return response.writeWith(Mono.just(dataBuffer));
     }

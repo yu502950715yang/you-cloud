@@ -45,6 +45,12 @@
             <groupId>com.you</groupId>
             <artifactId>you-common-redis</artifactId>
         </dependency>
+
+        <!-- 系统接口模块-->
+        <dependency>
+            <groupId>com.you</groupId>
+            <artifactId>api-system</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

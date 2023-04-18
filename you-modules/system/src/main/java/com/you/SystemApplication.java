@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Create with Intellij IDEA on 2023-04-11 16:36
  */
 @SpringBootApplication()
-@MapperScan(basePackages = {"com.you.**.dao"})
+@MapperScan(basePackages = {"com.you.system.mapper"})
 public class SystemApplication {
 
     public static void main(String[] args) {

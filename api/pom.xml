@@ -9,16 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>you-common</artifactId>
+    <artifactId>api</artifactId>
     <packaging>pom</packaging>
-
-    <description>公共模块</description>
-
+    <description>系统api接口</description>
     <modules>
-        <module>you-common-core</module>
-        <module>you-common-redis</module>
-        <module>you-common-datasource</module>
-        <module>you-common-models</module>
+        <module>api-system</module>
     </modules>
 
 </project>

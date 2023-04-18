@@ -18,7 +18,7 @@ public class JwtUtil {
     /**
      * 秘钥
      */
-    private static String secretKey = TokenConstants.SECRET;
+    private static final String secretKey = TokenConstants.SECRET;
 
     /**
      * 生成令牌

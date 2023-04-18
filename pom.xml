@@ -19,6 +19,7 @@
         <module>you-auth</module>
         <module>you-common</module>
         <module>you-modules</module>
+        <module>api</module>
     </modules>
 
     <properties>
@@ -31,6 +32,7 @@
         <druid.version>1.2.16</druid.version>
         <dynamic-ds.version>3.5.2</dynamic-ds.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <you-clous.version>0.0.1-SNAPSHOT</you-clous.version>
     </properties>
 
     <dependencyManagement>
@@ -80,14 +82,33 @@
             <dependency>
                 <groupId>com.you</groupId>
                 <artifactId>you-common-core</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${you-clous.version}</version>
             </dependency>
 
             <!-- Redis -->
             <dependency>
                 <groupId>com.you</groupId>
                 <artifactId>you-common-redis</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${you-clous.version}</version>
+            </dependency>
+
+            <!--数据库模块-->
+            <dependency>
+                <groupId>com.you</groupId>
+                <artifactId>you-common-datasource</artifactId>
+                <version>${you-clous.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.you</groupId>
+                <artifactId>system-model</artifactId>
+                <version>${you-clous.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.you</groupId>
+                <artifactId>api-system</artifactId>
+                <version>${you-clous.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
