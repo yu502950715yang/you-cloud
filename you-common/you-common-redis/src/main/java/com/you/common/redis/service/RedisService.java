@@ -240,4 +240,15 @@ public class RedisService {
             return false;
         }
     }
+
+    /**
+     * 拼接key
+     *
+     * @param prefix 固定前缀
+     * @param key    key变量
+     * @return 完整key
+     */
+    public String splitRedisKey(String prefix, String key) {
+        return prefix + key;
+    }
 }

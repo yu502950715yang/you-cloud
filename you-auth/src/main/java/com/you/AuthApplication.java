@@ -2,6 +2,7 @@ package com.you;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * 认证中心启动类
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  * Create with Intellij IDEA on 2023-04-06 11:19
  */
+@EnableFeignClients(basePackages = {"com.you"})
 @SpringBootApplication
 public class AuthApplication {
 

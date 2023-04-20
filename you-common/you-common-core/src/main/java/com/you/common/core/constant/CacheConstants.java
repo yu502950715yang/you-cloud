@@ -53,4 +53,9 @@ public class CacheConstants {
      * 登录IP黑名单 cache key
      */
     public static final String SYS_LOGIN_BLACKIPLIST = SYS_CONFIG_KEY + "sys.login.blackIPList";
+
+    /**
+     * 用户权限 redis key
+     */
+    public static final String REDIS_USER_PERMISSION_KEY = "user:permission:";
 }
