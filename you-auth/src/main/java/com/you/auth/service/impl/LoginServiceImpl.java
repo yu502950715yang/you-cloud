@@ -2,6 +2,7 @@ package com.you.auth.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import com.you.auth.model.User;
 import com.you.auth.service.LoginService;
 import com.you.common.core.enums.UserStatus;
 import com.you.common.core.exception.CommonException;
@@ -12,7 +13,7 @@ import com.you.system.model.LoginUser;
 import org.springframework.stereotype.Service;
 
 /**
- * Description on this file, you will change here.
+ * 登录service实现类
  *
  * @author Eric
  * @since 1.0
@@ -28,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public LoginUser login(String username, String password) {
+    public User login(String username, String password) {
         if (StrUtils.isAnyBlank(username, password)) {
             throw new CommonException("用户名/密码必须填写");
         }
@@ -53,6 +54,7 @@ public class LoginServiceImpl implements LoginService {
         // sa-token登录
         StpUtil.login(loginUser.getUserId());
         SaTokenInfo token = StpUtil.getTokenInfo();
-        return null;
+        User user = new User(loginUser.getUserId(), loginUser.getUsername(), token);
+        return user;
     }
 }

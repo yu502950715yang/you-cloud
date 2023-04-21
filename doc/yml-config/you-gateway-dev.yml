@@ -1,0 +1,26 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 认证中心
+        - id: you-auth
+          uri: lb://you-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        # 系统模块
+        - id: you-system
+          uri: lb://you-system
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1

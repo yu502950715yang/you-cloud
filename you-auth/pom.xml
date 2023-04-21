@@ -34,6 +34,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.you</groupId>
             <artifactId>api-system</artifactId>
         </dependency>
@@ -47,6 +52,11 @@
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-dao-redis-jackson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.you</groupId>
+            <artifactId>you-common-redis</artifactId>
         </dependency>
     </dependencies>
 

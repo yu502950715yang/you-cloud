@@ -1,4 +1,4 @@
-package com.you.gateway.saToken;
+package com.you.auth.service.impl;
 
 import cn.dev33.satoken.stp.StpInterface;
 import com.you.common.core.constant.CacheConstants;

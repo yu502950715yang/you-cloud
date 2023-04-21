@@ -21,6 +21,12 @@
         <dependency>
             <groupId>com.you</groupId>
             <artifactId>system-model</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

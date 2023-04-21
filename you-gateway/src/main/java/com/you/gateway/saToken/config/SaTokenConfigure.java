@@ -1,4 +1,4 @@
-package com.you.gateway.saToken;
+package com.you.gateway.saToken.config;
 
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
@@ -27,7 +27,7 @@ public class SaTokenConfigure {
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
                     // 登录认证：除登录接口都需要认证
-                    SaRouter.match("/**", "/auth/user/login", StpUtil::checkLogin);
+                    SaRouter.match("/**", "/auth/login", StpUtil::checkLogin);
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数
                 .setError(e -> {
