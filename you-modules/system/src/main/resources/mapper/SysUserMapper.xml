@@ -10,7 +10,7 @@
         <collection property="permissions"
                     javaType="java.util.ArrayList"
                     ofType="string"
-                    select=""
+                    select="com.you.system.mapper.SysRoleMapper.selectPermTokenByUserId"
                     column="user_id"/>
     </resultMap>
 
