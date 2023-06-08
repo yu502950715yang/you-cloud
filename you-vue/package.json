@@ -38,6 +38,7 @@
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
     "raw-loader": "^4.0.2",
+    "sm-crypto": "^0.3.12",
     "vue": "2.6.12",
     "vue-amap": "^0.5.10",
     "vue-bpmn": "^0.3.0",

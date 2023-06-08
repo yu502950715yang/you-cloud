@@ -79,10 +79,17 @@
                 <version>0.9.1</version>
             </dependency>
 
-            <!-- sa token-->
+            <!--Spring WebFlux 集成  sa token-->
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- SpringBoot 集成 sa token-->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
                 <version>${sa-token.version}</version>
             </dependency>
 
@@ -111,6 +118,13 @@
             <dependency>
                 <groupId>com.you</groupId>
                 <artifactId>you-common-datasource</artifactId>
+                <version>${you-clous.version}</version>
+            </dependency>
+
+            <!--权限认证-->
+            <dependency>
+                <groupId>com.you</groupId>
+                <artifactId>you-common-auth</artifactId>
                 <version>${you-clous.version}</version>
             </dependency>
 

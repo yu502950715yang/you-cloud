@@ -35,6 +35,11 @@ public class CacheConstants {
     public static final String CAPTCHA_CODE_KEY = "captcha_codes:";
 
     /**
+     * 验证码保存时间(秒)
+     */
+    public static final long CAPTCHA_EXPIRATION = 120;
+
+    /**
      * 参数管理 cache key
      */
     public static final String SYS_CONFIG_KEY = "sys_config:";

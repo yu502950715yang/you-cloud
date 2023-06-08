@@ -37,7 +37,7 @@
 
         <dependency>
             <groupId>com.you</groupId>
-            <artifactId>you-common-core</artifactId>
+            <artifactId>you-common-auth</artifactId>
         </dependency>
 
         <dependency>

@@ -24,3 +24,7 @@ spring:
             - Path=/system/**
           filters:
             - StripPrefix=1
+auth:
+  ignore:
+    whiteList:
+      - /auth/verifyCode

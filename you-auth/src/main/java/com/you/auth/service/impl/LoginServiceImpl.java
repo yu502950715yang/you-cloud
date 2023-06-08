@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.auth.model.User;
 import com.you.auth.service.LoginService;
+import com.you.common.core.constant.LoginConstants;
 import com.you.common.core.enums.UserStatus;
 import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
@@ -52,9 +53,8 @@ public class LoginServiceImpl implements LoginService {
             throw new CommonException("账号或密码不正确");
         }
         // sa-token登录
-        StpUtil.login(loginUser.getUserId());
+        StpUtil.login(loginUser.getUserId(), LoginConstants.DEVICE_PC);
         SaTokenInfo token = StpUtil.getTokenInfo();
-        User user = new User(loginUser.getUserId(), loginUser.getUsername(), token);
-        return user;
+        return new User(loginUser.getUserId(), loginUser.getUsername(), token);
     }
 }

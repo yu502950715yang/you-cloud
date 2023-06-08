@@ -85,7 +85,8 @@
 </template>
 
 <script>
-import md5 from 'md5'
+import encryp from '@/utils/password/encryp.js'
+import { verifyCodeUrl, login } from '~/auth/auth'
 export default {
   name: 'Login',
   data() {
@@ -132,7 +133,7 @@ export default {
       loading: false,
       passwordType: 'password',
       redirect: '/system/dashboard',
-      codeImgSrc: '/api/verifyCode?random=' + Math.random() * 100,
+      codeImgSrc: '/api/' + verifyCodeUrl + '?random=' + Math.random() * 100,
       shakeType: {
         username: false,
         password: false,
@@ -163,20 +164,21 @@ export default {
       })
     },
     validChange() {
-      this.codeImgSrc = '/api/verifyCode?random=' + Math.random() * 100
+      this.codeImgSrc = '/api' + verifyCodeUrl + '?random=' + Math.random() * 100
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loginForm.verifyCodeKey = this.$cookies.get('verifyCodeKey')
+          console.log(this.loginForm.password)
           const data = {
             'username': this.loginForm.username,
-            'password': md5(this.loginForm.password),
-            'verifyCode': this.loginForm.verifyCode,
-            'verifyCodeKey': this.loginForm.verifyCodeKey
+            'password': encryp(this.loginForm.password),
+            'code': this.loginForm.verifyCode,
+            'uuid': this.loginForm.verifyCodeKey
           }
-          this.loading = true
-          this.$store.dispatch('user/login', data).then(() => {
+          console.log(data)
+          login(data).then(() => {
             // this.$router.push(`/bigScreen?redirect=${this.$route.fullPath}`)
             this.$router.push({ path: this.redirect || '/system/index' })
             // const path = this.redirect || '/system/index'
@@ -190,6 +192,22 @@ export default {
             this.validChange()
             this.loading = false
           })
+
+          // this.loading = true
+          // this.$store.dispatch('user/login', data).then(() => {
+          //   // this.$router.push(`/bigScreen?redirect=${this.$route.fullPath}`)
+          //   this.$router.push({ path: this.redirect || '/system/index' })
+          //   // const path = this.redirect || '/system/index'
+          //   // console.log(path)
+          //   this.loading = false
+          // }).catch(() => {
+          //   this.shakeType.verifyCode = true
+          //   setTimeout(() => {
+          //     this.shakeType.verifyCode = false
+          //   }, 820)
+          //   this.validChange()
+          //   this.loading = false
+          // })
         } else {
           this.shakeType = {
             username: this.usernameShakeType,
@@ -206,7 +224,6 @@ export default {
             this.passwordShackType = false
             this.verifyCodeShakeType = false
           }, 820)
-          console.log('error submit!!')
           return false
         }
       })

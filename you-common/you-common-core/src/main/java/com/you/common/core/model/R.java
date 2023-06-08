@@ -1,12 +1,14 @@
 package com.you.common.core.model;
 
 import com.you.common.core.constant.Constants;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
  * 响应信息主体
  */
+@NoArgsConstructor
 public class R<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 

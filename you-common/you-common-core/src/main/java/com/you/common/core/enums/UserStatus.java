@@ -8,8 +8,8 @@ package com.you.common.core.enums;
  * Create with Intellij IDEA on 2023-04-20 15:40
  */
 public enum UserStatus {
-    OK(0, "正常"),
-    DISABLE(1, "禁用");
+    OK(1, "正常"),
+    DISABLE(0, "禁用");
 
     private final Integer code;
     private final String info;
