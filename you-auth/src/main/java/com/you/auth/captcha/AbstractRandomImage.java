@@ -65,5 +65,4 @@ public abstract class AbstractRandomImage implements RandomImage {
         int blue = frontColor + random.nextInt(backColor - frontColor);
         return new Color(red, green, blue);
     }
-
 }

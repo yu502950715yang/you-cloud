@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @since 1.0
  * Create with Intellij IDEA on 2023-04-12 17:11
  */
-@FeignClient(contextId = "remoteUserService", value = ServiceNameConstants.SYSTEM_SERVICE, fallbackFactory = RemoteUserFallbackFactory.class, configuration = FeignConfig.class)
+@FeignClient(contextId = "remoteUserService", value = ServiceNameConstants.SYSTEM_SERVICE,
+        fallbackFactory = RemoteUserFallbackFactory.class, configuration = FeignConfig.class)
 public interface RemoteUserService {
 
     @GetMapping(value = "/user/{username}")

@@ -18,11 +18,6 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
 
     @Override
     public RemoteUserService create(Throwable cause) {
-        return new RemoteUserService() {
-            @Override
-            public R<LoginUser> getUserByUsername(String username) {
-                return R.fail("获取用户失败：" + cause.getMessage());
-            }
-        };
+        return username -> R.fail("获取用户失败：" + cause.getMessage());
     }
 }
