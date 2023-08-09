@@ -3,6 +3,7 @@
 import {reactive, ref} from "vue";
 import type {FormRules} from "element-plus";
 import {Key, Lock, User} from "@element-plus/icons-vue";
+import {codeImgSrc} from "@/api/login/login.ts";
 
 // 登录model
 const loginModel = reactive({
@@ -21,6 +22,17 @@ const loginFormRules: FormRules = {
 
 // 登录按钮loading
 const loading = ref(false)
+
+const verifyCodeImgSrc = ref("")
+
+const createCode = () => {
+  loginModel.verifyCode = ""
+  verifyCodeImgSrc.value = codeImgSrc + "?random=" + Math.random() * 100
+  console.log(verifyCodeImgSrc.value)
+}
+
+// 初始化验证码
+createCode()
 
 </script>
 
@@ -46,7 +58,22 @@ const loading = ref(false)
           <div class="valid-code-box">
             <el-form-item prop="verifyCode">
               <el-input v-model.r.trim="loginModel.verifyCode" placeholder="验证码" type="text" tabindex="3"
-                        :prefix-icon="Key" clearable size="large"/>
+                        :prefix-icon="Key" clearable size="large">
+                <template #append>
+                  <el-image :src="verifyCodeImgSrc" @click="createCode" draggable="false">
+                    <template #placeholder>
+                      <el-icon>
+                        <Picture/>
+                      </el-icon>
+                    </template>
+                    <template #error>
+                      <el-icon>
+                        <Loading/>
+                      </el-icon>
+                    </template>
+                  </el-image>
+                </template>
+              </el-input>
             </el-form-item>
           </div>
           <el-button :loading="loading" type="primary" size="large">登录</el-button>
