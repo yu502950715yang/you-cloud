@@ -19,7 +19,7 @@
 1. 按照doc/nacos目录下的nacos文档配置nacos
 2. 将nacos数据库指向步骤一中的you_naocs_config数据库
 3. windows下执行nacos/bin目录下的startup.cmd
-4. 启动后浏览器访问http://127.0.0.1:8848/nacos进入nacos管理页面。默认用户名和密码都是nacos
+4. 启动后浏览器访问http://127.0.0.1:8848/nacos 进入nacos管理页面。默认用户名和密码都是nacos
 
 
 
