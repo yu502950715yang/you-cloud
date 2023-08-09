@@ -23,6 +23,11 @@ a:hover {
   color: #535bf2;
 }
 
+html , body {
+  height: 100%;
+  overflow: auto;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -60,9 +65,9 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  flex: 1;
   text-align: center;
 }
 
