@@ -1,9 +1,11 @@
-<script setup>
+<script setup lang="ts">
 
 </script>
 
 <template>
-  <div>dashboard</div>
+  <div>
+    dashboard
+  </div>
 </template>
 
 <style scoped>

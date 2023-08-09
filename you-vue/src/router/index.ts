@@ -5,11 +5,11 @@ const routes = [
     {
         path: '/',
         name: '首页',
-        component: () => import('@/views/dashboard/dashboard.vue')
+        component: () => import('../views/dashboard/index.vue')
     },
     {
         path: '/login',
-        component: () => import('@/views/login/login.vue')
+        component: () => import('@/views/login/index.vue')
     },
 ]
 

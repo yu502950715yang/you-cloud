@@ -1,11 +1,11 @@
 {
   "name": "you-vue",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,7 +14,10 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@types/node": "^20.4.9",
     "@vitejs/plugin-vue": "^4.2.3",
-    "vite": "^4.4.5"
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vue-tsc": "^1.8.5"
   }
 }
