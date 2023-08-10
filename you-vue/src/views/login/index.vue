@@ -1,9 +1,16 @@
 <script setup lang="ts">
 
 import {reactive, ref} from "vue";
-import type {FormRules} from "element-plus";
+import type {FormRules, FormInstance} from "element-plus";
 import {Key, Lock, User} from "@element-plus/icons-vue";
-import {codeImgSrc} from "@/api/login/login.ts";
+import {codeImgSrc, login} from "@/api/login/login.ts";
+import Cookies from "js-cookie"
+import {sm3} from "sm-crypto"
+import {useRouter} from "vue-router";
+
+const router = useRouter()
+
+const loginFormRef = ref<FormInstance | null>(null)
 
 // 登录model
 const loginModel = reactive({
@@ -21,9 +28,33 @@ const loginFormRules: FormRules = {
 }
 
 // 登录按钮loading
-const loading = ref(false)
+let loading = ref(false)
 
+// 验证码url
 const verifyCodeImgSrc = ref("")
+
+
+const handleLogin = async (formEl: FormInstance | null) => {
+  if (!formEl) return
+  await formEl.validate((valid) => {
+    if (valid) {
+      const loginData = {
+        username: loginModel.username,
+        password: sm3(loginModel.password),
+        verifyCode: loginModel.verifyCode,
+        verifyCodeKey: Cookies.get("verifyCodeKey") || ""
+      }
+      loading.value = true
+      login(loginData).then(res => {
+        loading.value = false
+        console.log(res)
+        router.push({path: "/"})
+      }).catch(() => {
+        loading.value = false
+      })
+    }
+  })
+}
 
 const createCode = () => {
   loginModel.verifyCode = ""
@@ -43,8 +74,8 @@ createCode()
         <h3>you vue</h3>
       </div>
       <div class="content">
-        <el-form :model="loginModel" :rules="loginFormRules" class="login-form" autocapitalize="on"
-                 label-position="left">
+        <el-form ref="loginFormRef" :model="loginModel" :rules="loginFormRules" class="login-form" autocapitalize="on"
+                 label-position="left" @keyup.enter="handleLogin(loginFormRef)">
 
           <el-form-item prop="username">
             <el-input v-model.trim="loginModel.username" placeholder="用户名" type="text" tabindex="1"
@@ -76,7 +107,7 @@ createCode()
               </el-input>
             </el-form-item>
           </div>
-          <el-button :loading="loading" type="primary" size="large">登录</el-button>
+          <el-button :loading="loading" type="primary" size="large" @click="handleLogin(loginFormRef)">登录</el-button>
         </el-form>
       </div>
     </div>

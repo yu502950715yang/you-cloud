@@ -11,9 +11,9 @@ export const useTokenStore = defineStore("token", () => {
         return sessionStorage.getItem(tokenKey) || token
     })
 
-    function setToken(token) {
-        token.value = token
-        sessionStorage.setItem(tokenKey, token)
+    function setToken(t: string) {
+        token.value = t
+        sessionStorage.setItem(tokenKey, t)
     }
 
     function cleanToken() {

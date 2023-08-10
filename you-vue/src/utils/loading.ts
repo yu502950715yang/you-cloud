@@ -17,7 +17,7 @@ function stopLoading() {
 
 const tryCloseLoading = () => {
     if (loadingRequestCount === 0) {
-        startLoading()
+        stopLoading()
     }
 }
 
