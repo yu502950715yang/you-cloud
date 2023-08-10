@@ -6,6 +6,7 @@ import com.you.auth.model.LoginForm;
 import com.you.auth.model.User;
 import com.you.auth.service.LoginService;
 import com.you.common.core.constant.CacheConstants;
+import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
 import com.you.common.core.utils.uuid.UUID;
 import com.you.common.redis.service.RedisService;
@@ -41,6 +42,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public R<User> login(@RequestBody LoginForm loginForm) {
+        if (loginForm.getVerifyCode() == null || loginForm.getVerifyCode().isEmpty()) {
+            throw new CommonException("验证码错误");
+        }
+        String redisKey = CacheConstants.CAPTCHA_CODE_KEY + loginForm.getVerifyCodeKey();
+        String redisCode = redisService.getCacheObject(redisKey).toString();
+        if (!loginForm.getVerifyCode().equals(redisCode)) {
+            throw new CommonException("验证码错误");
+        }
         User user = loginService.login(loginForm.getUsername(), loginForm.getPassword());
         return R.ok(user);
     }

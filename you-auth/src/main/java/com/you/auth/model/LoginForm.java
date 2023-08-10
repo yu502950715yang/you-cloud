@@ -16,6 +16,6 @@ public class LoginForm {
 
     private String username;
     private String password;
-//    private String code;
-//    private String uuid;
+    private String verifyCode;
+    private String verifyCodeKey;
 }
