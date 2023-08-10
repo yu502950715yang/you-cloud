@@ -1,14 +1,16 @@
 <script setup lang="ts">
 
 import {reactive, ref} from "vue";
-import type {FormRules, FormInstance} from "element-plus";
+import type {FormInstance, FormRules} from "element-plus";
 import {Key, Lock, User} from "@element-plus/icons-vue";
 import {codeImgSrc, login} from "@/api/login/login.ts";
 import Cookies from "js-cookie"
 import {sm3} from "sm-crypto"
 import {useRouter} from "vue-router";
+import {useTokenStore} from "@/store/token.ts";
 
 const router = useRouter()
+const store = useTokenStore()
 
 const loginFormRef = ref<FormInstance | null>(null)
 
@@ -47,7 +49,7 @@ const handleLogin = async (formEl: FormInstance | null) => {
       loading.value = true
       login(loginData).then(res => {
         loading.value = false
-        console.log(res)
+        store.setToken(res.data.tokenInfo.tokenValue)
         router.push({path: "/"})
       }).catch(() => {
         loading.value = false
