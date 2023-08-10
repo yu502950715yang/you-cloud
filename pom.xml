@@ -139,6 +139,13 @@
                 <artifactId>api-system</artifactId>
                 <version>${you-clous.version}</version>
             </dependency>
+
+            <!-- 国密算法依赖包-->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>1.70</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
