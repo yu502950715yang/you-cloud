@@ -46,7 +46,11 @@ public class AuthController {
             throw new CommonException("验证码错误");
         }
         String redisKey = CacheConstants.CAPTCHA_CODE_KEY + loginForm.getVerifyCodeKey();
-        String redisCode = redisService.getCacheObject(redisKey).toString();
+        Object codeObj = redisService.getCacheObject(redisKey);
+        if (codeObj == null) {
+            throw new CommonException("验证码错误");
+        }
+        String redisCode = codeObj.toString();
         if (!loginForm.getVerifyCode().equals(redisCode)) {
             throw new CommonException("验证码错误");
         }
