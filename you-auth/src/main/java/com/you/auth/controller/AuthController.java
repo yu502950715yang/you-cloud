@@ -1,5 +1,6 @@
 package com.you.auth.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.you.auth.captcha.RandomImage;
 import com.you.auth.captcha.impl.RandomImageImpl;
 import com.you.auth.model.LoginForm;
@@ -81,5 +82,11 @@ public class AuthController {
         ImageIO.write(randomImage.getValidateImage(), "jpeg", outputStream);
         outputStream.flush();
         outputStream.close();
+    }
+
+    @GetMapping("/logout")
+    public R<String> logout() {
+        StpUtil.logout();
+        return R.ok("登出成功");
     }
 }
