@@ -10,6 +10,8 @@ import com.you.gateway.config.properties.IgnoreWhiteProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 /**
  * sa全局配置类
  *
@@ -28,13 +30,15 @@ public class SaTokenConfigure {
 
     @Bean
     public SaReactorFilter getSaReactorFilter() {
+        List<String> whiteList = ignoreWhite.getWhiteList();
+        String[] whiteArray = whiteList.toArray(new String[0]);
         return new SaReactorFilter()
                 // 指定 [拦截路由]
                 .addInclude("/**")
                 // 指定 [放行路由]
                 .addExclude("/favicon.ico")
                 // 白名单放行
-                .addExclude(ignoreWhite.getWhiteList().toArray(String[]::new))
+                .addExclude(whiteArray)
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
                     // 登录认证：除登录接口都需要认证
