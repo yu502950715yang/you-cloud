@@ -58,7 +58,11 @@
 
         <dependency>
             <groupId>com.you</groupId>
-            <artifactId>api-system</artifactId>
+            <artifactId>you-common-datasource</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.you</groupId>
+            <artifactId>system-model</artifactId>
         </dependency>
     </dependencies>
 

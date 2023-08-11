@@ -22,4 +22,7 @@ public interface RemoteUserService {
 
     @GetMapping(value = "/user/{username}")
     R<LoginUser> getUserByUsername(@PathVariable("username") String username);
+
+    @GetMapping(value = "/user/getInfo")
+    R<LoginUser> getInfo();
 }

@@ -25,4 +25,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public LoginUser getLoginUser(String username) {
         return userMapper.selectLoginUserByUsername(username);
     }
+
+    @Override
+    public LoginUser getLoginUserByUserId(String userId) {
+        return userMapper.selectLoginUserByUserId(userId);
+    }
 }

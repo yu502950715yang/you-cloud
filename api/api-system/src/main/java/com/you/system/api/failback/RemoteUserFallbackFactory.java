@@ -15,9 +15,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserService> {
-
     @Override
     public RemoteUserService create(Throwable cause) {
-        return username -> R.fail("获取用户失败：" + cause.getMessage());
+        return new RemoteUserService() {
+            @Override
+            public R<LoginUser> getUserByUsername(String username) {
+                return R.fail("获取用户失败：" + cause.getMessage());
+            }
+
+            @Override
+            public R<LoginUser> getInfo() {
+                return R.fail("获取用户失败：" + cause.getMessage());
+            }
+        };
     }
 }

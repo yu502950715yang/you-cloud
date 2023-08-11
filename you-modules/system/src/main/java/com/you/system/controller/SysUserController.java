@@ -1,6 +1,6 @@
 package com.you.system.controller;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.common.core.model.R;
 import com.you.system.model.LoginUser;
@@ -33,10 +33,11 @@ public class SysUserController {
         return R.ok(user);
     }
 
-    @SaCheckLogin
-    @GetMapping("/test")
-    public R<?> getTest() {
-        System.out.println(StpUtil.getPermissionList());
-        return R.ok(StpUtil.getLoginId());
+    @SaCheckPermission("user:add")
+    @GetMapping("/getInfo")
+    public R<LoginUser> getInfo() {
+        String userId = String.valueOf(StpUtil.getLoginId());
+        LoginUser user = sysUserService.getLoginUserByUserId(userId);
+        return R.ok(user);
     }
 }
