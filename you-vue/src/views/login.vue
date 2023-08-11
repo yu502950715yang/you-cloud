@@ -58,17 +58,18 @@
 </template>
 
 <script setup>
-import { codeImgUrl } from "@/api/login";
+import {codeImgUrl} from "@/api/login";
 import Cookies from "js-cookie";
-import { encrypt, decrypt } from "@/utils/jsencrypt";
+import {decrypt, encrypt} from "@/utils/jsencrypt";
 import useUserStore from '@/store/modules/user'
 import {useRouter} from "vue-router";
+import {sm3} from "sm-crypto";
 
 const userStore = useUserStore()
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 
-const loginForm = ref({
+const loginForm = reactive({
   username: "",
   password: "",
   rememberMe: false,
@@ -93,10 +94,10 @@ function handleLogin() {
     if (valid) {
       loading.value = true;
       // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
-      if (loginForm.value.rememberMe) {
-        Cookies.set("username", loginForm.value.username, { expires: 30 });
-        Cookies.set("password", encrypt(loginForm.value.password), { expires: 30 });
-        Cookies.set("rememberMe", loginForm.value.rememberMe, { expires: 30 });
+      if (loginForm.rememberMe) {
+        Cookies.set("username", loginForm.username, {expires: 30});
+        Cookies.set("password", encrypt(loginForm.password), {expires: 30});
+        Cookies.set("rememberMe", loginForm.rememberMe, {expires: 30});
       } else {
         // 否则移除
         Cookies.remove("username");
@@ -104,7 +105,13 @@ function handleLogin() {
         Cookies.remove("rememberMe");
       }
       // 调用action的登录方法
-      userStore.login(loginForm.value).then(() => {
+      const loginData = {
+        username: loginForm.username.trim(),
+        password: sm3(loginForm.password),
+        verifyCode: loginForm.code,
+        verifyCodeKey: Cookies.get("verifyCodeKey") || ""
+      }
+      userStore.login(loginData).then(() => {
         router.push({ path: redirect.value || "/" });
       }).catch(() => {
         loading.value = false;
@@ -125,11 +132,9 @@ function getCookie() {
   const username = Cookies.get("username");
   const password = Cookies.get("password");
   const rememberMe = Cookies.get("rememberMe");
-  loginForm.value = {
-    username: username === undefined ? loginForm.value.username : username,
-    password: password === undefined ? loginForm.value.password : decrypt(password),
-    rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
-  };
+  loginForm.username = username === undefined ? loginForm.username : username
+  loginForm.password = password === undefined ? loginForm.password : decrypt(password)
+  loginForm.rememberMe = rememberMe === undefined ? false : Boolean(rememberMe)
 }
 
 getCode();

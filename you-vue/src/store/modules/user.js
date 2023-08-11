@@ -1,5 +1,5 @@
-import { login, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import {getInfo, login, logout} from '@/api/login'
+import {getToken, removeToken, setToken} from '@/utils/auth'
 import defAva from '@/assets/images/profile.jpg'
 
 const useUserStore = defineStore(
@@ -14,16 +14,12 @@ const useUserStore = defineStore(
     }),
     actions: {
       // 登录
-      login(userInfo) {
-        const username = userInfo.username.trim()
-        const password = userInfo.password
-        const code = userInfo.code
-        const uuid = userInfo.uuid
+      login(loginData) {
         return new Promise((resolve, reject) => {
-          login(username, password, code, uuid).then(res => {
+          login(loginData).then(res => {
             let data = res.data
-            setToken(data.access_token)
-            this.token = data.access_token
+            setToken(data.tokenInfo.tokenValue)
+            this.token = data.tokenInfo.tokenValue
             resolve()
           }).catch(error => {
             reject(error)
@@ -35,7 +31,7 @@ const useUserStore = defineStore(
         return new Promise((resolve, reject) => {
           getInfo().then(res => {
             const user = res.user
-            const avatar = (user.avatar == "" || user.avatar == null) ? defAva : user.avatar;
+            const avatar = (user.avatar === "" || user.avatar == null) ? defAva : user.avatar;
 
             if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
               this.roles = res.roles
