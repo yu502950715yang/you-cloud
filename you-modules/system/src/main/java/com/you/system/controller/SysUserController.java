@@ -33,7 +33,7 @@ public class SysUserController {
         return R.ok(user);
     }
 
-    @SaCheckPermission("user:add")
+    @SaCheckPermission("b:dict:add")
     @GetMapping("/getInfo")
     public R<LoginUser> getInfo() {
         String userId = String.valueOf(StpUtil.getLoginId());

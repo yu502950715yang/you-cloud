@@ -1,15 +1,11 @@
-package com.you.auth.service.impl;
+package com.you.auth.service;
 
 import cn.dev33.satoken.stp.StpInterface;
 import com.you.common.core.constant.CacheConstants;
-import com.you.common.core.model.R;
 import com.you.common.core.utils.text.Convert;
 import com.you.common.redis.service.RedisService;
-import com.you.system.api.feign.RemoteUserService;
-import com.you.system.model.LoginUser;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,29 +19,26 @@ import java.util.List;
 public class StpInterfaceImpl implements StpInterface {
 
     private final RedisService redisService;
-    private final RemoteUserService remoteUserService;
+    private final AuthService authService;
 
-    public StpInterfaceImpl(RedisService redisService, RemoteUserService remoteUserService) {
+    public StpInterfaceImpl(RedisService redisService, AuthService authService) {
         this.redisService = redisService;
-        this.remoteUserService = remoteUserService;
+        this.authService = authService;
     }
 
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
-        List<String> permissionList = new ArrayList<>();
-        String username = String.valueOf(loginId);
-        String redisKey = redisService.splitRedisKey(CacheConstants.REDIS_USER_PERMISSION_KEY, username);
+        List<String> permissionList;
+        String userId = String.valueOf(loginId);
+        String redisKey = redisService.splitRedisKey(CacheConstants.REDIS_USER_PERMISSION_KEY, userId);
         if (redisService.hasKey(redisKey)) {
             Object redisList = redisService.getCacheObject(redisKey);
             permissionList = Convert.objectToList(redisList, String.class);
         } else {
             // 如果不存在，则先查询再存入缓存中
-            R<LoginUser> result = remoteUserService.getUserByUsername(username);
-            if (null != result && null != result.getData()) {
-                permissionList = result.getData().getPermissions();
-                // 存入redis
-                redisService.setCacheObject(redisKey, permissionList);
-            }
+            permissionList = authService.getPermissions(userId);
+            // 存入redis
+            redisService.setCacheObject(redisKey, permissionList);
         }
         return permissionList;
     }

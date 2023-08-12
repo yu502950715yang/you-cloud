@@ -1,8 +1,8 @@
-package com.you.gateway.service;
+package com.you.auth.service;
 
 import java.util.List;
 
-public interface UserService {
+public interface AuthService {
 
     /**
      * 获取用户权限

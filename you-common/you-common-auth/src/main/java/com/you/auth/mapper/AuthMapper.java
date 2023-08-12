@@ -1,7 +1,6 @@
-package com.you.gateway.mapper;
+package com.you.auth.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.you.system.model.SysUser;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * Create with Intellij IDEA on 2023-04-12 10:52
  */
 @Mapper
-public interface SysUserMapper extends BaseMapper<SysUser> {
+public interface AuthMapper {
 
     List<String> selectPermTokenByUserId(String userId);
 }
