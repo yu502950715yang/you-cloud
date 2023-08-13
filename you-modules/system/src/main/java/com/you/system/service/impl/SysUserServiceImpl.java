@@ -1,6 +1,7 @@
 package com.you.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.you.auth.service.AuthService;
 import com.you.system.mapper.SysUserMapper;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     private final SysUserMapper userMapper;
+    private final AuthService authService;
 
-    public SysUserServiceImpl(SysUserMapper userMapper) {
+    public SysUserServiceImpl(SysUserMapper userMapper, AuthService authService) {
         this.userMapper = userMapper;
+        this.authService = authService;
     }
 
     @Override
@@ -22,12 +25,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public LoginUser getLoginUser(String username) {
-        return userMapper.selectLoginUserByUsername(username);
-    }
-
-    @Override
     public LoginUser getLoginUserByUserId(String userId) {
-        return userMapper.selectLoginUserByUserId(userId);
+        LoginUser loginUser = new LoginUser(userMapper.selectLoginUserByUserId(userId));
+        loginUser.setPermissions(authService.getPermissions(userId));
+        return loginUser;
     }
 }

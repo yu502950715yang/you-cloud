@@ -1,7 +1,6 @@
 package com.you.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,7 +16,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     SysUser selectByUsername(String username);
 
-    LoginUser selectLoginUserByUsername(String username);
-
-    LoginUser selectLoginUserByUserId(String userId);
+    SysUser selectLoginUserByUserId(String userId);
 }

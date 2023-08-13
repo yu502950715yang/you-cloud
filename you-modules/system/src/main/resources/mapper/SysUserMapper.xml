@@ -2,34 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.you.system.mapper.SysUserMapper">
 
-    <resultMap id="LoginUser" type="com.you.system.model.LoginUser">
-        <id column="user_id" property="userId"/>
-        <result column="username" property="username"/>
-        <result column="password" property="password"/>
-        <result column="status" property="status"/>
-        <collection property="permissions"
-                    javaType="java.util.ArrayList"
-                    ofType="string"
-                    select="com.you.system.mapper.SysRoleMapper.selectPermTokenByUserId"
-                    column="user_id"/>
-    </resultMap>
-
     <select id="selectByUsername" resultType="com.you.system.model.SysUser">
         select user_id, username, password, status
         from sys_user
         where username = #{username}
+          AND del_flag = 0
     </select>
 
-
-    <select id="selectLoginUserByUsername" resultMap="LoginUser">
-        select user_id, username, password, status
-        from sys_user
-        where username = #{username}
-    </select>
-
-    <select id="selectLoginUserByUserId" resultMap="LoginUser">
-        select user_id, username, real_name, phone, email, status, create_time
+    <select id="selectLoginUserByUserId" resultType="com.you.system.model.SysUser">
+        select user_id,
+               dept_id,
+               username,
+               nick_name,
+               user_type,
+               phone,
+               email,
+               sex,
+               status
         from sys_user
         where user_id = #{userId}
+          AND del_flag = 0
     </select>
 </mapper>

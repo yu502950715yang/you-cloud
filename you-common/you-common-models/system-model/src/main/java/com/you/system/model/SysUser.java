@@ -45,12 +45,6 @@ public class SysUser {
     @TableField("del_flag")
     private Integer delFlag;
 
-    @TableField("login_ip")
-    private String loginIp;
-
-    @TableField("login_date")
-    private LocalDateTime loginDate;
-
     @TableField("create_by")
     private String createBy;
 

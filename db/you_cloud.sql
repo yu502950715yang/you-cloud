@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 13/08/2023 13:13:30
+ Date: 13/08/2023 13:44:21
 */
 
 SET NAMES utf8mb4;
@@ -1161,173 +1161,173 @@ CREATE TABLE `sys_role_menu`
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1);
+VALUES (1, 1);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 2);
+VALUES (1, 2);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 3);
+VALUES (1, 3);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 4);
+VALUES (1, 4);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 100);
+VALUES (1, 100);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 101);
+VALUES (1, 101);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 102);
+VALUES (1, 102);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 103);
+VALUES (1, 103);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 104);
+VALUES (1, 104);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 105);
+VALUES (1, 105);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 106);
+VALUES (1, 106);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 107);
+VALUES (1, 107);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 108);
+VALUES (1, 108);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 109);
+VALUES (1, 109);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 110);
+VALUES (1, 110);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 111);
+VALUES (1, 111);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 112);
+VALUES (1, 112);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 113);
+VALUES (1, 113);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 114);
+VALUES (1, 114);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 115);
+VALUES (1, 115);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 116);
+VALUES (1, 116);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 500);
+VALUES (1, 500);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 501);
+VALUES (1, 501);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1000);
+VALUES (1, 1000);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1001);
+VALUES (1, 1001);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1002);
+VALUES (1, 1002);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1003);
+VALUES (1, 1003);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1004);
+VALUES (1, 1004);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1005);
+VALUES (1, 1005);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1006);
+VALUES (1, 1006);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1007);
+VALUES (1, 1007);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1008);
+VALUES (1, 1008);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1009);
+VALUES (1, 1009);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1010);
+VALUES (1, 1010);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1011);
+VALUES (1, 1011);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1012);
+VALUES (1, 1012);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1013);
+VALUES (1, 1013);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1014);
+VALUES (1, 1014);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1015);
+VALUES (1, 1015);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1016);
+VALUES (1, 1016);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1017);
+VALUES (1, 1017);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1018);
+VALUES (1, 1018);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1019);
+VALUES (1, 1019);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1020);
+VALUES (1, 1020);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1021);
+VALUES (1, 1021);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1022);
+VALUES (1, 1022);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1023);
+VALUES (1, 1023);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1024);
+VALUES (1, 1024);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1025);
+VALUES (1, 1025);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1026);
+VALUES (1, 1026);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1027);
+VALUES (1, 1027);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1028);
+VALUES (1, 1028);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1029);
+VALUES (1, 1029);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1030);
+VALUES (1, 1030);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1031);
+VALUES (1, 1031);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1032);
+VALUES (1, 1032);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1033);
+VALUES (1, 1033);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1034);
+VALUES (1, 1034);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1035);
+VALUES (1, 1035);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1036);
+VALUES (1, 1036);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1037);
+VALUES (1, 1037);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1038);
+VALUES (1, 1038);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1039);
+VALUES (1, 1039);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1040);
+VALUES (1, 1040);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1041);
+VALUES (1, 1041);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1042);
+VALUES (1, 1042);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1043);
+VALUES (1, 1043);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1044);
+VALUES (1, 1044);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1045);
+VALUES (1, 1045);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1046);
+VALUES (1, 1046);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1047);
+VALUES (1, 1047);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1048);
+VALUES (1, 1048);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1049);
+VALUES (1, 1049);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1050);
+VALUES (1, 1050);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1051);
+VALUES (1, 1051);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1052);
+VALUES (1, 1052);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1053);
+VALUES (1, 1053);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1054);
+VALUES (1, 1054);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1055);
+VALUES (1, 1055);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1056);
+VALUES (1, 1056);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1057);
+VALUES (1, 1057);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1058);
+VALUES (1, 1058);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1059);
+VALUES (1, 1059);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
-VALUES (2, 1060);
+VALUES (1, 1060);
 COMMIT;
 
 -- ----------------------------
@@ -1344,12 +1344,9 @@ CREATE TABLE `sys_user`
     `email`       varchar(50)  DEFAULT '' COMMENT '用户邮箱',
     `phone`       varchar(11)  DEFAULT '' COMMENT '手机号码',
     `sex`         char(1)      DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
-    `avatar`      varchar(100) DEFAULT '' COMMENT '头像地址',
     `password`    varchar(100) DEFAULT '' COMMENT '密码',
     `status`      char(1)      DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
     `del_flag`    char(1)      DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-    `login_ip`    varchar(128) DEFAULT '' COMMENT '最后登录IP',
-    `login_date`  datetime     DEFAULT NULL COMMENT '最后登录时间',
     `create_by`   varchar(64)  DEFAULT '' COMMENT '创建者',
     `create_time` datetime     DEFAULT NULL COMMENT '创建时间',
     `update_by`   varchar(64)  DEFAULT '' COMMENT '更新者',
@@ -1363,18 +1360,16 @@ CREATE TABLE `sys_user`
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nick_name`, `user_type`, `email`, `phone`, `sex`, `avatar`,
-                        `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`,
-                        `update_by`, `update_time`, `remark`)
-VALUES (1, 103, 'admin', '疯狂的狮子Li', 'sys_user', 'crazyLionLi@163.com', '15888888888', '1', '',
-        'dc1fd00e3eeeb940ff46f457bf97d66ba7fcc36e0b20802383de142860e76ae6', '0', '0', '127.0.0.1',
-        '2023-08-13 12:27:54', 'admin', '2023-08-13 12:27:54', '', NULL, '管理员');
-INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nick_name`, `user_type`, `email`, `phone`, `sex`, `avatar`,
-                        `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`,
-                        `update_by`, `update_time`, `remark`)
-VALUES (2, 105, 'lionli', '疯狂的狮子Li', 'sys_user', 'crazyLionLi@qq.com', '15666666666', '1', '',
-        'dc1fd00e3eeeb940ff46f457bf97d66ba7fcc36e0b20802383de142860e76ae6', '0', '0', '127.0.0.1',
-        '2023-08-13 12:27:54', 'admin', '2023-08-13 12:27:54', '', NULL, '测试员');
+INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nick_name`, `user_type`, `email`, `phone`, `sex`, `password`,
+                        `status`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`)
+VALUES (1, 103, 'admin', '超级管理员', 'sys_user', 'crazyLionLi@163.com', '15888888888', '1',
+        'dc1fd00e3eeeb940ff46f457bf97d66ba7fcc36e0b20802383de142860e76ae6', '0', '0', 'admin', '2023-08-13 12:27:54',
+        '', NULL, '管理员');
+INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nick_name`, `user_type`, `email`, `phone`, `sex`, `password`,
+                        `status`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`)
+VALUES (2, 105, 'lionli', '疯狂的狮子Li', 'sys_user', 'crazyLionLi@qq.com', '15666666666', '1',
+        'dc1fd00e3eeeb940ff46f457bf97d66ba7fcc36e0b20802383de142860e76ae6', '0', '0', 'admin', '2023-08-13 12:27:54',
+        '', NULL, '测试员');
 COMMIT;
 
 -- ----------------------------

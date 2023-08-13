@@ -37,4 +37,22 @@ public class LoginUser extends SysUser {
      * 过期时间
      */
     private Long expireTime;
+
+    public LoginUser(SysUser sysUser) {
+        this.setUserId(sysUser.getUserId());
+        this.setDeptId(sysUser.getDeptId());
+        this.setUsername(sysUser.getUsername());
+        this.setNickName(sysUser.getNickName());
+        this.setUserType(sysUser.getUserType());
+        this.setEmail(sysUser.getEmail());
+        this.setPhone(sysUser.getPhone());
+        this.setPassword(sysUser.getPassword());
+        this.setStatus(sysUser.getStatus());
+        this.setDelFlag(sysUser.getDelFlag());
+        this.setCreateBy(sysUser.getCreateBy());
+        this.setCreateTime(sysUser.getCreateTime());
+        this.setUpdateBy(sysUser.getUpdateBy());
+        this.setUpdateTime(sysUser.getUpdateTime());
+        this.setRemark(sysUser.getRemark());
+    }
 }
