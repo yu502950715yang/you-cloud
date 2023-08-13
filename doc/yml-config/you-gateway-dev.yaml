@@ -28,3 +28,4 @@ auth:
   ignore:
     whiteList:
       - /auth/verifyCode
+      - /auth/logout
