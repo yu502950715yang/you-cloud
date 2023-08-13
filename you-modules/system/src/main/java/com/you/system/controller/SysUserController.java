@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.common.core.model.R;
 import com.you.system.model.LoginUser;
+import com.you.system.model.SysUser;
 import com.you.system.service.SysUserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +29,8 @@ public class SysUserController {
     }
 
     @GetMapping("/{username}")
-    public R<LoginUser> getUserByUsername(@PathVariable("username") String username) {
-        LoginUser user = sysUserService.getLoginUser(username);
+    public R<SysUser> getUserByUsername(@PathVariable("username") String username) {
+        SysUser user = sysUserService.getUserByUsername(username);
         return R.ok(user);
     }
 

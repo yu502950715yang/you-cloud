@@ -28,7 +28,7 @@
     </select>
 
     <select id="selectLoginUserByUserId" resultMap="LoginUser">
-        select user_id, username, password, status
+        select user_id, username, real_name, phone, email, status, create_time
         from sys_user
         where user_id = #{userId}
     </select>

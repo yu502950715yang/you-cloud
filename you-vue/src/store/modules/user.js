@@ -1,6 +1,5 @@
 import {getInfo, login, logout} from '@/api/login'
 import {getToken, removeToken, setTokenName} from '@/utils/auth'
-import defAva from '@/assets/images/profile.jpg'
 
 
 const useUserStore = defineStore(
@@ -31,17 +30,9 @@ const useUserStore = defineStore(
       getInfo() {
         return new Promise((resolve, reject) => {
           getInfo().then(res => {
-            const user = res.user
-            const avatar = (user.avatar === "" || user.avatar == null) ? defAva : user.avatar;
-
-            if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-              this.roles = res.roles
-              this.permissions = res.permissions
-            } else {
-              this.roles = ['ROLE_DEFAULT']
-            }
-            this.name = user.userName
-            this.avatar = avatar;
+              const user = res.data
+              this.permissions = user.permissions
+              this.name = user.realName
             resolve(res)
           }).catch(error => {
             reject(error)

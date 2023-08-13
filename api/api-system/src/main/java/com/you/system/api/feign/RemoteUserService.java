@@ -5,6 +5,7 @@ import com.you.common.core.model.R;
 import com.you.system.api.config.FeignConfig;
 import com.you.system.api.failback.RemoteUserFallbackFactory;
 import com.you.system.model.LoginUser;
+import com.you.system.model.SysUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface RemoteUserService {
 
     @GetMapping(value = "/user/{username}")
-    R<LoginUser> getUserByUsername(@PathVariable("username") String username);
+    R<SysUser> getUserByUsername(@PathVariable("username") String username);
 
     @GetMapping(value = "/user/getInfo")
     R<LoginUser> getInfo();

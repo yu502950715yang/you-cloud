@@ -6,23 +6,26 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @TableName("sys_user")
 public class SysUser {
 
-    @TableId(value = "user_id", type = IdType.ASSIGN_ID)
-    private String userId;
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Long userId;
+
+    @TableField("dept_id")
+    private Long deptId;
 
     @TableField("username")
     private String username;
 
-    @TableField("real_name")
-    private String realName;
+    @TableField("nick_name")
+    private String nickName;
 
-    @TableField("password")
-    private String password;
+    @TableField("user_type")
+    private String userType;
 
     @TableField("email")
     private String email;
@@ -30,12 +33,36 @@ public class SysUser {
     @TableField("phone")
     private String phone;
 
+    @TableField("password")
+    private String password;
+
     /**
-     * 用户状态 0禁用 1启用
+     * 用户状态 0正常 1停用
      */
     @TableField("status")
     private Integer status;
 
+    @TableField("del_flag")
+    private Integer delFlag;
+
+    @TableField("login_ip")
+    private String loginIp;
+
+    @TableField("login_date")
+    private LocalDateTime loginDate;
+
+    @TableField("create_by")
+    private String createBy;
+
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
+
+    @TableField("update_by")
+    private String updateBy;
+
+    @TableField("update_time")
+    private LocalDateTime updateTime;
+
+    @TableField("remark")
+    private String remark;
 }

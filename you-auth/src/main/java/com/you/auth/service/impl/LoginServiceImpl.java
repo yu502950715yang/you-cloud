@@ -10,7 +10,7 @@ import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
 import com.you.common.core.utils.StrUtils;
 import com.you.system.api.feign.RemoteUserService;
-import com.you.system.model.LoginUser;
+import com.you.system.model.SysUser;
 import org.springframework.stereotype.Service;
 
 /**
@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
             throw new CommonException("用户名/密码必须填写");
         }
         //查询用户
-        R<LoginUser> loginUserResult = remoteUserService.getUserByUsername(username);
+        R<SysUser> loginUserResult = remoteUserService.getUserByUsername(username);
         if (null == loginUserResult || null == loginUserResult.getData()) {
             throw new CommonException("账号或密码不正确");
         }
@@ -43,18 +43,18 @@ public class LoginServiceImpl implements LoginService {
         if (R.FAIL == loginUserResult.getCode()) {
             throw new CommonException(loginUserResult.getMsg());
         }
-        LoginUser loginUser = loginUserResult.getData();
+        SysUser sysUser = loginUserResult.getData();
         // 校验用户状态
-        if (UserStatus.DISABLE.getCode().equals(loginUser.getStatus())) {
+        if (UserStatus.DISABLE.getCode().equals(sysUser.getStatus())) {
             throw new CommonException("对不起，您的账号已被禁用");
         }
         // 校验用户密码
-        if (!password.equals(loginUser.getPassword())) {
+        if (!password.equals(sysUser.getPassword())) {
             throw new CommonException("账号或密码不正确");
         }
         // sa-token登录
-        StpUtil.login(loginUser.getUserId(), LoginConstants.DEVICE_PC);
+        StpUtil.login(sysUser.getUserId(), LoginConstants.DEVICE_PC);
         SaTokenInfo token = StpUtil.getTokenInfo();
-        return new User(loginUser.getUserId(), loginUser.getUsername(), token);
+        return new User(sysUser.getUserId().toString(), sysUser.getUsername(), token);
     }
 }
