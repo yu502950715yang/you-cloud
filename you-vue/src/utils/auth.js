@@ -1,29 +1,28 @@
 import Cookies from 'js-cookie'
+import cache from '@/plugins/cache'
 
-const TokenKey = 'Admin-Token'
-
-const ExpiresInKey = 'Admin-Expires-In'
+const TokenNameKey = 'token-name'
 
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return Cookies.get(getTokenName())
 }
 
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  return Cookies.set(getTokenName(), token)
 }
 
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  return Cookies.remove(getTokenName())
 }
 
-export function getExpiresIn() {
-  return Cookies.get(ExpiresInKey) || -1
+export function getTokenName() {
+  return cache.local.get(TokenNameKey) ?? ''
 }
 
-export function setExpiresIn(time) {
-  return Cookies.set(ExpiresInKey, time)
+export function setTokenName(token) {
+  return cache.local.set(TokenNameKey, token)
 }
 
-export function removeExpiresIn() {
-  return Cookies.remove(ExpiresInKey)
+export function removeTokenName() {
+  return cache.local.remove(TokenNameKey)
 }

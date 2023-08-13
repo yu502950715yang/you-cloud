@@ -1,6 +1,7 @@
 import {getInfo, login, logout} from '@/api/login'
-import {getToken, removeToken, setToken} from '@/utils/auth'
+import {getToken, removeToken, setTokenName} from '@/utils/auth'
 import defAva from '@/assets/images/profile.jpg'
+
 
 const useUserStore = defineStore(
   'user',
@@ -18,7 +19,7 @@ const useUserStore = defineStore(
         return new Promise((resolve, reject) => {
           login(loginData).then(res => {
             let data = res.data
-            setToken(data.tokenInfo.tokenValue)
+            setTokenName(data.tokenInfo.tokenName)
             this.token = data.tokenInfo.tokenValue
             resolve()
           }).catch(error => {
