@@ -1,10 +1,12 @@
 package com.you.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.you.system.model.SysRole;
+import com.you.system.qo.RoleQo;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 角色 mapper
@@ -16,11 +18,5 @@ import java.util.List;
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
-    /**
-     * 根据用户id获取权限list
-     *
-     * @param userId 用户id
-     * @return 权限字符串list
-     */
-    List<String> selectPermTokenByUserId(String userId);
+    IPage<SysRole> listPage(@Param("page") Page<SysRole> page, @Param("roleQo") RoleQo roleQo);
 }

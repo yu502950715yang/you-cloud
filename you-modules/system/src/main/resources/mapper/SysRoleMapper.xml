@@ -2,15 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.you.system.mapper.SysRoleMapper">
 
-    <select id="selectPermTokenByUserId" resultType="string">
-        SELECT DISTINCT(p.perm_token)
-        FROM sys_role_permission p,
-             sys_role r,
-             sys_user_role ur
-        WHERE p.role_id = r.role_id
-          AND r.role_id = ur.role_id
-          AND ur.user_id = #{userId}
+
+    <select id="listPage" resultType="com.you.system.model.SysRole">
+        select role_id ,role_name ,role_key, role_sort, status, create_time
+        from sys_role
+        <where>
+            del_flag = 0
+            <if test="roleQo.roleName != null and roleQo.roleName !=''">
+                and role_name like CONCAT('%',#{roleQo.roleName},'%')
+            </if>
+            <if test="roleQo.roleKey != null and roleQo.roleKey !=''">
+                and role_key like CONCAT('%',#{roleQo.roleKey},'%')
+            </if>
+            <if test="roleQo.status != null and roleQo.status !=''">
+                and status = #{roleQo.status}
+            </if>
+            <if test="roleQo.status != null and roleQo.status !=''">
+                and status = #{roleQo.status}
+            </if>
+            <if test="roleQo.beginTime != null and roleQo.beginTime !=''">
+                <if test="roleQo.endTime != null and roleQo.endTime !=''">
+                    and create_time BETWEEN #{roleQo.beginTime} AND #{roleQo.endTime}
+                </if>
+            </if>
+        </where>
     </select>
-
-
 </mapper>

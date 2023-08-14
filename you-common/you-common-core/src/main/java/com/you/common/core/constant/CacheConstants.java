@@ -63,4 +63,9 @@ public class CacheConstants {
      * 用户权限 redis key
      */
     public static final String REDIS_USER_PERMISSION_KEY = "user:permission:";
+
+    /**
+     * 数据字典 redis key
+     */
+    public static final String REDIS_SYS_DICT_KEY = "sys:dict:";
 }

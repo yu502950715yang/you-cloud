@@ -134,8 +134,8 @@
       <pagination
          v-show="total > 0"
          :total="total"
-         v-model:page="queryParams.pageNum"
-         v-model:limit="queryParams.pageSize"
+         v-model:page="queryParams.page.current"
+         v-model:limit="queryParams.page.size"
          @pagination="getList"
       />
 
@@ -241,9 +241,20 @@
    </div>
 </template>
 
-<script setup name="Role">
-import { addRole, changeRoleStatus, dataScope, delRole, getRole, listRole, updateRole, deptTreeSelect } from "@/api/system/role";
-import { roleMenuTreeselect, treeselect as menuTreeselect } from "@/api/system/menu";
+<script setup>
+import {
+  addRole,
+  changeRoleStatus,
+  dataScope,
+  delRole,
+  deptTreeSelect,
+  getRole,
+  listRole,
+  updateRole
+} from "@/api/system/role";
+import {roleMenuTreeselect, treeselect as menuTreeselect} from "@/api/system/menu";
+import {useRouter} from "vue-router";
+import {parseTime} from "@/utils/ruoyi";
 
 const router = useRouter();
 const { proxy } = getCurrentInstance();
@@ -281,8 +292,13 @@ const dataScopeOptions = ref([
 const data = reactive({
   form: {},
   queryParams: {
-    pageNum: 1,
-    pageSize: 10,
+    page: {
+      current: 1,
+      size: 10,
+      orders: [
+        {column: 'role_name', asc: false}
+      ]
+    },
     roleName: undefined,
     roleKey: undefined,
     status: undefined
@@ -299,15 +315,16 @@ const { queryParams, form, rules } = toRefs(data);
 /** 查询角色列表 */
 function getList() {
   loading.value = true;
-  listRole(proxy.addDateRange(queryParams.value, dateRange.value)).then(response => {
-    roleList.value = response.rows;
-    total.value = response.total;
+  listRole(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
+    roleList.value = res.data.records;
+    total.value = res.data.total;
+  }).finally(() => {
     loading.value = false;
   });
 }
 /** 搜索按钮操作 */
 function handleQuery() {
-  queryParams.value.pageNum = 1;
+  queryParams.value.page.current = 1;
   getList();
 }
 /** 重置按钮操作 */

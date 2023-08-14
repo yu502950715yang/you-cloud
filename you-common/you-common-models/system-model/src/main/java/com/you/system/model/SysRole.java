@@ -41,7 +41,7 @@ public class SysRole {
     private Integer deptCheckStrictly;
 
     @TableField("status")
-    private Integer status;
+    private String status;
 
     @TableField("del_flag")
     private Integer delFlag;
