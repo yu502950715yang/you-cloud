@@ -44,7 +44,6 @@ const usePermissionStore = defineStore(
             const defaultRoutes = filterAsyncRouter(defaultData)
             const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
             asyncRoutes.forEach(route => {
-              console.log(route)
               router.addRoute(route)
             })
             this.setRoutes(rewriteRoutes)
