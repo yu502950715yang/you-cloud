@@ -9,7 +9,6 @@ const useUserStore = defineStore(
       token: getToken(),
       name: '',
       avatar: '',
-      roles: [],
       permissions: []
     }),
     actions: {
@@ -44,7 +43,6 @@ const useUserStore = defineStore(
         return new Promise((resolve, reject) => {
           logout(this.token).then(() => {
             this.token = ''
-            this.roles = []
             this.permissions = []
             removeToken()
             resolve()

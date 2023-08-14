@@ -1,6 +1,6 @@
 import auth from '@/plugins/auth'
-import router, { constantRoutes, dynamicRoutes } from '@/router'
-import { getRouters } from '@/api/menu'
+import router, {constantRoutes, dynamicRoutes} from '@/router'
+import {getRouters} from '@/api/menu'
 import Layout from '@/layout/index'
 import ParentView from '@/components/ParentView'
 import InnerLink from '@/layout/components/InnerLink'
@@ -32,7 +32,7 @@ const usePermissionStore = defineStore(
       setSidebarRouters(routes) {
         this.sidebarRouters = routes
       },
-      generateRoutes(roles) {
+      generateRoutes() {
         return new Promise(resolve => {
           // 向后端请求路由数据
           getRouters().then(res => {
@@ -43,7 +43,10 @@ const usePermissionStore = defineStore(
             const rewriteRoutes = filterAsyncRouter(rdata, false, true)
             const defaultRoutes = filterAsyncRouter(defaultData)
             const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
-            asyncRoutes.forEach(route => { router.addRoute(route) })
+            asyncRoutes.forEach(route => {
+              console.log(route)
+              router.addRoute(route)
+            })
             this.setRoutes(rewriteRoutes)
             this.setSidebarRouters(constantRoutes.concat(sidebarRoutes))
             this.setDefaultRoutes(sidebarRoutes)
