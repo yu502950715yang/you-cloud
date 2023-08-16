@@ -1,7 +1,9 @@
 package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
 import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
@@ -25,5 +27,16 @@ public class SysRoleController {
     @SaCheckPermission("system:role:list")
     public R<IPage<SysRole>> listPage(@RequestBody RoleQo qo) {
         return R.ok(roleService.listPage(qo));
+    }
+
+    @PostMapping("/changeStatus")
+    @SaCheckPermission("system:role:edit")
+    public R<Void> changeStatus(@RequestBody SysRole role) {
+        roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
+        if (roleService.updateRoleStatus(role.getRoleId(), role.getStatus())) {
+            return R.ok();
+        } else {
+            return R.fail(Constants.REQUEST_FAIL_MSG);
+        }
     }
 }

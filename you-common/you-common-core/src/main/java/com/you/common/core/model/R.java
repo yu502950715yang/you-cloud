@@ -1,6 +1,7 @@
 package com.you.common.core.model;
 
 import com.you.common.core.constant.Constants;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 /**
  * 响应信息主体
  */
+@Getter
 @NoArgsConstructor
 public class R<T> implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -68,24 +70,12 @@ public class R<T> implements Serializable {
         return apiResult;
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public void setCode(int code) {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
     }
 
     public void setData(T data) {

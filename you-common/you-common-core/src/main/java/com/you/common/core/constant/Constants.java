@@ -124,4 +124,9 @@ public class Constants {
      */
     public static final String[] JOB_ERROR_STR = {"java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
             "org.springframework", "org.apache", "com.ruoyi.common.core.utils.file"};
+
+    /**
+     * 请求错误公共提示信息
+     */
+    public static final String REQUEST_FAIL_MSG="系统内部错误，请稍后重试";
 }

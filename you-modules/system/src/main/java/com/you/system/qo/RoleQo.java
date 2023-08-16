@@ -1,6 +1,6 @@
 package com.you.system.qo;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.you.common.model.PageModel;
 import com.you.system.model.SysRole;
 import lombok.Data;
 
@@ -18,5 +18,5 @@ public class RoleQo {
 
     private String endTime;
 
-    private Page<SysRole> page;
+    private PageModel<SysRole> page;
 }

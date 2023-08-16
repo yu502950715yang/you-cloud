@@ -148,7 +148,7 @@
             <el-form-item prop="roleKey">
                <template #label>
                   <span>
-                     <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasRole('admin')`)" placement="top">
+                     <el-tooltip content="控制器中定义的权限字符，如：@SaCheckRole('admin')" placement="top">
                         <el-icon><question-filled /></el-icon>
                      </el-tooltip>
                      权限字符
@@ -295,8 +295,8 @@ const data = reactive({
     page: {
       current: 1,
       size: 10,
-      orders: [
-        {column: 'role_name', asc: false}
+      orderList: [
+        {column: 'roleSort', asc: true}
       ]
     },
     roleName: undefined,

@@ -52,7 +52,7 @@ export function changeRoleStatus(roleId, status) {
   }
   return request({
     url: '/system/role/changeStatus',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }

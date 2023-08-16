@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class SysRole {
 
     @TableId(value = "role_id", type = IdType.AUTO)
-    private Integer roleId;
+    private Long roleId;
 
     @TableField("role_name")
     private String roleName;

@@ -6,6 +6,7 @@ import com.you.common.core.utils.text.Convert;
 import com.you.common.redis.service.RedisService;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +46,18 @@ public class StpInterfaceImpl implements StpInterface {
 
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        return null;
+        List<String> roles;
+        String userId = String.valueOf(loginId);
+        String redisKey = redisService.splitRedisKey(CacheConstants.REDIS_USER_ROLE_KEY, userId);
+        if (redisService.hasKey(redisKey)) {
+            Object redisList = redisService.getCacheObject(redisKey);
+            roles = Convert.objectToList(redisList, String.class);
+        } else {
+            // 如果不存在，则先查询再存入缓存中
+            roles = authService.getRoles(userId);
+            // 存入redis
+            redisService.setCacheObject(redisKey, roles);
+        }
+        return roles;
     }
 }

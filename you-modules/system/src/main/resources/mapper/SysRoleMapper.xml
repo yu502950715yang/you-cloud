@@ -27,4 +27,8 @@
             </if>
         </where>
     </select>
+
+    <update id="updateState">
+        update sys_role set status = #{status} where role_id = #{roleId}
+    </update>
 </mapper>

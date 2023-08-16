@@ -19,4 +19,13 @@ import org.apache.ibatis.annotations.Param;
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
     IPage<SysRole> listPage(@Param("page") Page<SysRole> page, @Param("roleQo") RoleQo roleQo);
+
+    /**
+     * 根据id更新角色状态
+     *
+     * @param roleId 角色id
+     * @param status 角色状态
+     * @return 执行行数
+     */
+    int updateState(@Param("roleId") Long roleId, @Param("status") String status);
 }

@@ -13,4 +13,10 @@
           AND m.perms != ''
     </select>
 
+    <select id="selectRolesByUserId" resultType="string">
+        SELECT DISTINCT (r.role_key)
+        FROM sys_role r, sys_user_role ur
+        WHERE r.role_id = ur.role_id
+        AND ur.user_id = #{userId}
+    </select>
 </mapper>

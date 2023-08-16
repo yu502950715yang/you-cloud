@@ -11,4 +11,11 @@ public interface AuthService {
      * @return 权限list
      */
     List<String> getPermissions(String userId);
+
+    /**
+     * 获取用户角色key
+     * @param userId 用户id
+     * @return 角色key List
+     */
+    List<String> getRoles(String userId);
 }

@@ -18,4 +18,9 @@ public class AuthServiceImpl implements AuthService {
     public List<String> getPermissions(String userId) {
         return authMapper.selectPermTokenByUserId(userId);
     }
+
+    @Override
+    public List<String> getRoles(String userId) {
+        return authMapper.selectRolesByUserId(userId);
+    }
 }
