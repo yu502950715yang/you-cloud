@@ -1,11 +1,9 @@
 package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
-import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleService;
 import org.springframework.web.bind.annotation.PostMapping;

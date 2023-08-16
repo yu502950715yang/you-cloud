@@ -128,12 +128,21 @@
                 <version>${you-clous.version}</version>
             </dependency>
 
+            <!-- 注解校验模块 -->
+            <dependency>
+                <groupId>com.you</groupId>
+                <artifactId>you-common-validation</artifactId>
+                <version>${you-clous.version}</version>
+            </dependency>
+
+            <!--公共实体类-->
             <dependency>
                 <groupId>com.you</groupId>
                 <artifactId>system-model</artifactId>
                 <version>${you-clous.version}</version>
             </dependency>
 
+            <!--系统管理api-->
             <dependency>
                 <groupId>com.you</groupId>
                 <artifactId>api-system</artifactId>

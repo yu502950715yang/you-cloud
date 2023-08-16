@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.you.validation.ValidationGroups;
+import com.you.validation.annotation.RoleStatusValid;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -19,6 +22,7 @@ import java.time.LocalDateTime;
 @TableName("sys_role")
 public class SysRole {
 
+    @NotNull(message = "角色id不能为空", groups = ValidationGroups.Other.class)
     @TableId(value = "role_id", type = IdType.AUTO)
     private Long roleId;
 
@@ -40,6 +44,7 @@ public class SysRole {
     @TableField("dept_check_strictly")
     private Integer deptCheckStrictly;
 
+    @RoleStatusValid(groups = ValidationGroups.Other.class)
     @TableField("status")
     private String status;
 

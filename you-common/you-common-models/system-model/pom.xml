@@ -11,4 +11,10 @@
 
     <artifactId>system-model</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.you</groupId>
+            <artifactId>you-common-validation</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.auth.service.AuthService;
 import com.you.system.mapper.SysUserMapper;
 import com.you.system.model.LoginUser;
-import com.you.system.model.SysUser;
 import com.you.system.service.SysUserService;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,6 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.model.LoginUser;
-import com.you.system.model.SysUser;
 
 public interface SysUserService extends IService<SysUser> {
 

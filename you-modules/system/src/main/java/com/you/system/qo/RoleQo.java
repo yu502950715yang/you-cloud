@@ -1,7 +1,6 @@
 package com.you.system.qo;
 
 import com.you.common.model.PageModel;
-import com.you.system.model.SysRole;
 import lombok.Data;
 
 @Data

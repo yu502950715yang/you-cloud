@@ -4,10 +4,13 @@ import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * 全局异常处理器
@@ -26,7 +29,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = CommonException.class)
     public R<?> handlerCommonException(CommonException e) {
-        log.error(e.getMessage(), e);
+        log.info(e.getMessage(), e);
         return R.fail(e.getMessage());
     }
 
@@ -48,5 +51,25 @@ public class GlobalExceptionHandler {
         String requestUri = request.getRequestURI();
         log.error("请求地址'{}'，发生系统异常", requestUri, e);
         return R.fail(e.getMessage());
+    }
+
+    /**
+     * Validated验证异常捕获
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public R<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+        String requestUri = request.getRequestURI();
+        log.info("请求地址'{}'，发生参数异常", requestUri, e);
+        return R.fail(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage());
+    }
+
+    /**
+     * Validated验证异常捕获
+     */
+    @ExceptionHandler(BindException.class)
+    public R<?> handleBindException(BindException e, HttpServletRequest request) {
+        String requestUri = request.getRequestURI();
+        log.info("请求地址'{}'，发生参数异常", requestUri, e);
+        return R.fail(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage());
     }
 }

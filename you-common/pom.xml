@@ -20,6 +20,7 @@
         <module>you-common-datasource</module>
         <module>you-common-models</module>
         <module>you-common-auth</module>
+        <module>you-common-validation</module>
     </modules>
 
 </project>
