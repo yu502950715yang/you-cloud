@@ -3,6 +3,7 @@ package com.you.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.common.core.model.R;
 import com.you.system.model.LoginUser;
+import com.you.system.model.SysUser;
 import com.you.system.service.SysUserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
