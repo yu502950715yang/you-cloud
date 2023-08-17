@@ -6,7 +6,6 @@ import com.you.common.core.utils.text.Convert;
 import com.you.common.redis.service.RedisService;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class StpInterfaceImpl implements StpInterface {
             permissionList = Convert.objectToList(redisList, String.class);
         } else {
             // 如果不存在，则先查询再存入缓存中
-            permissionList = authService.getPermissions(userId);
+            permissionList = authService.getPermissions(Long.valueOf(userId));
             // 存入redis
             redisService.setCacheObject(redisKey, permissionList);
         }

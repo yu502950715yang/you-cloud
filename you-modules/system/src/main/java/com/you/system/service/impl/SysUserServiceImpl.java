@@ -25,7 +25,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public LoginUser getLoginUserByUserId(String userId) {
+    public LoginUser getLoginUserByUserId(Long userId) {
         LoginUser loginUser = new LoginUser(userMapper.selectLoginUserByUserId(userId));
         loginUser.setPermissions(authService.getPermissions(userId));
         return loginUser;

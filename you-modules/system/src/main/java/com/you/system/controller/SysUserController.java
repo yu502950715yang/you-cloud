@@ -35,7 +35,7 @@ public class SysUserController {
 
     @GetMapping("/getInfo")
     public R<LoginUser> getInfo() {
-        String userId = String.valueOf(StpUtil.getLoginId());
+        Long userId = StpUtil.getLoginIdAsLong();
         LoginUser user = sysUserService.getLoginUserByUserId(userId);
         return R.ok(user);
     }

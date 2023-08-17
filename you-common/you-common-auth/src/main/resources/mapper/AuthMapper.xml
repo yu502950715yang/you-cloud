@@ -13,6 +13,12 @@
           AND m.perms != ''
     </select>
 
+    <select id="selectAllPerm" resultType="string">
+        SELECT DISTINCT (perms)
+        FROM sys_menu
+        WHERE perms != ''
+    </select>
+
     <select id="selectRolesByUserId" resultType="string">
         SELECT DISTINCT (r.role_key)
         FROM sys_role r, sys_user_role ur

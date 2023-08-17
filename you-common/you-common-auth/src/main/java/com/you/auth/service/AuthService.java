@@ -10,7 +10,7 @@ public interface AuthService {
      * @param userId 用户id
      * @return 权限list
      */
-    List<String> getPermissions(String userId);
+    List<String> getPermissions(Long userId);
 
     /**
      * 获取用户角色key

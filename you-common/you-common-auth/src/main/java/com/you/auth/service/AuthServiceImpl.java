@@ -1,6 +1,7 @@
 package com.you.auth.service;
 
 import com.you.auth.mapper.AuthMapper;
+import com.you.common.core.constant.UserConstants;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public List<String> getPermissions(String userId) {
+    public List<String> getPermissions(Long userId) {
+        if (UserConstants.ADMIN_ID.equals(userId)) {
+            return authMapper.selectAllPerm();
+        }
         return authMapper.selectPermTokenByUserId(userId);
     }
 

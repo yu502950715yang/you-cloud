@@ -15,7 +15,11 @@ import java.util.List;
 @Mapper
 public interface AuthMapper {
 
-    List<String> selectPermTokenByUserId(String userId);
+    List<String> selectPermTokenByUserId(Long userId);
+
+    List<String> selectAllPerm();
 
     List<String> selectRolesByUserId(String userId);
+
+
 }

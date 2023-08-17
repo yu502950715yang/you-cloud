@@ -6,6 +6,7 @@ import com.you.system.mapper.SysMenuMapper;
 import com.you.system.model.SysMenu;
 import com.you.system.service.SysMenuService;
 import com.you.system.utils.RouterUtil;
+import com.you.system.vo.ElTree;
 import com.you.system.vo.MenuTree;
 import com.you.system.vo.MetaVo;
 import com.you.system.vo.RouterVo;
@@ -26,7 +27,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     @Override
     public List<MenuTree> selectMenuTreeByUserId(Long userId) {
-        List<SysMenu> sysMenuList = menuMapper.selectMenuByUserId(userId);
+        List<SysMenu> sysMenuList;
+        if (UserConstants.ADMIN_ID.equals(userId)) {
+            sysMenuList = menuMapper.selectMenuTypeMCByUserId(null);
+        } else {
+            sysMenuList = menuMapper.selectMenuTypeMCByUserId(userId);
+        }
         return createMenuTree(sysMenuList, 0);
     }
 
@@ -76,6 +82,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return routerVoList;
     }
 
+    @Override
+    public List<ElTree> selectMenuList(Long userId) {
+        List<SysMenu> sysMenuList;
+        if (UserConstants.ADMIN_ID.equals(userId)) {
+            sysMenuList = menuMapper.selectMenuByUserId(null);
+        } else {
+            sysMenuList = menuMapper.selectMenuByUserId(userId);
+        }
+        return createElTree(sysMenuList, 0);
+    }
+
     private List<MenuTree> createMenuTree(List<SysMenu> list, long parentId) {
         List<MenuTree> returnList = new ArrayList<>();
         list.forEach(sysMenu -> {
@@ -89,4 +106,19 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return returnList;
     }
 
+
+    private List<ElTree> createElTree(List<SysMenu> list, long parentId) {
+        List<ElTree> returnList = new ArrayList<>();
+        list.forEach(sysMenu -> {
+            if (parentId == sysMenu.getParentId()) {
+                ElTree elTree = new ElTree();
+                elTree.setId(String.valueOf(sysMenu.getMenuId()));
+                elTree.setParentId(String.valueOf(sysMenu.getParentId()));
+                elTree.setLabel(sysMenu.getMenuName());
+                elTree.setChildren(createElTree(list, sysMenu.getMenuId()));
+                returnList.add(elTree);
+            }
+        });
+        return returnList;
+    }
 }

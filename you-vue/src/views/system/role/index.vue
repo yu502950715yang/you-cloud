@@ -252,7 +252,7 @@ import {
   listRole,
   updateRole
 } from "@/api/system/role";
-import {roleMenuTreeselect, treeselect as menuTreeselect} from "@/api/system/menu";
+import {roleMenuTreeselect, treeSelect as menuTreeSelect} from "@/api/system/menu";
 import {useRouter} from "vue-router";
 import {parseTime} from "@/utils/ruoyi";
 
@@ -384,8 +384,8 @@ function handleAuthUser(row) {
   router.push("/system/role-auth/user/" + row.roleId);
 }
 /** 查询菜单树结构 */
-function getMenuTreeselect() {
-  menuTreeselect().then(response => {
+function getMenuTreeSelect() {
+  menuTreeSelect().then(response => {
     menuOptions.value = response.data;
   });
 }
@@ -400,7 +400,7 @@ function getDeptAllCheckedKeys() {
 }
 /** 重置新增的表单以及其他数据  */
 function reset() {
-  if (menuRef.value != undefined) {
+  if (menuRef.value !== undefined && menuRef.value !== null) {
     menuRef.value.setCheckedKeys([]);
   }
   menuExpand.value = false;
@@ -424,7 +424,7 @@ function reset() {
 /** 添加角色 */
 function handleAdd() {
   reset();
-  getMenuTreeselect();
+  getMenuTreeSelect();
   open.value = true;
   title.value = "添加角色";
 }

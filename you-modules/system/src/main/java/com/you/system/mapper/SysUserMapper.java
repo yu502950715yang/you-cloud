@@ -16,5 +16,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     SysUser selectByUsername(String username);
 
-    SysUser selectLoginUserByUserId(String userId);
+    SysUser selectLoginUserByUserId(Long userId);
 }
