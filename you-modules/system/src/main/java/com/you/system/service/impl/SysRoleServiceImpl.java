@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.exception.CommonException;
 import com.you.system.mapper.SysRoleMapper;
+import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleService;
 import org.springframework.stereotype.Service;

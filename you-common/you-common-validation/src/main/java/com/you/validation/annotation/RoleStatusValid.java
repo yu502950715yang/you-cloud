@@ -5,6 +5,9 @@ import com.you.validation.constraints.RoleStatusValidConstraint;
 import javax.validation.Constraint;
 import java.lang.annotation.*;
 
+/**
+ * 自定义校验注解，判断角色状态
+ */
 @Documented
 @Constraint(validatedBy = {RoleStatusValidConstraint.class})
 @Target({ElementType.FIELD})
