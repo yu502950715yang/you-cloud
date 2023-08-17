@@ -7,6 +7,8 @@ import com.you.common.core.model.R;
 import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleService;
+import com.you.validation.ValidationGroups;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,7 @@ public class SysRoleController {
 
     @PostMapping("/changeStatus")
     @SaCheckPermission("system:role:edit")
-    public R<Void> changeStatus(@RequestBody SysRole role) {
+    public R<Void> changeStatus(@Validated(ValidationGroups.Other.class) @RequestBody SysRole role) {
         roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
         if (roleService.updateRoleStatus(role.getRoleId(), role.getStatus())) {
             return R.ok();
