@@ -386,8 +386,9 @@ function handleAuthUser(row) {
 }
 /** 查询菜单树结构 */
 function getMenuTreeSelect() {
-  menuTreeSelect().then(response => {
+  return menuTreeSelect().then(response => {
     menuOptions.value = response.data;
+    return response;
   });
 }
 /** 所有部门节点数据 */
@@ -433,14 +434,14 @@ function handleAdd() {
 function handleUpdate(row) {
   reset();
   const roleId = row.roleId || ids.value;
-  const roleMenu = getRoleMenuTreeselect(roleId);
+  const roleMenu = getMenuTreeSelect();
   getRole(roleId).then(response => {
     form.value = response.data;
     form.value.roleSort = Number(form.value.roleSort);
     open.value = true;
     nextTick(() => {
-      roleMenu.then((res) => {
-        let checkedKeys = res.checkedKeys;
+      roleMenu.then(() => {
+        let checkedKeys = response.data.menuIds;
         checkedKeys.forEach((v) => {
           nextTick(() => {
             menuRef.value.setChecked(v, true, false);
