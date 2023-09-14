@@ -2,7 +2,7 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.you.system.bo.RoleBo;
+import com.you.system.bo.SysRoleBo;
 import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 
@@ -55,5 +55,13 @@ public interface SysRoleService extends IService<SysRole> {
      * @param role 新增角色实体
      * @return 是否成功
      */
-    boolean save(RoleBo role);
+    boolean save(SysRoleBo role);
+
+    /**
+     * 根据角色id获取角色信息
+     *
+     * @param roleId 角色id
+     * @return 角色信息
+     */
+    SysRoleBo getRoleById(Long roleId);
 }

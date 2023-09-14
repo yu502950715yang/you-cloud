@@ -5,8 +5,14 @@
 
     <insert id="batchInsert">
         INSERT INTO sys_role_menu (role_id, menu_id) VALUES
-        <foreach collection="menuIdList" index="item" separator=",">
+        <foreach collection="menuIdList" item="item" separator=",">
             (#{roleId},#{item})
         </foreach>
     </insert>
+
+    <select id="selectMenuIds" resultType="long">
+        SELECT menu_id
+        FROM sys_role_menu
+        WHERE role_id = #{roleId}
+    </select>
 </mapper>

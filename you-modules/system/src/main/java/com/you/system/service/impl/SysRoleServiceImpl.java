@@ -5,12 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.exception.CommonException;
-import com.you.system.bo.RoleBo;
+import com.you.system.bo.SysRoleBo;
 import com.you.system.mapper.SysRoleMapper;
 import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleMenuService;
 import com.you.system.service.SysRoleService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,11 +77,22 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean save(RoleBo role) {
+    public boolean save(SysRoleBo role) {
         roleMapper.insert(role);
         if (role.getMenuIds() != null && !role.getMenuIds().isEmpty()) {
             sysRoleMenuService.batchSave(role.getRoleId(), role.getMenuIds());
         }
         return role.getRoleId() != null;
+    }
+
+    @Override
+    public SysRoleBo getRoleById(Long roleId) {
+        SysRole role = roleMapper.selectById(roleId);
+        SysRoleBo bo = new SysRoleBo();
+        if (role != null) {
+            BeanUtils.copyProperties(role, bo);
+            bo.setMenuIds(sysRoleMenuService.getMenuIdsByRoleId(roleId));
+        }
+        return bo;
     }
 }

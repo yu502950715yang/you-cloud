@@ -21,4 +21,9 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
             sysRoleMenuMapper.batchInsert(roleId, menuIdList);
         }
     }
+
+    @Override
+    public List<Long> getMenuIdsByRoleId(Long roleId) {
+        return sysRoleMenuMapper.selectMenuIds(roleId);
+    }
 }

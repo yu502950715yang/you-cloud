@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class RoleBo extends SysRole {
+public class SysRoleBo extends SysRole {
 
     /**
      * 角色对应的菜单
