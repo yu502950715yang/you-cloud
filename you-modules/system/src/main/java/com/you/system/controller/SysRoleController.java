@@ -64,4 +64,20 @@ public class SysRoleController {
         return R.ok(roleService.getRoleById(roleId));
     }
 
+    @PostMapping("/edit")
+    @SaCheckPermission("system:role:edit")
+    public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysRoleBo role) {
+        roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
+        // 校验角色名称唯一
+        roleService.checkRoleNameUnique(role.getRoleId(), role.getRoleName());
+        // 校验权限字符串唯一
+        roleService.checkRoleKeyUnique(role.getRoleId(), role.getRoleKey());
+        role.setUpdateTime(LocalDateTime.now());
+        role.setUpdateBy(StpUtil.getLoginIdAsString());
+        if (roleService.edit(role)) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
 }

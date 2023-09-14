@@ -19,4 +19,11 @@ public interface SysRoleMenuService {
      * @return 菜单id集合
      */
     List<Long> getMenuIdsByRoleId(Long roleId);
+
+    /**
+     * 根据角色id删除管理信息
+     *
+     * @param roleId 角色id
+     */
+    void deleteByRoleId(Long roleId);
 }

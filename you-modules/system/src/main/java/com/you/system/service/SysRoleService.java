@@ -64,4 +64,12 @@ public interface SysRoleService extends IService<SysRole> {
      * @return 角色信息
      */
     SysRoleBo getRoleById(Long roleId);
+
+    /**
+     * 编辑角色
+     *
+     * @param role 角色实体
+     * @return 是否成功
+     */
+    boolean edit(SysRoleBo role);
 }

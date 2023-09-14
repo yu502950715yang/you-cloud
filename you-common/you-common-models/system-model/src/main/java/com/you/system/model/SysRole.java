@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 public class SysRole {
 
     @NotNull(message = "角色id不能为空", groups = ValidationGroups.Other.class)
+    @NotNull(message = "角色id不能为空", groups = ValidationGroups.Update.class)
     @TableId(value = "role_id", type = IdType.AUTO)
     private Long roleId;
 
@@ -69,7 +70,7 @@ public class SysRole {
     private String updateBy;
 
     @TableField("update_time")
-    private String updateTime;
+    private LocalDateTime updateTime;
 
     @Length(max = 500, message = "备注最多500个字符", groups = ValidationGroups.Common.class)
     @TableField("remark")

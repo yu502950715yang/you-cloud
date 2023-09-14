@@ -26,4 +26,9 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
     public List<Long> getMenuIdsByRoleId(Long roleId) {
         return sysRoleMenuMapper.selectMenuIds(roleId);
     }
+
+    @Override
+    public void deleteByRoleId(Long roleId) {
+        sysRoleMenuMapper.deleteByRoleId(roleId);
+    }
 }

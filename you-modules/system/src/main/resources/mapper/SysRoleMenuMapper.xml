@@ -15,4 +15,10 @@
         FROM sys_role_menu
         WHERE role_id = #{roleId}
     </select>
+
+    <delete id="deleteByRoleId">
+        DELETE
+        FROM sys_role_menu
+        WHERE role_id = #{roleId}
+    </delete>
 </mapper>

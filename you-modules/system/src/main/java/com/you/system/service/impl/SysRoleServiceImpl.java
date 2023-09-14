@@ -95,4 +95,17 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         }
         return bo;
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean edit(SysRoleBo role) {
+        int result = roleMapper.updateById(role);
+        // 删除原有角色菜单关联表
+        sysRoleMenuService.deleteByRoleId(role.getRoleId());
+        // 新增关联关系
+        if (role.getMenuIds() != null && !role.getMenuIds().isEmpty()) {
+            sysRoleMenuService.batchSave(role.getRoleId(), role.getMenuIds());
+        }
+        return result > 0;
+    }
 }
