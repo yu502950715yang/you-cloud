@@ -157,7 +157,7 @@
                <el-input v-model="form.roleKey" placeholder="请输入权限字符" />
             </el-form-item>
             <el-form-item label="角色顺序" prop="roleSort">
-               <el-input-number v-model="form.roleSort" controls-position="right" :min="0" />
+               <el-input-number v-model="form.roleSort" controls-position="right" :min="0" :max="9999" />
             </el-form-item>
             <el-form-item label="状态">
                <el-radio-group v-model="form.status">
@@ -252,7 +252,7 @@ import {
   listRole,
   updateRole
 } from "@/api/system/role";
-import {roleMenuTreeselect, treeSelect as menuTreeSelect} from "@/api/system/menu";
+import {treeSelect as menuTreeSelect} from "@/api/system/menu";
 import {useRouter} from "vue-router";
 import {parseTime} from "@/utils/ruoyi";
 import {QuestionFilled} from "@element-plus/icons-vue";
@@ -452,13 +452,7 @@ function handleUpdate(row) {
     title.value = "修改角色";
   });
 }
-/** 根据角色ID查询菜单树结构 */
-function getRoleMenuTreeselect(roleId) {
-  return roleMenuTreeselect(roleId).then(response => {
-    menuOptions.value = response.menus;
-    return response;
-  });
-}
+
 /** 根据角色ID查询部门树结构 */
 function getDeptTree(roleId) {
   return deptTreeSelect(roleId).then(response => {
@@ -509,7 +503,7 @@ function getMenuAllCheckedKeys() {
 function submitForm() {
   proxy.$refs["roleRef"].validate(valid => {
     if (valid) {
-      if (form.value.roleId !== undefined && form.value.roleId !== null && from.value.roleId !== "") {
+      if (form.value.roleId !== undefined && form.value.roleId !== null && form.value.roleId !== "") {
         form.value.menuIds = getMenuAllCheckedKeys();
         updateRole(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
