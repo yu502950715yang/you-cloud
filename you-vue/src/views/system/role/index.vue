@@ -255,6 +255,7 @@ import {
 import {roleMenuTreeselect, treeSelect as menuTreeSelect} from "@/api/system/menu";
 import {useRouter} from "vue-router";
 import {parseTime} from "@/utils/ruoyi";
+import {QuestionFilled} from "@element-plus/icons-vue";
 
 const router = useRouter();
 const { proxy } = getCurrentInstance();
@@ -507,7 +508,7 @@ function getMenuAllCheckedKeys() {
 function submitForm() {
   proxy.$refs["roleRef"].validate(valid => {
     if (valid) {
-      if (form.value.roleId != undefined) {
+      if (form.value.roleId !== undefined && form.value.roleId !== null && from.value.roleId !== "") {
         form.value.menuIds = getMenuAllCheckedKeys();
         updateRole(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
@@ -516,6 +517,7 @@ function submitForm() {
         });
       } else {
         form.value.menuIds = getMenuAllCheckedKeys();
+        console.log(form.value);
         addRole(form.value).then(response => {
           proxy.$modal.msgSuccess("新增成功");
           open.value = false;

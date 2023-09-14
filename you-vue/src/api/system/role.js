@@ -20,7 +20,7 @@ export function getRole(roleId) {
 // 新增角色
 export function addRole(data) {
   return request({
-    url: '/system/role',
+      url: '/system/role/save',
     method: 'post',
     data: data
   })

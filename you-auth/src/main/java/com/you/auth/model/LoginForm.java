@@ -14,8 +14,22 @@ import lombok.Setter;
 @Setter
 public class LoginForm {
 
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
+
+    /**
+     * 验证码
+     */
     private String verifyCode;
+
+    /**
+     * 验证码key值
+     */
     private String verifyCodeKey;
 }

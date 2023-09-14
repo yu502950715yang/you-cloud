@@ -1,9 +1,11 @@
 package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
+import com.you.system.bo.RoleBo;
 import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleService;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/role")
@@ -36,8 +40,24 @@ public class SysRoleController {
         roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
         if (roleService.updateRoleStatus(role.getRoleId(), role.getStatus())) {
             return R.ok();
-        } else {
-            return R.fail(Constants.REQUEST_FAIL_MSG);
         }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @PostMapping("/save")
+    @SaCheckPermission("system:role:add")
+    public R<Void> save(@Validated(ValidationGroups.Add.class) @RequestBody RoleBo role) {
+        roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
+        // 校验角色名称唯一
+        roleService.checkRoleNameUnique(role.getRoleId(), role.getRoleName());
+        // 校验权限字符串唯一
+        roleService.checkRoleKeyUnique(role.getRoleId(), role.getRoleKey());
+        // 构造新增数据
+        role.setCreateTime(LocalDateTime.now());
+        role.setCreateBy(StpUtil.getLoginIdAsString());
+        if (roleService.save(role)) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 }

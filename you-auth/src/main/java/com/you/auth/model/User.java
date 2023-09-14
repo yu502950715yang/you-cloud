@@ -15,8 +15,17 @@ import lombok.Setter;
 @Setter
 public class User {
 
+    /**
+     * 用户id
+     */
     private String userId;
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * token信息
+     */
     private SaTokenInfo tokenInfo;
 
     public User(String userId, String username, SaTokenInfo tokenInfo) {
