@@ -1088,7 +1088,7 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`
 (
-    `role_id`             bigint(20)   NOT NULL COMMENT '角色ID',
+    `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
     `role_name`           varchar(30)  NOT NULL COMMENT '角色名称',
     `role_key`            varchar(100) NOT NULL COMMENT '角色权限字符串',
     `role_sort`           int(4)       NOT NULL COMMENT '显示顺序',

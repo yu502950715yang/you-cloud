@@ -21,4 +21,13 @@
         FROM sys_role_menu
         WHERE role_id = #{roleId}
     </delete>
+
+    <delete id="deleteByRoleIds">
+        DELETE
+        FROM sys_role_menu
+        WHERE role_id IN
+        <foreach collection="roleIds" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

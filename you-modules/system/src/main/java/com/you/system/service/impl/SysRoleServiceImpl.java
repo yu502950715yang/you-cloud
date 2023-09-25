@@ -15,6 +15,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
@@ -107,5 +109,29 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             sysRoleMenuService.batchSave(role.getRoleId(), role.getMenuIds());
         }
         return result > 0;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean removeByIds(List<Long> roleIds) {
+        if (roleIds == null || roleIds.isEmpty()) {
+            throw new CommonException("请选择要删除的角色");
+        }
+        List<SysRoleBo> roleList = roleMapper.selectByRoleIds(roleIds);
+        roleList.forEach(roleBo -> {
+            // 检查所选角色能否删除
+            checkRoleAllowed(roleBo.getRoleId(), null);
+            // 检查角色是否关联用户
+            if (roleBo.getUserCount() > 0) {
+                throw new CommonException(String.format("%1$s已分配用户,不能删除", roleBo.getRoleName()));
+            }
+        });
+        // 删除角色关联菜单表
+        sysRoleMenuService.deleteByRoleIds(roleIds);
+        int result = roleMapper.deleteBatchIds(roleIds);
+        if (result != roleIds.size()) {
+            throw new CommonException("角色删除失败");
+        }
+        return true;
     }
 }

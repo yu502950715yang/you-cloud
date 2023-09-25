@@ -2,33 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.you.system.mapper.SysRoleMapper">
 
+    <resultMap id="SysRoleBo" type="com.you.system.bo.SysRoleBo">
+        <result column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_key" property="roleKey"/>
+        <result column="role_sort" property="roleSort"/>
+        <result column="status" property="status"/>
+        <association property="userCount"
+                     javaType="int"
+                     select="com.you.system.mapper.SysUserRoleMapper.countUsers"
+                     column="role_id"/>
+    </resultMap>
+
 
     <select id="listPage" resultType="com.you.system.model.SysRole">
-        select role_id ,role_name ,role_key, role_sort, status, create_time
-        from sys_role
+        SELECT role_id ,role_name ,role_key, role_sort, status, create_time
+        FROM sys_role
         <where>
             del_flag = 0
             <if test="roleQo.roleName != null and roleQo.roleName !=''">
-                and role_name like CONCAT('%',#{roleQo.roleName},'%')
+                AND role_name LIKE CONCAT('%',#{roleQo.roleName},'%')
             </if>
             <if test="roleQo.roleKey != null and roleQo.roleKey !=''">
-                and role_key like CONCAT('%',#{roleQo.roleKey},'%')
+                AND role_key LIKE CONCAT('%',#{roleQo.roleKey},'%')
             </if>
             <if test="roleQo.status != null and roleQo.status !=''">
-                and status = #{roleQo.status}
-            </if>
-            <if test="roleQo.status != null and roleQo.status !=''">
-                and status = #{roleQo.status}
+                AND status = #{roleQo.status}
             </if>
             <if test="roleQo.beginTime != null and roleQo.beginTime !=''">
                 <if test="roleQo.endTime != null and roleQo.endTime !=''">
-                    and create_time BETWEEN #{roleQo.beginTime} AND #{roleQo.endTime}
+                    AND create_time BETWEEN #{roleQo.beginTime} AND #{roleQo.endTime}
                 </if>
             </if>
         </where>
     </select>
 
     <update id="updateState">
-        update sys_role set status = #{status} where role_id = #{roleId}
+        UPDATE sys_role
+        SET status = #{status}
+        WHERE role_id = #{roleId}
     </update>
+
+    <select id="selectByRoleIds" resultMap="SysRoleBo">
+        SELECT role_id ,role_name ,role_key, role_sort, status
+        FROM sys_role
+        WHERE role_id IN
+        <foreach collection="roleIds" open="(" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

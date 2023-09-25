@@ -6,6 +6,8 @@ import com.you.system.bo.SysRoleBo;
 import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 
+import java.util.List;
+
 public interface SysRoleService extends IService<SysRole> {
 
     /**
@@ -72,4 +74,12 @@ public interface SysRoleService extends IService<SysRole> {
      * @return 是否成功
      */
     boolean edit(SysRoleBo role);
+
+    /**
+     * 根据角色id 批量删除角色
+     *
+     * @param roleIds 角色id List
+     * @return 是否成功
+     */
+    boolean removeByIds(List<Long> roleIds);
 }

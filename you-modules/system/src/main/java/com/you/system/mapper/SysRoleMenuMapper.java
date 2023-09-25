@@ -30,4 +30,11 @@ public interface SysRoleMenuMapper {
      * @param roleId 角色id
      */
     void deleteByRoleId(Long roleId);
+
+    /**
+     * 根据角色id list删除关联信息
+     *
+     * @param roleIds 角色id List
+     */
+    void deleteByRoleIds(@Param("roleIds") List<Long> roleIds);
 }

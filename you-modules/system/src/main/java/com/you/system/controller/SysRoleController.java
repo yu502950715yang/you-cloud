@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/role")
@@ -75,6 +76,15 @@ public class SysRoleController {
         role.setUpdateTime(LocalDateTime.now());
         role.setUpdateBy(StpUtil.getLoginIdAsString());
         if (roleService.edit(role)) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @PostMapping("/remove")
+    @SaCheckPermission("system:role:remove")
+    public R<Void> remove(@RequestBody List<Long> roleIds) {
+        if (roleService.removeByIds(roleIds)) {
             return R.ok();
         }
         return R.fail(Constants.REQUEST_FAIL_MSG);

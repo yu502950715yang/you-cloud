@@ -3,10 +3,13 @@ package com.you.system.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.you.system.bo.SysRoleBo;
 import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 角色 mapper
@@ -28,4 +31,12 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
      * @return 执行行数
      */
     int updateState(@Param("roleId") Long roleId, @Param("status") String status);
+
+    /**
+     * 根据角色id list查询
+     *
+     * @param roleIds 角色id List
+     * @return 角色list
+     */
+    List<SysRoleBo> selectByRoleIds(@Param("roleIds") List<Long> roleIds);
 }

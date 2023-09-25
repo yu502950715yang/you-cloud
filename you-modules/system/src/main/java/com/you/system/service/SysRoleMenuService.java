@@ -26,4 +26,11 @@ public interface SysRoleMenuService {
      * @param roleId 角色id
      */
     void deleteByRoleId(Long roleId);
+
+    /**
+     * 根据角色id list 批量删除关联
+     *
+     * @param roleIds 角色id List
+     */
+    void deleteByRoleIds(List<Long> roleIds);
 }

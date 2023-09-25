@@ -17,4 +17,9 @@ public class SysRoleBo extends SysRole {
      * 角色对应的菜单
      */
     private List<Long> menuIds;
+
+    /**
+     * 该角色下的人数
+     */
+    private int userCount;
 }
