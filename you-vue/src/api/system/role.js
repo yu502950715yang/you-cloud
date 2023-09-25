@@ -35,15 +35,6 @@ export function updateRole(data) {
   })
 }
 
-// 角色数据权限
-export function dataScope(data) {
-  return request({
-    url: '/system/role/dataScope',
-    method: 'put',
-    data: data
-  })
-}
-
 // 角色状态修改
 export function changeRoleStatus(roleId, status) {
   const data = {
@@ -108,13 +99,5 @@ export function authUserSelectAll(data) {
     url: '/system/role/authUser/selectAll',
     method: 'put',
     params: data
-  })
-}
-
-// 根据角色ID查询部门树结构
-export function deptTreeSelect(roleId) {
-  return request({
-    url: '/system/role/deptTree/' + roleId,
-    method: 'get'
   })
 }
