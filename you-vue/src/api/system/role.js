@@ -70,8 +70,8 @@ export function allocatedUserList(query) {
 export function unallocatedUserList(query) {
   return request({
     url: '/system/role/authUser/unallocatedList',
-    method: 'get',
-    params: query
+      method: 'post',
+      data: query
   })
 }
 
@@ -87,8 +87,8 @@ export function authUserCancel(data) {
 // 授权用户选择
 export function authUserSelectAll(data) {
   return request({
-    url: '/system/role/authUser/selectAll',
-    method: 'put',
-    params: data
+      url: '/system/role/authUser/select',
+      method: 'post',
+      data: data
   })
 }

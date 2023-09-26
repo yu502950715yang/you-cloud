@@ -3,10 +3,8 @@ package com.you.system.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.you.system.model.SysRole;
 import com.you.system.model.SysUser;
 import com.you.system.qo.AuthUserQo;
-import com.you.system.qo.RoleQo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +23,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     SysUser selectLoginUserByUserId(Long userId);
 
     IPage<SysUser> ruleAllocatedListPage(@Param("page") Page<SysUser> page, @Param("qo") AuthUserQo qo);
+
+    IPage<SysUser> ruleUnallocatedListPage(@Param("page") Page<SysUser> page, @Param("qo") AuthUserQo qo);
 }

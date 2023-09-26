@@ -24,4 +24,21 @@ public interface SysUserRoleMapper {
      * @return 删除条数
      */
     int deleteRoleByUserIds(@Param("roleId") Long roleId, @Param("userIds") List<Long> userIds);
+
+    /**
+     * 根据角色id 获取该角色下的所有用户
+     *
+     * @param roleId 角色id
+     * @return 用户id list
+     */
+    List<Long> selectUserIdsByRoleId(Long roleId);
+
+    /**
+     * 保存用户角色对应关系
+     *
+     * @param roleId  角色id
+     * @param userIds 用户id List
+     * @return 保存条数
+     */
+    int insertUserRole(@Param("roleId") Long roleId, @Param("userIds") List<Long> userIds);
 }

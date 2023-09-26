@@ -31,4 +31,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return 分页数据
      */
     IPage<SysUser> ruleAllocatedListPage(AuthUserQo qo);
+
+    /**
+     * 角色未分配用户分页
+     *
+     * @param qo 查询条件
+     * @return 分页数据
+     */
+    IPage<SysUser> ruleUnallocatedListPage(AuthUserQo qo);
 }

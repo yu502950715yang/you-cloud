@@ -106,10 +106,29 @@ public class SysRoleController {
         return R.ok(userService.ruleAllocatedListPage(qo));
     }
 
+    @PostMapping("/authUser/unallocatedList")
+    @SaCheckPermission("system:role:edit")
+    public R<IPage<SysUser>> unallocatedListPage(@RequestBody AuthUserQo qo) {
+        return R.ok(userService.ruleUnallocatedListPage(qo));
+    }
+
     @PostMapping("/authUser/cancel")
     @SaCheckPermission("system:role:edit")
     public R<Void> authUserCancel(@RequestBody AuthUserBo bo) {
+        // 检查是否为管理员角色
+        roleService.checkRoleAllowed(bo.getRoleId(), null);
         if (userRoleService.removeRoleByUserIds(bo.getRoleId(), bo.getUserIds())) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @PostMapping("/authUser/select")
+    @SaCheckPermission("system:role:edit")
+    public R<Void> authUserSelect(@RequestBody AuthUserBo bo) {
+        // 检查是否为管理员角色
+        roleService.checkRoleAllowed(bo.getRoleId(), null);
+        if (userRoleService.saveUserRole(bo.getRoleId(), bo.getUserIds())) {
             return R.ok();
         }
         return R.fail(Constants.REQUEST_FAIL_MSG);
