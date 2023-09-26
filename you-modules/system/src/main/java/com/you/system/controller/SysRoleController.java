@@ -5,12 +5,14 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
+import com.you.system.bo.AuthUserBo;
 import com.you.system.bo.SysRoleBo;
 import com.you.system.model.SysRole;
 import com.you.system.model.SysUser;
 import com.you.system.qo.AuthUserQo;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleService;
+import com.you.system.service.SysUserRoleService;
 import com.you.system.service.SysUserService;
 import com.you.validation.ValidationGroups;
 import org.springframework.validation.annotation.Validated;
@@ -25,10 +27,12 @@ public class SysRoleController {
 
     private final SysRoleService roleService;
     private final SysUserService userService;
+    private final SysUserRoleService userRoleService;
 
-    public SysRoleController(SysRoleService roleService, SysUserService userService) {
+    public SysRoleController(SysRoleService roleService, SysUserService userService, SysUserRoleService userRoleService) {
         this.roleService = roleService;
         this.userService = userService;
+        this.userRoleService = userRoleService;
     }
 
     @PostMapping("/list")
@@ -100,5 +104,14 @@ public class SysRoleController {
     @SaCheckPermission("system:role:edit")
     public R<IPage<SysUser>> allocatedListPage(@RequestBody AuthUserQo qo) {
         return R.ok(userService.ruleAllocatedListPage(qo));
+    }
+
+    @PostMapping("/authUser/cancel")
+    @SaCheckPermission("system:role:edit")
+    public R<Void> authUserCancel(@RequestBody AuthUserBo bo) {
+        if (userRoleService.removeRoleByUserIds(bo.getRoleId(), bo.getUserIds())) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 }

@@ -1,6 +1,9 @@
 package com.you.system.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface SysUserRoleMapper {
@@ -12,4 +15,13 @@ public interface SysUserRoleMapper {
      * @return 用户数量
      */
     int countUsers(Long roleId);
+
+    /**
+     * 根据用户id删除对应的角色
+     *
+     * @param roleId  角色id
+     * @param userIds 用户id list
+     * @return 删除条数
+     */
+    int deleteRoleByUserIds(@Param("roleId") Long roleId, @Param("userIds") List<Long> userIds);
 }

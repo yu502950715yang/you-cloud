@@ -33,7 +33,7 @@
                plain
                icon="Plus"
                @click="openSelectUser"
-               v-hasPermi="['system:role:add']"
+               v-hasPermi="['system:role:edit']"
             >添加用户</el-button>
          </el-col>
          <el-col :span="1.5">
@@ -43,7 +43,7 @@
                icon="CircleClose"
                :disabled="multiple"
                @click="cancelAuthUserAll"
-               v-hasPermi="['system:role:remove']"
+               v-hasPermi="['system:role:edit']"
             >批量取消授权</el-button>
          </el-col>
          <el-col :span="1.5">
@@ -75,7 +75,9 @@
          </el-table-column>
          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template #default="scope">
-               <el-button link type="primary" icon="CircleClose" @click="cancelAuthUser(scope.row)" v-hasPermi="['system:role:remove']">取消授权</el-button>
+              <el-button link type="primary" icon="CircleClose" @click="cancelAuthUser(scope.row)"
+                         v-hasPermi="['system:role:edit']">取消授权
+              </el-button>
             </template>
          </el-table-column>
       </el-table>
@@ -93,7 +95,7 @@
 
 <script setup name="AuthUser">
 import selectUser from "./selectUser";
-import {allocatedUserList, authUserCancel, authUserCancelAll} from "@/api/system/role";
+import {allocatedUserList, authUserCancel} from "@/api/system/role";
 import {useRoute} from "vue-router";
 
 const route = useRoute();
@@ -153,7 +155,7 @@ function openSelectUser() {
 /** 取消授权按钮操作 */
 function cancelAuthUser(row) {
   proxy.$modal.confirm('确认要取消该用户"' + row.username + '"角色吗？').then(function () {
-    return authUserCancel({ userId: row.userId, roleId: queryParams.roleId });
+    return authUserCancel({userIds: [row.userId], roleId: queryParams.roleId});
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("取消授权成功");
@@ -162,9 +164,9 @@ function cancelAuthUser(row) {
 /** 批量取消授权按钮操作 */
 function cancelAuthUserAll(row) {
   const roleId = queryParams.roleId;
-  const uIds = userIds.value.join(",");
+  const uIds = userIds.value;
   proxy.$modal.confirm("是否取消选中用户授权数据项?").then(function () {
-    return authUserCancelAll({ roleId: roleId, userIds: uIds });
+    return authUserCancel({roleId: roleId, userIds: uIds});
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("取消授权成功");

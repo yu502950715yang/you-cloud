@@ -8,4 +8,12 @@
         WHERE role_id = #{roleId}
     </select>
 
+    <delete id="deleteRoleByUserIds">
+        DELETE FROM sys_user_role
+        WHERE role_id = #{roleId}
+        AND user_id IN
+        <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
 </mapper>
