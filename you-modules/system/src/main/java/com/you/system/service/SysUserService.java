@@ -1,8 +1,10 @@
 package com.you.system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
+import com.you.system.qo.AuthUserQo;
 
 public interface SysUserService extends IService<SysUser> {
 
@@ -21,4 +23,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return 用户信息
      */
     LoginUser getLoginUserByUserId(Long userId);
+
+    /**
+     * 角色已分配用户分页
+     *
+     * @param qo 查询条件
+     * @return 分页数据
+     */
+    IPage<SysUser> ruleAllocatedListPage(AuthUserQo qo);
 }

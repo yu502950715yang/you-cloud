@@ -13,7 +13,7 @@
         SELECT user_id,
                dept_id,
                username,
-               nick_name,
+               nickname,
                user_type,
                phone,
                email,
@@ -22,5 +22,21 @@
         FROM sys_user
         WHERE user_id = #{userId}
           AND del_flag = 0
+    </select>
+
+    <select id="ruleAllocatedListPage" resultType="com.you.system.model.SysUser">
+        SELECT u.user_id, u.username, u.nickname, u.email, u.phone, u.create_time, u.status
+        FROM sys_user AS u, sys_user_role AS sur
+        <where>
+            sur.role_id = #{qo.roleId}
+            AND sur.user_id = u.user_id
+            <if test="qo.username != null and qo.username !=''">
+                AND u.username LIKE CONCAT('%',#{qo.username},'%')
+            </if>
+            <if test="qo.phone != null and qo.phone !=''">
+                AND u.phone LIKE CONCAT('%',#{qo.phone},'%')
+            </if>
+        </where>
+        ORDER BY u.create_time
     </select>
 </mapper>

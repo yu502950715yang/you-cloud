@@ -61,8 +61,8 @@ export function delRole(data) {
 export function allocatedUserList(query) {
   return request({
     url: '/system/role/authUser/allocatedList',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: query
   })
 }
 

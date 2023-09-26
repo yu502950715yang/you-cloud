@@ -7,8 +7,11 @@ import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
 import com.you.system.bo.SysRoleBo;
 import com.you.system.model.SysRole;
+import com.you.system.model.SysUser;
+import com.you.system.qo.AuthUserQo;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleService;
+import com.you.system.service.SysUserService;
 import com.you.validation.ValidationGroups;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +24,11 @@ import java.util.List;
 public class SysRoleController {
 
     private final SysRoleService roleService;
+    private final SysUserService userService;
 
-    public SysRoleController(SysRoleService roleService) {
+    public SysRoleController(SysRoleService roleService, SysUserService userService) {
         this.roleService = roleService;
+        this.userService = userService;
     }
 
     @PostMapping("/list")
@@ -90,4 +95,10 @@ public class SysRoleController {
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
+
+    @PostMapping("/authUser/allocatedList")
+    @SaCheckPermission("system:role:edit")
+    public R<IPage<SysUser>> allocatedListPage(@RequestBody AuthUserQo qo) {
+        return R.ok(userService.ruleAllocatedListPage(qo));
+    }
 }
