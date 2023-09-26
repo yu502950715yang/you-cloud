@@ -21,8 +21,8 @@ public class SysUser {
     @TableField("username")
     private String username;
 
-    @TableField("nick_name")
-    private String nickName;
+    @TableField("nickname")
+    private String nickname;
 
     @TableField("user_type")
     private String userType;

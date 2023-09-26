@@ -1339,7 +1339,7 @@ CREATE TABLE `sys_user`
     `user_id`     bigint(20)  NOT NULL COMMENT '用户ID',
     `dept_id`     bigint(20)   DEFAULT NULL COMMENT '部门ID',
     `username`    varchar(30) NOT NULL COMMENT '用户账号',
-    `nick_name`   varchar(30) NOT NULL COMMENT '用户昵称',
+    `nickname` varchar(30) NOT NULL COMMENT '用户昵称',
     `user_type`   varchar(10)  DEFAULT 'sys_user' COMMENT '用户类型（sys_user系统用户）',
     `email`       varchar(50)  DEFAULT '' COMMENT '用户邮箱',
     `phone`       varchar(11)  DEFAULT '' COMMENT '手机号码',
@@ -1360,12 +1360,12 @@ CREATE TABLE `sys_user`
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nick_name`, `user_type`, `email`, `phone`, `sex`, `password`,
+INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nickname`, `user_type`, `email`, `phone`, `sex`, `password`,
                         `status`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`)
 VALUES (1, 103, 'admin', '超级管理员', 'sys_user', 'crazyLionLi@163.com', '15888888888', '1',
         'dc1fd00e3eeeb940ff46f457bf97d66ba7fcc36e0b20802383de142860e76ae6', '0', '0', 'admin', '2023-08-13 12:27:54',
         '', NULL, '管理员');
-INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nick_name`, `user_type`, `email`, `phone`, `sex`, `password`,
+INSERT INTO `sys_user` (`user_id`, `dept_id`, `username`, `nickname`, `user_type`, `email`, `phone`, `sex`, `password`,
                         `status`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`)
 VALUES (2, 105, 'lionli', '疯狂的狮子Li', 'sys_user', 'crazyLionLi@qq.com', '15666666666', '1',
         'dc1fd00e3eeeb940ff46f457bf97d66ba7fcc36e0b20802383de142860e76ae6', '0', '0', 'admin', '2023-08-13 12:27:54',

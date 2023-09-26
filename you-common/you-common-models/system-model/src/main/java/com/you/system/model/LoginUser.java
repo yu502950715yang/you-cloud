@@ -42,7 +42,7 @@ public class LoginUser extends SysUser {
         this.setUserId(sysUser.getUserId());
         this.setDeptId(sysUser.getDeptId());
         this.setUsername(sysUser.getUsername());
-        this.setNickName(sysUser.getNickName());
+        this.setNickname(sysUser.getNickname());
         this.setUserType(sysUser.getUserType());
         this.setEmail(sysUser.getEmail());
         this.setPhone(sysUser.getPhone());
