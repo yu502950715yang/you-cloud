@@ -28,6 +28,12 @@ public class ValidationGroups {
     }
 
     /**
+     * 查询
+     */
+    public interface Query extends Common {
+    }
+
+    /**
      * 其他
      */
     public interface Other {
