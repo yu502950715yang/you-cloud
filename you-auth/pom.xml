@@ -39,6 +39,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.you</groupId>
             <artifactId>api-system</artifactId>
         </dependency>
