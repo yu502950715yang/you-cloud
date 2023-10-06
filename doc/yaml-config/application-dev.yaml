@@ -8,14 +8,28 @@ feign:
     enabled: false
   client:
     config:
+      # 针对所有服务
       default:
+        # feign建立连接超时时间 默认10秒
         connectTimeout: 10000
+        # feign的请求处理超时时间 默认60秒
         readTimeout: 10000
+        # 日志级别 NONE, BASIC, HEADERS, FULL
+        loggerLevel: full
+  # feign请求响应压缩配置
   compression:
     request:
+      # 开启feign请求压缩配置，默认不开启
       enabled: true
+      # 配置支持压缩的MIME TYPE，默认为：text/xml,application/xml,application/json
+      mime-types: text/xml,application/xml,application/json
+      # 触发请求数据压缩的最小Size，默认2048KB
+      min-request-size: 2048
     response:
+      # 开启Feign响应压缩，默认不开启
       enabled: true
+      # 使用GZip解码器，默认不使用
+      useGzipDecoder: false
 
 # Sa-Token配置
 sa-token:
