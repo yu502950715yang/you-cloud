@@ -4,6 +4,10 @@ spring:
     host: localhost
     port: 6379
     password:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8718
   datasource:
     druid:
       # 数据监控
