@@ -1,4 +1,4 @@
-package com.you.gateway.saToken.config;
+package com.you.gateway.config;
 
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;

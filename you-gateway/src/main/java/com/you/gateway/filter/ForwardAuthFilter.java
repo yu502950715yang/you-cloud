@@ -1,4 +1,4 @@
-package com.you.gateway.saToken.filter;
+package com.you.gateway.filter;
 
 import cn.dev33.satoken.same.SaSameUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
