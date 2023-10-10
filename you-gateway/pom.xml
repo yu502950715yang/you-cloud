@@ -60,6 +60,11 @@
             <groupId>com.you</groupId>
             <artifactId>you-common-redis</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-http</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

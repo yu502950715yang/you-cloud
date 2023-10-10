@@ -24,8 +24,17 @@ spring:
             - Path=/system/**
           filters:
             - StripPrefix=1
+#权限配置
 auth:
   ignore:
+    # 放行白名单
     whiteList:
       - /auth/verifyCode
       - /auth/logout
+
+# 安全配置
+security:
+  # 防止XSS攻击
+  xss:
+    # 放行名单
+    excludeUrls:
