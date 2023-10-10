@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Security放行名单
+ * sa-token放行名单
  * <p>
  * RefreshScope 动态刷新，根据nacos配置动态变化
  *
