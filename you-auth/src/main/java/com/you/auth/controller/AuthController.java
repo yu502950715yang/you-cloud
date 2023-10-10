@@ -11,6 +11,8 @@ import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
 import com.you.common.core.utils.uuid.UUID;
 import com.you.common.redis.service.RedisService;
+import com.you.validation.ValidationGroups;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public R<User> login(@RequestBody LoginForm loginForm) {
+    public R<User> login(@Validated(ValidationGroups.Common.class) @RequestBody LoginForm loginForm) {
         if (loginForm.getVerifyCode() == null || loginForm.getVerifyCode().isEmpty()) {
             throw new CommonException("验证码错误");
         }
