@@ -29,7 +29,8 @@ public class SysRoleController {
     private final SysUserService userService;
     private final SysUserRoleService userRoleService;
 
-    public SysRoleController(SysRoleService roleService, SysUserService userService, SysUserRoleService userRoleService) {
+    public SysRoleController(SysRoleService roleService, SysUserService userService,
+                             SysUserRoleService userRoleService) {
         this.roleService = roleService;
         this.userService = userService;
         this.userRoleService = userRoleService;
