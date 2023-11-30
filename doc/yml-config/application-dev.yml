@@ -1,3 +1,13 @@
+# spring配置
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8718
 # feign 配置
 feign:
   sentinel:

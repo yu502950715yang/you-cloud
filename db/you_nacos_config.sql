@@ -52,22 +52,22 @@ CREATE TABLE `config_info`
 -- Records of config_info
 -- ----------------------------
 INSERT INTO `config_info`
-VALUES (1, 'application-dev.yaml', 'DEFAULT_GROUP',
+VALUES (1, 'application-dev.yml', 'DEFAULT_GROUP',
         '# feign 配置\r\nfeign:\r\n  sentinel:\r\n    enabled: true\r\n  okhttp:\r\n    enabled: true\r\n  httpclient:\r\n    enabled: false\r\n  client:\r\n    config:\r\n      default:\r\n        connectTimeout: 10000\r\n        readTimeout: 10000\r\n  compression:\r\n    request:\r\n      enabled: true\r\n    response:\r\n      enabled: true',
         '0616ec8d6b88afa4f408dabaea88d05a', '2023-08-09 01:38:18', '2023-08-09 01:38:18', 'nacos', '127.0.0.1', '', '',
         '公共配置', NULL, NULL, 'yaml', NULL, '');
 INSERT INTO `config_info`
-VALUES (2, 'you-auth-dev.yaml', 'DEFAULT_GROUP',
+VALUES (2, 'you-auth-dev.yml', 'DEFAULT_GROUP',
         'spring:\r\n  redis:\r\n    host: localhost\r\n    port: 6379\r\n    password:\r\n',
         '7679126e553fb99f877a98715a35f8ef', '2023-08-09 01:39:23', '2023-08-09 01:39:23', 'nacos', '127.0.0.1', '', '',
         '认证中心模块配置', NULL, NULL, 'yaml', NULL, '');
 INSERT INTO `config_info`
-VALUES (3, 'you-gateway-dev.yaml', 'DEFAULT_GROUP',
+VALUES (3, 'you-gateway-dev.yml', 'DEFAULT_GROUP',
         'spring:\r\n  redis:\r\n    host: localhost\r\n    port: 6379\r\n    password:\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          lowerCaseServiceId: true\r\n          enabled: true\r\n      routes:\r\n        # 认证中心\r\n        - id: you-auth\r\n          uri: lb://you-auth\r\n          predicates:\r\n            - Path=/auth/**\r\n          filters:\r\n            - StripPrefix=1\r\n        # 系统模块\r\n        - id: you-system\r\n          uri: lb://you-system\r\n          predicates:\r\n            - Path=/system/**\r\n          filters:\r\n            - StripPrefix=1\r\nauth:\r\n  ignore:\r\n    whiteList:\r\n      - /auth/verifyCode',
         'd5ead612bd895144c93bc2453ed3ad21', '2023-08-09 01:40:03', '2023-08-09 01:40:03', 'nacos', '127.0.0.1', '', '',
         '网关配置', NULL, NULL, 'yaml', NULL, '');
 INSERT INTO `config_info`
-VALUES (4, 'you-system-dev.yaml', 'DEFAULT_GROUP',
+VALUES (4, 'you-system-dev.yml', 'DEFAULT_GROUP',
         '# spring配置\nspring:\n  redis:\n    host: localhost\n    port: 6379\n    password:\n  datasource:\n    druid:\n      # 数据监控\n      stat-view-servlet:\n        enabled: true\n        loginUsername: admin\n        loginPassword: 123456\n    dynamic:\n      druid:\n        initial-size: 5\n        min-idle: 5\n        maxActive: 20\n        maxWait: 60000\n        timeBetweenEvictionRunsMillis: 60000\n        minEvictableIdleTimeMillis: 300000\n        validationQuery: SELECT 1 FROM DUAL\n        testWhileIdle: true\n        testOnBorrow: false\n        testOnReturn: false\n        poolPreparedStatements: true\n        maxPoolPreparedStatementPerConnectionSize: 20\n        filters: stat,slf4j\n        connectionProperties: druid.stat.mergeSql\\=true;druid.stat.slowSqlMillis\\=5000\n      datasource:\n        # 主库数据源\n        master:\n          driver-class-name: com.mysql.cj.jdbc.Driver\n          url: jdbc:mysql://localhost:3306/you_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8\n          username: root\n          password: root\n          # 从库数据源\n          # slave:\n          # username:\n          # password:\n          # url:\n          # driver-class-name:',
         'edc48503b876c818657120a77670a945', '2023-08-09 01:41:36', '2023-08-09 01:47:42', 'nacos', '127.0.0.1', '', '',
         '系统模块配置', '', '', 'yaml', '', '');
@@ -247,27 +247,27 @@ CREATE TABLE `his_config_info`
 -- Records of his_config_info
 -- ----------------------------
 INSERT INTO `his_config_info`
-VALUES (0, 1, 'application-dev.yaml', 'DEFAULT_GROUP', '',
+VALUES (0, 1, 'application-dev.yml', 'DEFAULT_GROUP', '',
         '# feign 配置\r\nfeign:\r\n  sentinel:\r\n    enabled: true\r\n  okhttp:\r\n    enabled: true\r\n  httpclient:\r\n    enabled: false\r\n  client:\r\n    config:\r\n      default:\r\n        connectTimeout: 10000\r\n        readTimeout: 10000\r\n  compression:\r\n    request:\r\n      enabled: true\r\n    response:\r\n      enabled: true',
         '0616ec8d6b88afa4f408dabaea88d05a', '2023-08-09 09:38:17', '2023-08-09 01:38:18', 'nacos', '127.0.0.1', 'I', '',
         '');
 INSERT INTO `his_config_info`
-VALUES (0, 2, 'you-auth-dev.yaml', 'DEFAULT_GROUP', '',
+VALUES (0, 2, 'you-auth-dev.yml', 'DEFAULT_GROUP', '',
         'spring:\r\n  redis:\r\n    host: localhost\r\n    port: 6379\r\n    password:\r\n',
         '7679126e553fb99f877a98715a35f8ef', '2023-08-09 09:39:23', '2023-08-09 01:39:23', 'nacos', '127.0.0.1', 'I', '',
         '');
 INSERT INTO `his_config_info`
-VALUES (0, 3, 'you-gateway-dev.yaml', 'DEFAULT_GROUP', '',
+VALUES (0, 3, 'you-gateway-dev.yml', 'DEFAULT_GROUP', '',
         'spring:\r\n  redis:\r\n    host: localhost\r\n    port: 6379\r\n    password:\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          lowerCaseServiceId: true\r\n          enabled: true\r\n      routes:\r\n        # 认证中心\r\n        - id: you-auth\r\n          uri: lb://you-auth\r\n          predicates:\r\n            - Path=/auth/**\r\n          filters:\r\n            - StripPrefix=1\r\n        # 系统模块\r\n        - id: you-system\r\n          uri: lb://you-system\r\n          predicates:\r\n            - Path=/system/**\r\n          filters:\r\n            - StripPrefix=1\r\nauth:\r\n  ignore:\r\n    whiteList:\r\n      - /auth/verifyCode',
         'd5ead612bd895144c93bc2453ed3ad21', '2023-08-09 09:40:02', '2023-08-09 01:40:03', 'nacos', '127.0.0.1', 'I', '',
         '');
 INSERT INTO `his_config_info`
-VALUES (0, 4, 'you-system-dev.yaml', 'DEFAULT_GROUP', '',
+VALUES (0, 4, 'you-system-dev.yml', 'DEFAULT_GROUP', '',
         '# spring配置\r\nspring:\r\n  redis:\r\n    host: localhost\r\n    port: 6379\r\n    password:\r\n  datasource:\r\n    druid:\r\n      # 数据监控\r\n      stat-view-servlet:\r\n        enabled: true\r\n        loginUsername: admin\r\n        loginPassword: 123456\r\n    dynamic:\r\n      druid:\r\n        initial-size: 5\r\n        min-idle: 5\r\n        maxActive: 20\r\n        maxWait: 60000\r\n        timeBetweenEvictionRunsMillis: 60000\r\n        minEvictableIdleTimeMillis: 300000\r\n        validationQuery: SELECT 1 FROM DUAL\r\n        testWhileIdle: true\r\n        testOnBorrow: false\r\n        testOnReturn: false\r\n        poolPreparedStatements: true\r\n        maxPoolPreparedStatementPerConnectionSize: 20\r\n        filters: stat,slf4j\r\n        connectionProperties: druid.stat.mergeSql\\=true;druid.stat.slowSqlMillis\\=5000\r\n      datasource:\r\n        # 主库数据源\r\n        master:\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://localhost:3306/you-cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8\r\n          username: root\r\n          password: root\r\n          # 从库数据源\r\n          # slave:\r\n          # username:\r\n          # password:\r\n          # url:\r\n          # driver-class-name:',
         '0cd48e4bc5e2fa84496cc36ce08d654b', '2023-08-09 09:41:36', '2023-08-09 01:41:36', 'nacos', '127.0.0.1', 'I', '',
         '');
 INSERT INTO `his_config_info`
-VALUES (4, 5, 'you-system-dev.yaml', 'DEFAULT_GROUP', '',
+VALUES (4, 5, 'you-system-dev.yml', 'DEFAULT_GROUP', '',
         '# spring配置\r\nspring:\r\n  redis:\r\n    host: localhost\r\n    port: 6379\r\n    password:\r\n  datasource:\r\n    druid:\r\n      # 数据监控\r\n      stat-view-servlet:\r\n        enabled: true\r\n        loginUsername: admin\r\n        loginPassword: 123456\r\n    dynamic:\r\n      druid:\r\n        initial-size: 5\r\n        min-idle: 5\r\n        maxActive: 20\r\n        maxWait: 60000\r\n        timeBetweenEvictionRunsMillis: 60000\r\n        minEvictableIdleTimeMillis: 300000\r\n        validationQuery: SELECT 1 FROM DUAL\r\n        testWhileIdle: true\r\n        testOnBorrow: false\r\n        testOnReturn: false\r\n        poolPreparedStatements: true\r\n        maxPoolPreparedStatementPerConnectionSize: 20\r\n        filters: stat,slf4j\r\n        connectionProperties: druid.stat.mergeSql\\=true;druid.stat.slowSqlMillis\\=5000\r\n      datasource:\r\n        # 主库数据源\r\n        master:\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://localhost:3306/you-cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8\r\n          username: root\r\n          password: root\r\n          # 从库数据源\r\n          # slave:\r\n          # username:\r\n          # password:\r\n          # url:\r\n          # driver-class-name:',
         '0cd48e4bc5e2fa84496cc36ce08d654b', '2023-08-09 09:47:42', '2023-08-09 01:47:42', 'nacos', '127.0.0.1', 'U', '',
         '');

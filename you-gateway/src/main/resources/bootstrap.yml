@@ -11,7 +11,7 @@ spring:
     nacos:
       config:
         server-addr: localhost:8848
-        file-extension: yaml
+        file-extension: yml
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         username: nacos
