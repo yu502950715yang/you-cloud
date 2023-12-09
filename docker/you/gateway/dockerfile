@@ -1,0 +1,15 @@
+# 基础镜像
+FROM  openjdk:8-jre
+# author
+MAINTAINER Eric
+
+# 挂载目录
+VOLUME /home/you
+# 创建目录
+RUN mkdir -p /home/you
+# 指定路径
+WORKDIR /home/you
+# 复制jar文件到路径
+COPY ./jar/you-gateway.jar /home/you/you-gateway.jar
+# 启动网关服务
+ENTRYPOINT ["java","-jar","you-gateway.jar"]

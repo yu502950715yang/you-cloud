@@ -189,7 +189,46 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <!-- 开发/默认本地 -->
+            <id>local</id>
+            <properties>
+                <spring.profile>dev</spring.profile>
+                <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
+                <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
+                <nacos.server.namespace>public</nacos.server.namespace>
+                <nacos.server.address>localhost:8848</nacos.server.address>
+                <sentinel.server.address>localhost:8718</sentinel.server.address>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 开发/默认本地 -->
+            <id>local-docker</id>
+            <properties>
+                <spring.profile>dev</spring.profile>
+                <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
+                <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
+                <nacos.server.namespace>public</nacos.server.namespace>
+                <nacos.server.address>192.168.0.88:8848</nacos.server.address>
+                <sentinel.server.address>192.168.0.88:8718</sentinel.server.address>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
