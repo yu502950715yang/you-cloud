@@ -1,1 +1,3 @@
-
+logging:
+  level:
+    com.you.system.api.feign: debug
