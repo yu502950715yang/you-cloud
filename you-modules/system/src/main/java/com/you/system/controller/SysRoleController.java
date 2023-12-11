@@ -1,8 +1,8 @@
 package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
 import com.you.system.bo.AuthUserBo;
@@ -62,7 +62,7 @@ public class SysRoleController {
         roleService.checkRoleKeyUnique(role.getRoleId(), role.getRoleKey());
         // 构造新增数据
         role.setCreateTime(LocalDateTime.now());
-        role.setCreateBy(StpUtil.getLoginIdAsString());
+        role.setCreateBy(LoginUtils.getLoginUserName());
         if (roleService.save(role)) {
             return R.ok();
         }
@@ -84,7 +84,7 @@ public class SysRoleController {
         // 校验权限字符串唯一
         roleService.checkRoleKeyUnique(role.getRoleId(), role.getRoleKey());
         role.setUpdateTime(LocalDateTime.now());
-        role.setUpdateBy(StpUtil.getLoginIdAsString());
+        role.setUpdateBy(LoginUtils.getLoginUserName());
         if (roleService.edit(role)) {
             return R.ok();
         }
