@@ -12,4 +12,20 @@ import java.util.List;
 public interface SysDeptMapper extends BaseMapper<SysDept> {
 
     List<SysDept> selectList(@Param("qo") DeptQo qo);
+
+    /**
+     * 获取所有子部门
+     *
+     * @param deptId 部门id
+     * @return 子部门集合
+     */
+    List<SysDept> selectChildrenDeptById(Long deptId);
+
+    /**
+     * 修改子元素关系
+     *
+     * @param deptList 子元素
+     * @return 结果
+     */
+    int updateDeptChildren(@Param("deptList") List<SysDept> deptList);
 }

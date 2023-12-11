@@ -11,6 +11,7 @@ import com.you.system.model.SysDept;
 import com.you.system.qo.DeptQo;
 import com.you.system.service.SysDeptService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +26,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
     }
 
     @Override
-    public List<SysDept> listPage(DeptQo deptQo) {
+    public List<SysDept> list(DeptQo deptQo) {
         return deptMapper.selectList(deptQo);
     }
 
@@ -44,6 +45,28 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         return deptMapper.insert(sysDept) > 0;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean editDept(SysDept sysDept) {
+        SysDept newParentDept = deptMapper.selectById(sysDept.getParentId());
+        if (newParentDept == null) {
+            throw new CommonException(sysDept.getDeptName() + "父部门不存在");
+        }
+        SysDept oldDept = deptMapper.selectById(sysDept.getDeptId());
+        if (oldDept == null) {
+            throw new CommonException(sysDept.getDeptName() + "部门不存在");
+        }
+        // 修改所有子部门节点
+        String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getDeptId();
+        String oldAncestors = oldDept.getAncestors();
+        sysDept.setAncestors(newAncestors);
+        // 修改子部门祖级列表
+        updateDeptChildren(sysDept.getDeptId(), newAncestors, oldAncestors);
+        sysDept.setUpdateBy(LoginUtils.getLoginUserName());
+        sysDept.setUpdateTime(LocalDateTime.now());
+        return deptMapper.updateById(sysDept) > 0;
+    }
+
     @Override
     public void checkDeptNameUnique(SysDept sysDept) {
         LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();
@@ -58,4 +81,20 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         }
     }
 
+    /**
+     * 修改子元素关系
+     *
+     * @param deptId       被修改的部门ID
+     * @param newAncestors 新的父ID集合
+     * @param oldAncestors 旧的父ID集合
+     */
+    private void updateDeptChildren(Long deptId, String newAncestors, String oldAncestors) {
+        List<SysDept> children = deptMapper.selectChildrenDeptById(deptId);
+        for (SysDept child : children) {
+            child.setAncestors(child.getAncestors().replaceFirst(oldAncestors, newAncestors));
+        }
+        if (!children.isEmpty()) {
+            deptMapper.updateDeptChildren(children);
+        }
+    }
 }

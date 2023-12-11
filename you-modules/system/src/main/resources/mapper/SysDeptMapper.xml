@@ -6,7 +6,7 @@
         SELECT dept_id ,parent_id ,ancestors, dept_name, order_num, status, create_time
         FROM sys_dept
         <where>
-            del_flag = 0
+            del_flag = '0'
             <if test="qo.deptName != null and qo.deptName !=''">
                 AND dept_name LIKE CONCAT('%',#{qo.deptName},'%')
             </if>
@@ -16,4 +16,22 @@
         </where>
     </select>
 
+    <select id="selectChildrenDeptById" resultType="com.you.system.model.SysDept">
+        SELECT dept_id, parent_id, ancestors
+        FROM sys_dept
+        WHERE FIND_IN_SET(#{deptId}, ancestors)
+    </select>
+
+    <update id="updateDeptChildren" parameterType="java.util.List">
+        UPDATE sys_dept SET ancestors =
+        <foreach collection="deptList" item="item" index="index"
+                 separator=" " open="case dept_id" close="end">
+            WHEN #{item.deptId} THEN #{item.ancestors}
+        </foreach>
+        WHERE dept_id IN
+        <foreach collection="deptList" item="item" index="index"
+                 separator="," open="(" close=")">
+            #{item.deptId}
+        </foreach>
+    </update>
 </mapper>

@@ -15,7 +15,7 @@ public interface SysDeptService extends IService<SysDept> {
      * @param deptQo 查询参数
      * @return 部门列表
      */
-    List<SysDept> listPage(DeptQo deptQo);
+    List<SysDept> list(DeptQo deptQo);
 
     /**
      * 新增部门
@@ -24,6 +24,14 @@ public interface SysDeptService extends IService<SysDept> {
      * @return 是否成功
      */
     boolean addDept(SysDept sysDept);
+
+    /**
+     * 编辑部门
+     *
+     * @param sysDept 部门参数
+     * @return 是否成功
+     */
+    boolean editDept(SysDept sysDept);
 
     /**
      * 校验部门名称唯一

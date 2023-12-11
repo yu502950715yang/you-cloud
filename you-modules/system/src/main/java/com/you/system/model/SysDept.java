@@ -1,5 +1,6 @@
 package com.you.system.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 public class SysDept {
 
     @NotNull(message = "部门ID不能为空", groups = ValidationGroups.Update.class)
-    @TableId(value = "dept_id")
+    @TableId(value = "dept_id", type = IdType.AUTO)
     private Long deptId;
 
     @NotNull(message = "父级部门不能为空", groups = ValidationGroups.Common.class)
