@@ -3,6 +3,7 @@ FROM  openjdk:8-jre
 # author
 MAINTAINER Eric
 
+EXPOSE 8080
 # 挂载目录
 VOLUME /home/you
 # 创建目录
