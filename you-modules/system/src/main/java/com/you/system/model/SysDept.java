@@ -1,6 +1,5 @@
 package com.you.system.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -9,44 +8,47 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@TableName("sys_user")
-public class SysUser {
+@TableName("sys_dept")
+public class SysDept {
 
-    @TableId(value = "user_id", type = IdType.AUTO)
-    private Long userId;
-
-    @TableField("dept_id")
+    @TableId(value = "dept_id")
     private Long deptId;
 
-    @TableField("username")
-    private String username;
+    @TableField("parent_id")
+    private Long parentId;
 
-    @TableField("nickname")
-    private String nickname;
+    /**
+     * 祖籍列表
+     */
+    @TableField("ancestors")
+    private String ancestors;
 
-    @TableField("user_type")
-    private String userType;
+    @TableField("dept_name")
+    private String deptName;
 
-    @TableField("email")
-    private String email;
+    @TableField("order_num")
+    private Integer orderNum;
+
+    @TableField("leader")
+    private String leader;
 
     @TableField("phone")
     private String phone;
 
-    @TableField("password")
-    private String password;
+    @TableField("email")
+    private String email;
 
     /**
-     * 用户状态 0正常 1停用
+     * 部门状态（0正常 1停用）
      */
     @TableField("status")
-    private Integer status;
+    private String status;
 
     /**
      * 删除标志（0代表存在 2代表删除）
      */
     @TableField("del_flag")
-    private Integer delFlag;
+    private String delFlag;
 
     @TableField("create_by")
     private String createBy;
@@ -59,7 +61,4 @@ public class SysUser {
 
     @TableField("update_time")
     private LocalDateTime updateTime;
-
-    @TableField("remark")
-    private String remark;
 }
