@@ -3,17 +3,21 @@ package com.you.system.model;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.you.validation.ValidationGroups;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
 @TableName("sys_dept")
 public class SysDept {
 
+    @NotNull(message = "部门ID不能为空", groups = ValidationGroups.Update.class)
     @TableId(value = "dept_id")
     private Long deptId;
 
+    @NotNull(message = "父级部门不能为空", groups = ValidationGroups.Common.class)
     @TableField("parent_id")
     private Long parentId;
 
@@ -23,9 +27,11 @@ public class SysDept {
     @TableField("ancestors")
     private String ancestors;
 
+    @NotNull(message = "部门名称不能为空", groups = ValidationGroups.Common.class)
     @TableField("dept_name")
     private String deptName;
 
+    @NotNull(message = "部门排序不能为空", groups = ValidationGroups.Common.class)
     @TableField("order_num")
     private Integer orderNum;
 

@@ -1,9 +1,10 @@
 # spring配置
 spring:
   redis:
-    host: localhost
+    host: 192.168.0.88
     port: 6379
     password:
+    database: 0
   cloud:
     sentinel:
       transport:
@@ -60,3 +61,5 @@ sa-token:
   is-share: false
   # token前缀
   token-prefix: Bearer
+  # jwt秘钥
+  jwt-secret-key: 1wewle30skeku3yurfewbfjsdafjk

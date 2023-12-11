@@ -3,7 +3,9 @@ package com.you.auth.config;
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.filter.SaServletFilter;
 import cn.dev33.satoken.interceptor.SaInterceptor;
+import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
 import cn.dev33.satoken.same.SaSameUtil;
+import cn.dev33.satoken.stp.StpLogic;
 import com.alibaba.fastjson2.JSON;
 import com.you.common.core.model.R;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class SaTokenConfigure implements WebMvcConfigurer {
+
+    // Sa-Token 整合 jwt (Simple 简单模式)
+    @Bean
+    public StpLogic getStpLogicJwt() {
+        return new StpLogicJwtForSimple();
+    }
 
     //注册sa-token全局过滤器
     @Bean

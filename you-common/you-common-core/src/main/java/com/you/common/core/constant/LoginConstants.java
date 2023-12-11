@@ -13,4 +13,9 @@ public class LoginConstants {
      * 登录设备 pc
      */
     public static final String DEVICE_PC = "PC";
+
+    /**
+     * 登录信息存储用户名
+     */
+    public static final String EXTRA_USERNAME = "username";
 }

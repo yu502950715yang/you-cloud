@@ -1,11 +1,12 @@
 package com.you.auth.service.impl;
 
+import cn.dev33.satoken.stp.SaLoginConfig;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.auth.model.User;
 import com.you.auth.service.LoginService;
 import com.you.common.core.constant.LoginConstants;
-import com.you.common.core.enums.UserStatus;
+import com.you.common.core.enums.StatusEnum;
 import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
 import com.you.common.core.utils.StrUtils;
@@ -45,7 +46,7 @@ public class LoginServiceImpl implements LoginService {
         }
         SysUser sysUser = loginUserResult.getData();
         // 校验用户状态
-        if (UserStatus.DISABLE.getCode().equals(sysUser.getStatus())) {
+        if (StatusEnum.DISABLE.getCode().equals(sysUser.getStatus())) {
             throw new CommonException("对不起，您的账号已被禁用");
         }
         // 校验用户密码
@@ -53,7 +54,8 @@ public class LoginServiceImpl implements LoginService {
             throw new CommonException("账号或密码不正确");
         }
         // sa-token登录
-        StpUtil.login(sysUser.getUserId(), LoginConstants.DEVICE_PC);
+        StpUtil.login(sysUser.getUserId(), SaLoginConfig.setDevice(LoginConstants.DEVICE_PC)
+                .setExtra(LoginConstants.EXTRA_USERNAME, username));
         SaTokenInfo token = StpUtil.getTokenInfo();
         return new User(sysUser.getUserId().toString(), sysUser.getUsername(), token);
     }
