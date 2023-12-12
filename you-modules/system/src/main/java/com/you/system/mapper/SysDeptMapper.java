@@ -28,4 +28,20 @@ public interface SysDeptMapper extends BaseMapper<SysDept> {
      * @return 结果
      */
     int updateDeptChildren(@Param("deptList") List<SysDept> deptList);
+
+    /**
+     * 查询部门下有多少用户
+     *
+     * @param deptId 部门id
+     * @return 人数
+     */
+    int selectCountDeptUser(@Param("deptId") Long deptId);
+
+    /**
+     * 逻辑删除
+     *
+     * @param deptId 部门id
+     * @return 行数
+     */
+    int deleteByDeptId(@Param("deptId") Long deptId);
 }

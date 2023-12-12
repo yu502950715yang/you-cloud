@@ -40,4 +40,27 @@ public interface SysDeptService extends IService<SysDept> {
      */
     void checkDeptNameUnique(SysDept sysDept);
 
+    /**
+     * 是否有子部门
+     *
+     * @param deptId 部门id
+     * @return 结果
+     */
+    boolean hasChildByDeptId(Long deptId);
+
+    /**
+     * 是否存在人员
+     *
+     * @param deptId 部门id
+     * @return 结果
+     */
+    boolean hasUserByDeptId(Long deptId);
+
+    /**
+     * 根据部门id删除
+     *
+     * @param deptId 部门id
+     * @return 结果
+     */
+    boolean delById(Long deptId);
 }

@@ -65,7 +65,22 @@ public class SysDeptController {
             return R.fail("上级部门不能是自己");
         }
         if (deptService.editDept(dept)) {
-           return R.ok();
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @SaCheckPermission("system:dept:remove")
+    @DeleteMapping("/{deptId}")
+    public R<Void> remove(@PathVariable Long deptId) {
+        if (deptService.hasChildByDeptId(deptId)) {
+            return R.fail("存在下级部门,不允许删除");
+        }
+        if (deptService.hasUserByDeptId(deptId)) {
+            return R.fail("部门存在用户,不允许删除");
+        }
+        if (deptService.delById(deptId)) {
+            return R.ok();
         }
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }

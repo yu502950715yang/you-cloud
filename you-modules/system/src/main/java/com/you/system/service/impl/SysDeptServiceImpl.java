@@ -81,6 +81,27 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         }
     }
 
+    @Override
+    public boolean hasChildByDeptId(Long deptId) {
+        LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysDept::getParentId, deptId)
+                .eq(SysDept::getDelFlag, DelFlagEnum.NORMAL.getCode());
+        return deptMapper.selectCount(queryWrapper) > 0;
+    }
+
+    @Override
+    public boolean hasUserByDeptId(Long deptId) {
+        return deptMapper.selectCountDeptUser(deptId) > 0;
+    }
+
+    @Override
+    public boolean delById(Long deptId) {
+        if (deptId == null) {
+            return true;
+        }
+        return deptMapper.deleteByDeptId(deptId) > 0;
+    }
+
     /**
      * 修改子元素关系
      *

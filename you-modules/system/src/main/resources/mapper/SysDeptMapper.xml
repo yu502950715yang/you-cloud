@@ -34,4 +34,14 @@
             #{item.deptId}
         </foreach>
     </update>
+
+    <select id="selectCountDeptUser" resultType="int">
+        SELECT COUNT(1)
+        FROM sys_user u
+        WHERE u.dept_id = #{deptId}
+    </select>
+
+    <update id="deleteByDeptId" parameterType="java.lang.Long">
+        UPDATE sys_dept SET del_flag = 2 WHERE dept_id = #{deptId}
+    </update>
 </mapper>
