@@ -160,7 +160,7 @@ CREATE TABLE `sys_dept`
     `update_by`   varchar(64)  DEFAULT '' COMMENT '更新者',
     `update_time` datetime     DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COMMENT='部门表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='部门表';
 
 -- ----------------------------
 -- Records of sys_dept
