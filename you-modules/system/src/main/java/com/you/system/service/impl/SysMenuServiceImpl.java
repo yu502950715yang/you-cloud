@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.common.core.constant.UserConstants;
 import com.you.system.mapper.SysMenuMapper;
 import com.you.system.model.SysMenu;
+import com.you.system.qo.MenuQo;
 import com.you.system.service.SysMenuService;
 import com.you.system.utils.RouterUtil;
 import com.you.system.vo.ElTree;
@@ -91,6 +92,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             sysMenuList = menuMapper.selectMenuByUserId(userId);
         }
         return createElTree(sysMenuList, 0);
+    }
+
+    @Override
+    public List<SysMenu> selectMenuList(MenuQo qo) {
+        return menuMapper.selectMenuList(qo);
     }
 
     private List<MenuTree> createMenuTree(List<SysMenu> list, long parentId) {

@@ -40,4 +40,17 @@
         ORDER BY m.parent_id, m.order_num
     </select>
 
+    <select id="selectMenuList" resultType="com.you.system.model.SysMenu">
+        SELECT menu_id, menu_name, parent_id, order_num, perms, component, status, create_time
+        FROM sys_menu
+        <where>
+            <if test="qo.menuName != null and qo.menuName != ''">
+                AND menu_name LIKE CONCAT('%',#{qo.menuName},'%')
+            </if>
+            <if test="qo.status != null and qo.status != ''">
+                AND status = #{qo.status}
+            </if>
+        </where>
+        ORDER BY order_num
+    </select>
 </mapper>

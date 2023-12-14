@@ -1,7 +1,10 @@
 package com.you.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.common.core.model.R;
+import com.you.system.model.SysMenu;
+import com.you.system.qo.MenuQo;
 import com.you.system.service.SysMenuService;
 import com.you.system.vo.ElTree;
 import com.you.system.vo.MenuTree;
@@ -41,4 +44,9 @@ public class SysMenuController {
         return R.ok(treeList);
     }
 
+    @SaCheckPermission("system:menu:list")
+    @GetMapping("/list")
+    public R<List<SysMenu>> list(MenuQo qo) {
+        return R.ok(menuService.selectMenuList(qo));
+    }
 }

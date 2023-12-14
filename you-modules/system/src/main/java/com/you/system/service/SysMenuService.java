@@ -2,6 +2,7 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.model.SysMenu;
+import com.you.system.qo.MenuQo;
 import com.you.system.vo.ElTree;
 import com.you.system.vo.MenuTree;
 import com.you.system.vo.RouterVo;
@@ -22,4 +23,11 @@ public interface SysMenuService extends IService<SysMenu> {
      */
     List<ElTree> selectMenuList(Long userId);
 
+    /**
+     * 获取所有菜单
+     *
+     * @param qo 查询条件
+     * @return 菜单列表
+     */
+    List<SysMenu> selectMenuList(MenuQo qo);
 }

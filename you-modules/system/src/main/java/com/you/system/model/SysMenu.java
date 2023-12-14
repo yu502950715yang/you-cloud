@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @TableName("sys_menu")
 public class SysMenu {
@@ -94,6 +96,18 @@ public class SysMenu {
      */
     @TableField("icon")
     private String icon;
+
+    @TableField("create_by")
+    private String createBy;
+
+    @TableField("create_time")
+    private LocalDateTime createTime;
+
+    @TableField("update_by")
+    private String updateBy;
+
+    @TableField("update_time")
+    private LocalDateTime updateTime;
 
     /**
      * 备注
