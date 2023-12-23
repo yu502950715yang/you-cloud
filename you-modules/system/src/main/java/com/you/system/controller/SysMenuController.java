@@ -2,28 +2,30 @@ package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
+import com.you.auth.utils.LoginUtils;
+import com.you.common.core.constant.UserConstants;
 import com.you.common.core.model.R;
+import com.you.common.core.utils.StrUtils;
 import com.you.system.model.SysMenu;
 import com.you.system.qo.MenuQo;
 import com.you.system.service.SysMenuService;
 import com.you.system.vo.ElTree;
 import com.you.system.vo.MenuTree;
 import com.you.system.vo.RouterVo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.you.validation.ValidationGroups;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/menu")
 public class SysMenuController {
 
     private final SysMenuService menuService;
-
-    public SysMenuController(SysMenuService menuService) {
-        this.menuService = menuService;
-    }
 
     /**
      * 获取路由信息
@@ -48,5 +50,21 @@ public class SysMenuController {
     @GetMapping("/list")
     public R<List<SysMenu>> list(MenuQo qo) {
         return R.ok(menuService.selectMenuList(qo));
+    }
+
+    @SaCheckPermission("system:menu:add")
+    @PostMapping
+    public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysMenu menu) {
+        if (!menuService.checkMenuNameUnique(menu)) {
+            return R.fail("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
+        } else if (UserConstants.YES_FRAME == menu.getIsFrame() && !StrUtils.ishttp(menu.getPath())) {
+            return R.fail("新增菜单'" + menu.getMenuName() + "'失败，地址必须以http(s)://开头");
+        }
+        menu.setCreateBy(LoginUtils.getLoginUserName());
+        menu.setCreateTime(LocalDateTime.now());
+        if (menuService.save(menu)) {
+            return R.ok();
+        }
+        return R.fail("新增菜单失败");
     }
 }

@@ -7,23 +7,16 @@ import com.you.system.mapper.SysUserMapper;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
 import com.you.system.qo.AuthUserQo;
-import com.you.system.service.SysUserRoleService;
 import com.you.system.service.SysUserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     private final SysUserMapper userMapper;
     private final AuthService authService;
-    private final SysUserRoleService userRoleService;
-
-    public SysUserServiceImpl(SysUserMapper userMapper, AuthService authService,
-                              SysUserRoleService userRoleService) {
-        this.userMapper = userMapper;
-        this.authService = authService;
-        this.userRoleService = userRoleService;
-    }
 
     @Override
     public SysUser getUserByUsername(String username) {

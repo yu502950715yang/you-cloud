@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.common.core.constant.UserConstants;
 import com.you.system.mapper.SysMenuMapper;
@@ -11,20 +12,18 @@ import com.you.system.vo.ElTree;
 import com.you.system.vo.MenuTree;
 import com.you.system.vo.MetaVo;
 import com.you.system.vo.RouterVo;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
     private final SysMenuMapper menuMapper;
-
-    public SysMenuServiceImpl(SysMenuMapper menuMapper) {
-        this.menuMapper = menuMapper;
-    }
 
     @Override
     public List<MenuTree> selectMenuTreeByUserId(Long userId) {
@@ -68,7 +67,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             } else if (menu.getParentId().intValue() == 0 && RouterUtil.isInnerLink(menu)) {
                 router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon()));
                 router.setPath("/");
-                List<RouterVo> childrenList = new ArrayList<RouterVo>();
+                List<RouterVo> childrenList = new ArrayList<>();
                 RouterVo children = new RouterVo();
                 String routerPath = RouterUtil.innerLinkReplaceEach(menu.getPath());
                 children.setPath(routerPath);
@@ -97,6 +96,18 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     public List<SysMenu> selectMenuList(MenuQo qo) {
         return menuMapper.selectMenuList(qo);
+    }
+
+    @Override
+    public boolean checkMenuNameUnique(SysMenu sysMenu) {
+        LambdaQueryWrapper<SysMenu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysMenu::getMenuName, sysMenu.getMenuName())
+                .eq(SysMenu::getParentId, sysMenu.getParentId());
+        if (sysMenu.getMenuId() != null) {
+            queryWrapper.ne(SysMenu::getMenuId, sysMenu.getMenuId());
+        }
+        queryWrapper.last("limit 1");
+        return menuMapper.selectCount(queryWrapper) == 0;
     }
 
     private List<MenuTree> createMenuTree(List<SysMenu> list, long parentId) {

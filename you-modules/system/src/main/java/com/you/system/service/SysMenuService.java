@@ -30,4 +30,12 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return 菜单列表
      */
     List<SysMenu> selectMenuList(MenuQo qo);
+
+    /**
+     * 校验菜单名称是否存在
+     *
+     * @param sysMenu 菜单参数
+     * @return 结果
+     */
+    boolean checkMenuNameUnique(SysMenu sysMenu);
 }

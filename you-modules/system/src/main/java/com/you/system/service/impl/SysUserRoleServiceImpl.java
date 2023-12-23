@@ -2,19 +2,17 @@ package com.you.system.service.impl;
 
 import com.you.system.mapper.SysUserRoleMapper;
 import com.you.system.service.SysUserRoleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SysUserRoleServiceImpl implements SysUserRoleService {
 
     private final SysUserRoleMapper sysUserRoleMapper;
-
-    public SysUserRoleServiceImpl(SysUserRoleMapper sysUserRoleMapper) {
-        this.sysUserRoleMapper = sysUserRoleMapper;
-    }
 
     @Override
     public boolean removeRoleByUserIds(Long roleId, List<Long> userIds) {

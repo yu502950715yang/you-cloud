@@ -9,20 +9,17 @@ import com.you.common.redis.service.RedisService;
 import com.you.system.mapper.SysDictDataMapper;
 import com.you.system.model.SysDictData;
 import com.you.system.service.SysDictDataService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDictData> implements SysDictDataService {
 
     private final RedisService redisService;
     private final SysDictDataMapper dictDataMapper;
-
-    public SysDictDataServiceImpl(RedisService redisService, SysDictDataMapper dictDataMapper) {
-        this.redisService = redisService;
-        this.dictDataMapper = dictDataMapper;
-    }
 
     @Override
     public List<SysDictData> getDictDataByType(String dictType) {

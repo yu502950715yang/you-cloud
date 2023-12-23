@@ -15,12 +15,14 @@ import com.you.system.service.SysRoleService;
 import com.you.system.service.SysUserRoleService;
 import com.you.system.service.SysUserService;
 import com.you.validation.ValidationGroups;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/role")
 public class SysRoleController {
@@ -28,13 +30,6 @@ public class SysRoleController {
     private final SysRoleService roleService;
     private final SysUserService userService;
     private final SysUserRoleService userRoleService;
-
-    public SysRoleController(SysRoleService roleService, SysUserService userService,
-                             SysUserRoleService userRoleService) {
-        this.roleService = roleService;
-        this.userService = userService;
-        this.userRoleService = userRoleService;
-    }
 
     @PostMapping("/list")
     @SaCheckPermission("system:role:list")

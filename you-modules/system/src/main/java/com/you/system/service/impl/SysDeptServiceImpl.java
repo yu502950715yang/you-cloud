@@ -10,20 +10,18 @@ import com.you.system.mapper.SysDeptMapper;
 import com.you.system.model.SysDept;
 import com.you.system.qo.DeptQo;
 import com.you.system.service.SysDeptService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements SysDeptService {
 
     private final SysDeptMapper deptMapper;
-
-    public SysDeptServiceImpl(SysDeptMapper deptMapper) {
-        this.deptMapper = deptMapper;
-    }
 
     @Override
     public List<SysDept> list(DeptQo deptQo) {

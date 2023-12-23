@@ -11,22 +11,19 @@ import com.you.system.model.SysRole;
 import com.you.system.qo.RoleQo;
 import com.you.system.service.SysRoleMenuService;
 import com.you.system.service.SysRoleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
     private final SysRoleMapper roleMapper;
     private final SysRoleMenuService sysRoleMenuService;
-
-    public SysRoleServiceImpl(SysRoleMapper roleMapper, SysRoleMenuService sysRoleMenuService) {
-        this.roleMapper = roleMapper;
-        this.sysRoleMenuService = sysRoleMenuService;
-    }
 
     @Override
     public IPage<SysRole> listPage(RoleQo roleQo) {

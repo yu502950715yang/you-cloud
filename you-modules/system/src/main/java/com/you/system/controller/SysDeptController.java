@@ -7,6 +7,7 @@ import com.you.system.model.SysDept;
 import com.you.system.qo.DeptQo;
 import com.you.system.service.SysDeptService;
 import com.you.validation.ValidationGroups;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -14,15 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/dept")
 public class SysDeptController {
 
     private final SysDeptService deptService;
-
-    public SysDeptController(SysDeptService deptService) {
-        this.deptService = deptService;
-    }
 
     @SaCheckPermission("system:dept:list")
     @GetMapping("/list")
