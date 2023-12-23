@@ -42,7 +42,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         menuTrees.forEach(menuTree -> {
             SysMenu menu = menuTree.getMenu();
             RouterVo router = new RouterVo();
-            router.setHidden(1 == menu.getVisible());
+            router.setHidden("1".equals(menu.getVisible()));
             router.setName(RouterUtil.getRouteName(menu));
             router.setPath(RouterUtil.getRouterPath(menu));
             router.setComponent(RouterUtil.getComponent(menu));

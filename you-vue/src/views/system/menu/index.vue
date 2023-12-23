@@ -154,8 +154,8 @@
                         </span>
                      </template>
                      <el-radio-group v-model="form.isFrame">
-                        <el-radio label="0">是</el-radio>
-                        <el-radio label="1">否</el-radio>
+                        <el-radio :label=0>是</el-radio>
+                        <el-radio :label=1>否</el-radio>
                      </el-radio-group>
                   </el-form-item>
                </el-col>
@@ -222,8 +222,8 @@
                         </span>
                      </template>
                      <el-radio-group v-model="form.isCache">
-                        <el-radio label="0">缓存</el-radio>
-                        <el-radio label="1">不缓存</el-radio>
+                        <el-radio :label=0>缓存</el-radio>
+                        <el-radio :label=1>不缓存</el-radio>
                      </el-radio-group>
                   </el-form-item>
                </el-col>
@@ -278,10 +278,10 @@
 </template>
 
 <script setup name="Menu">
-import { addMenu, delMenu, getMenu, listMenu, updateMenu } from "@/api/system/menu";
+import {addMenu, delMenu, getMenu, listMenu, updateMenu} from "@/api/system/menu";
 import SvgIcon from "@/components/SvgIcon";
 import IconSelect from "@/components/IconSelect";
-import { ClickOutside as vClickOutside } from 'element-plus'
+import {ClickOutside as vClickOutside} from 'element-plus'
 
 const { proxy } = getCurrentInstance();
 const { sys_show_hide, sys_normal_disable } = proxy.useDict("sys_show_hide", "sys_normal_disable");
@@ -343,8 +343,8 @@ function reset() {
     icon: undefined,
     menuType: "M",
     orderNum: undefined,
-    isFrame: "1",
-    isCache: "0",
+    isFrame: 1,
+    isCache: 0,
     visible: "0",
     status: "0"
   };

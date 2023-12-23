@@ -87,4 +87,10 @@ public class SysMenuController {
         }
         return R.fail("删除菜单失败");
     }
+
+    @SaCheckPermission("system:menu:query")
+    @GetMapping(value = "/{menuId}")
+    public R<SysMenu> getInfo(@PathVariable Long menuId) {
+        return R.ok(menuService.getById(menuId));
+    }
 }
