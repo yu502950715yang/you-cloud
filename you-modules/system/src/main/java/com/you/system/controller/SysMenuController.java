@@ -3,6 +3,7 @@ package com.you.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.auth.utils.LoginUtils;
+import com.you.common.core.constant.Constants;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.model.R;
 import com.you.common.core.utils.StrUtils;
@@ -67,7 +68,7 @@ public class SysMenuController {
         if (menuService.save(menu)) {
             return R.ok();
         }
-        return R.fail("新增菜单失败");
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
     /**
@@ -85,12 +86,31 @@ public class SysMenuController {
         if (menuService.removeById(menuId)) {
             return R.ok();
         }
-        return R.fail("删除菜单失败");
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
     @SaCheckPermission("system:menu:query")
     @GetMapping(value = "/{menuId}")
     public R<SysMenu> getInfo(@PathVariable Long menuId) {
         return R.ok(menuService.getById(menuId));
+    }
+
+    @SaCheckPermission("system:menu:edit")
+    @PutMapping
+    public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysMenu menu) {
+        String errorMsgTitle = "修改菜单";
+        if (!menuService.checkMenuNameUnique(menu)) {
+            return R.fail(errorMsgTitle + menu.getMenuName() + "'失败，菜单名称已存在");
+        } else if (UserConstants.YES_FRAME == menu.getIsFrame() && !StrUtils.ishttp(menu.getPath())) {
+            return R.fail(errorMsgTitle + menu.getMenuName() + "'失败，地址必须以http(s)://开头");
+        } else if (menu.getMenuId().equals(menu.getParentId())) {
+            return R.fail(errorMsgTitle + menu.getMenuName() + "'失败，上级菜单不能选择自己");
+        }
+        menu.setUpdateTime(LocalDateTime.now());
+        menu.setUpdateBy(LoginUtils.getLoginUserName());
+        if (menuService.updateById(menu)) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 }
