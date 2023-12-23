@@ -38,4 +38,12 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return 结果
      */
     boolean checkMenuNameUnique(SysMenu sysMenu);
+
+    /**
+     * 是否存在菜单子节点
+     *
+     * @param menuId 菜单ID
+     * @return 结果 true 存在 false 不存在
+     */
+    boolean hasChildByMenuId(Long menuId);
 }

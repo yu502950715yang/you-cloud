@@ -33,4 +33,12 @@ public interface SysRoleMenuService {
      * @param roleIds 角色id List
      */
     void deleteByRoleIds(List<Long> roleIds);
+
+    /**
+     * 查询菜单是否在角色中关联
+     *
+     * @param menuId 菜单id
+     * @return 是否关联
+     */
+    boolean checkMenuInUse(Long menuId);
 }

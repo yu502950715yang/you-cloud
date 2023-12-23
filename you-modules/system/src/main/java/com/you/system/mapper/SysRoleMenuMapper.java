@@ -37,4 +37,11 @@ public interface SysRoleMenuMapper {
      * @param roleIds 角色id List
      */
     void deleteByRoleIds(@Param("roleIds") List<Long> roleIds);
+
+    /**
+     * 查询菜单id在角色中的数量
+     * @param menuId 菜单id
+     * @return 数量
+     */
+    int selectCountByMenuId(Long menuId);
 }

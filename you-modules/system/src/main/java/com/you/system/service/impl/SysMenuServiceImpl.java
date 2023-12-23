@@ -110,6 +110,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return menuMapper.selectCount(queryWrapper) == 0;
     }
 
+    @Override
+    public boolean hasChildByMenuId(Long menuId) {
+        LambdaQueryWrapper<SysMenu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysMenu::getParentId, menuId);
+        return menuMapper.selectCount(queryWrapper) > 0;
+    }
+
     private List<MenuTree> createMenuTree(List<SysMenu> list, long parentId) {
         List<MenuTree> returnList = new ArrayList<>();
         list.forEach(sysMenu -> {

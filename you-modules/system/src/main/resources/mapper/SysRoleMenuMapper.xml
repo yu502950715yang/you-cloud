@@ -30,4 +30,8 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectCountByMenuId" resultType="int">
+        select count(1) from sys_role_menu where menu_id = #{menuId}
+    </select>
 </mapper>

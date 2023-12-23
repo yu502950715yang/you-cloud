@@ -9,6 +9,7 @@ import com.you.common.core.utils.StrUtils;
 import com.you.system.model.SysMenu;
 import com.you.system.qo.MenuQo;
 import com.you.system.service.SysMenuService;
+import com.you.system.service.SysRoleMenuService;
 import com.you.system.vo.ElTree;
 import com.you.system.vo.MenuTree;
 import com.you.system.vo.RouterVo;
@@ -26,6 +27,7 @@ import java.util.List;
 public class SysMenuController {
 
     private final SysMenuService menuService;
+    private final SysRoleMenuService roleMenuService;
 
     /**
      * 获取路由信息
@@ -66,5 +68,23 @@ public class SysMenuController {
             return R.ok();
         }
         return R.fail("新增菜单失败");
+    }
+
+    /**
+     * 删除菜单
+     */
+    @SaCheckPermission("system:menu:remove")
+    @DeleteMapping("/{menuId}")
+    public R<Void> remove(@PathVariable("menuId") Long menuId) {
+        if (menuService.hasChildByMenuId(menuId)) {
+            return R.fail("存在子菜单,不允许删除");
+        }
+        if (roleMenuService.checkMenuInUse(menuId)) {
+            return R.fail("菜单已分配,不允许删除");
+        }
+        if (menuService.removeById(menuId)) {
+            return R.ok();
+        }
+        return R.fail("删除菜单失败");
     }
 }

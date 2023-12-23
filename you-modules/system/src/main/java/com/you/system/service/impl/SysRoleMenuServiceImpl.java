@@ -36,4 +36,9 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
             sysRoleMenuMapper.deleteByRoleIds(roleIds);
         }
     }
+
+    @Override
+    public boolean checkMenuInUse(Long menuId) {
+        return sysRoleMenuMapper.selectCountByMenuId(menuId) > 0;
+    }
 }
