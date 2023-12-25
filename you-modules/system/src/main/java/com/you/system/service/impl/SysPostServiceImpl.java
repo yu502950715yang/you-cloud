@@ -9,6 +9,8 @@ import com.you.system.service.SysPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> implements SysPostService {
@@ -18,5 +20,10 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Override
     public IPage<SysPost> listPage(PostQo qo) {
         return sysPostMapper.listPage(qo.getPage(), qo);
+    }
+
+    @Override
+    public List<SysPost> selectList(PostQo qo) {
+        return sysPostMapper.selectList(qo);
     }
 }

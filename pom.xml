@@ -180,6 +180,13 @@
                 <artifactId>bcpkix-jdk15on</artifactId>
                 <version>1.70</version>
             </dependency>
+
+            <!-- 导出excel-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>3.2.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

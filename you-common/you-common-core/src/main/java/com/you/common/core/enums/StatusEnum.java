@@ -22,4 +22,12 @@ public enum StatusEnum {
         this.info = info;
     }
 
+    public static String getInfo(String code) {
+        for (StatusEnum statusEnum : StatusEnum.values()) {
+            if (statusEnum.getCode().equals(code)) {
+                return statusEnum.getInfo();
+            }
+        }
+        return "";
+    }
 }
