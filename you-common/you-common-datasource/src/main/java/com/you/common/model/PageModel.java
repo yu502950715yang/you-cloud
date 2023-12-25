@@ -23,7 +23,7 @@ public class PageModel<T> extends Page<T> {
             List<OrderItem> orders = new ArrayList<>();
             orderList.forEach(item -> {
                 // 检查是否有sql注入风险，如果有风险则剔除排序字段
-                if (SqlInjectionUtils.check(item.getColumn())) {
+                if (!SqlInjectionUtils.check(item.getColumn())) {
                     OrderItem orderItem = new OrderItem();
                     orderItem.setColumn(StrUtil.convertCamelToUnderscore(item.getColumn()));
                     orderItem.setAsc(item.isAsc());

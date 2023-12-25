@@ -104,8 +104,8 @@
       <pagination
          v-show="total > 0"
          :total="total"
-         v-model:page="queryParams.pageNum"
-         v-model:limit="queryParams.pageSize"
+         v-model:page="queryParams.page.current"
+         v-model:limit="queryParams.page.size"
          @pagination="getList"
       />
 
@@ -145,7 +145,7 @@
 </template>
 
 <script setup name="Post">
-import { listPost, addPost, delPost, getPost, updatePost } from "@/api/system/post";
+import {addPost, delPost, getPost, listPost, updatePost} from "@/api/system/post";
 
 const { proxy } = getCurrentInstance();
 const { sys_normal_disable } = proxy.useDict("sys_normal_disable");
@@ -163,8 +163,13 @@ const title = ref("");
 const data = reactive({
   form: {},
   queryParams: {
-    pageNum: 1,
-    pageSize: 10,
+    page: {
+      current: 1,
+      size: 10,
+      orderList: [
+        {column: 'postSort', asc: true}
+      ]
+    },
     postCode: undefined,
     postName: undefined,
     status: undefined
@@ -182,8 +187,8 @@ const { queryParams, form, rules } = toRefs(data);
 function getList() {
   loading.value = true;
   listPost(queryParams.value).then(response => {
-    postList.value = response.rows;
-    total.value = response.total;
+    postList.value = response.data.records;
+    total.value = response.data.total;
     loading.value = false;
   });
 }
@@ -206,7 +211,7 @@ function reset() {
 }
 /** 搜索按钮操作 */
 function handleQuery() {
-  queryParams.value.pageNum = 1;
+  queryParams.value.page.pageNum = 1;
   getList();
 }
 /** 重置按钮操作 */
