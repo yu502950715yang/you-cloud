@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.you.common.core.excel.converters.StatusConverter;
+import com.you.validation.ValidationGroups;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,12 +20,14 @@ public class SysPost {
 
     @ExcelProperty(value = "岗位ID")
     @TableId(value = "post_id", type = IdType.AUTO)
+    @NotNull(message = "岗位ID不能为空", groups = ValidationGroups.Update.class)
     private Long postId;
 
     /**
      * 岗位编码
      */
     @ExcelProperty(value = "岗位编码")
+    @NotNull(message = "岗位编码不能为空", groups = ValidationGroups.Common.class)
     @TableField("post_code")
     private String postCode;
 
@@ -31,6 +35,7 @@ public class SysPost {
      * 岗位名称
      */
     @ExcelProperty(value = "名称")
+    @NotNull(message = "岗位名称不能为空", groups = ValidationGroups.Common.class)
     @TableField("post_name")
     private String postName;
 
@@ -38,6 +43,7 @@ public class SysPost {
      * 显示顺序
      */
     @ExcelProperty(value = "显示顺序")
+    @NotNull(message = "显示顺序不能为空", groups = ValidationGroups.Common.class)
     @TableField("post_sort")
     private Integer postSort;
 
@@ -45,6 +51,7 @@ public class SysPost {
      * 状态（0正常 1停用）
      */
     @ExcelProperty(value = "状态", converter = StatusConverter.class)
+    @NotNull(message = "状态不能为空", groups = ValidationGroups.Common.class)
     @TableField("status")
     private String status;
 

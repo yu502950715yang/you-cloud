@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.system.mapper.SysPostMapper;
@@ -25,5 +26,25 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Override
     public List<SysPost> selectList(PostQo qo) {
         return sysPostMapper.selectList(qo);
+    }
+
+    @Override
+    public boolean checkPostNameUnique(SysPost post) {
+        LambdaQueryWrapper<SysPost> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysPost::getPostName, post.getPostName());
+        if (post.getPostId() != null) {
+            queryWrapper.ne(SysPost::getPostId, post.getPostId());
+        }
+        return sysPostMapper.selectCount(queryWrapper) == 0;
+    }
+
+    @Override
+    public boolean checkPostCodeUnique(SysPost post) {
+        LambdaQueryWrapper<SysPost> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysPost::getPostCode, post.getPostCode());
+        if (post.getPostId() != null) {
+            queryWrapper.ne(SysPost::getPostId, post.getPostId());
+        }
+        return sysPostMapper.selectCount(queryWrapper) == 0;
     }
 }

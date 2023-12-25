@@ -24,4 +24,18 @@ public interface SysPostService extends IService<SysPost> {
      * @return 岗位数据
      */
     List<SysPost> selectList(PostQo qo);
+
+    /**
+     * 校验岗位名称是否唯一
+     * @param post 岗位数据
+     * @return 结果
+     */
+    boolean checkPostNameUnique(SysPost post);
+
+    /**
+     * 校验岗位code是否唯一
+     * @param post 岗位数据
+     * @return 结果
+     */
+    boolean checkPostCodeUnique(SysPost post);
 }

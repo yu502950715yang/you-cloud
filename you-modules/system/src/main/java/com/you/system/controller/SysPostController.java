@@ -3,12 +3,14 @@ package com.you.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.alibaba.excel.EasyExcelFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.you.auth.utils.LoginUtils;
 import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
 import com.you.system.model.SysPost;
 import com.you.system.qo.PostQo;
 import com.you.system.service.SysPostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -43,7 +46,7 @@ public class SysPostController {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
-        String fileName = null;
+        String fileName;
         try {
             fileName = URLEncoder.encode("测试", "UTF-8");
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
@@ -51,6 +54,24 @@ public class SysPostController {
         } catch (IOException e) {
             throw new CommonException(e);
         }
+    }
 
+    /**
+     * 新增岗位
+     */
+    @SaCheckPermission("system:post:add")
+    @PostMapping
+    public R<Void> add(@Validated @RequestBody SysPost post) {
+        if (!sysPostService.checkPostNameUnique(post)) {
+            return R.fail("新增岗位'" + post.getPostName() + "'失败，岗位名称已存在");
+        } else if (!sysPostService.checkPostCodeUnique(post)) {
+            return R.fail("新增岗位'" + post.getPostName() + "'失败，岗位编码已存在");
+        }
+        post.setCreateTime(LocalDateTime.now());
+        post.setCreateBy(LoginUtils.getLoginUserName());
+        if (sysPostService.save(post)) {
+            return R.ok();
+        }
+        return R.fail();
     }
 }
