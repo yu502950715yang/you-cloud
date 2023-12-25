@@ -10,6 +10,7 @@ import com.you.common.core.model.R;
 import com.you.system.model.SysPost;
 import com.you.system.qo.PostQo;
 import com.you.system.service.SysPostService;
+import com.you.validation.ValidationGroups;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +61,7 @@ public class SysPostController {
      */
     @SaCheckPermission("system:post:add")
     @PostMapping
-    public R<Void> add(@Validated @RequestBody SysPost post) {
+    public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysPost post) {
         if (!sysPostService.checkPostNameUnique(post)) {
             return R.fail("新增岗位'" + post.getPostName() + "'失败，岗位名称已存在");
         } else if (!sysPostService.checkPostCodeUnique(post)) {
@@ -86,4 +87,27 @@ public class SysPostController {
         }
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
+
+    @SaCheckPermission("system:post:query")
+    @GetMapping(value = "/{postId}")
+    public R<SysPost> getInfo(@PathVariable Long postId) {
+        return R.ok(sysPostService.getById(postId));
+    }
+
+    @SaCheckPermission("system:post:edit")
+    @PutMapping
+    public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysPost post) {
+        if (!sysPostService.checkPostNameUnique(post)) {
+            return R.fail("修改岗位'" + post.getPostName() + "'失败，岗位名称已存在");
+        } else if (!sysPostService.checkPostCodeUnique(post)) {
+            return R.fail("修改岗位'" + post.getPostName() + "'失败，岗位编码已存在");
+        }
+        post.setUpdateTime(LocalDateTime.now());
+        post.setUpdateBy(LoginUtils.getLoginUserName());
+        if (sysPostService.updateById(post)) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
 }
