@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.alibaba.excel.EasyExcelFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.auth.utils.LoginUtils;
+import com.you.common.core.constant.Constants;
 import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
 import com.you.system.model.SysPost;
@@ -11,15 +12,13 @@ import com.you.system.qo.PostQo;
 import com.you.system.service.SysPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -72,6 +71,19 @@ public class SysPostController {
         if (sysPostService.save(post)) {
             return R.ok();
         }
-        return R.fail();
+        return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @SaCheckPermission("system:post:remove")
+    @DeleteMapping("/{postIds}")
+    public R<Void> remove(@PathVariable Long[] postIds) {
+        if (postIds == null || postIds.length <= 0) {
+            return R.fail("ID不能为空");
+        }
+        List<Long> postIdList = Arrays.asList(postIds);
+        if (sysPostService.removeByIds(postIdList)) {
+            return R.ok();
+        }
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 }
