@@ -74,9 +74,9 @@
             <if test="qo.status!= null and qo.status != ''">
                 AND u.status = #{qo.status}
             </if>
-            <if test="qo.createTimeStart != null and qo.createTimeStart !=''">
-                <if test="qo.createTimeEnd!= null and qo.createTimeEnd !=''">
-                    AND u.create_time BETWEEN #{qo.createTimeStart} AND #{qo.createTimeEnd}
+            <if test="qo.beginTime != null and qo.beginTime !=''">
+                <if test="qo.endTime!= null and qo.endTime !=''">
+                    AND u.create_time BETWEEN #{qo.beginTime} AND #{qo.endTime}
                 </if>
             </if>
         </where>

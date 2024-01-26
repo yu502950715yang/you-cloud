@@ -30,9 +30,9 @@ public class UserQo {
      */
     private String status;
 
-    private String createTimeStart;
+    private String beginTime;
 
-    private String createTimeEnd;
+    private String endTime;
 
     /**
      * 部门查询in 条件
