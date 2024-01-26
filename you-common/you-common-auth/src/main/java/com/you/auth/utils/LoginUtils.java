@@ -2,10 +2,13 @@ package com.you.auth.utils;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.common.core.constant.LoginConstants;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 人员登录工具类
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class LoginUtils {
 
     /**

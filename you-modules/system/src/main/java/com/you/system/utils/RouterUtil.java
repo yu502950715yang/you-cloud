@@ -4,8 +4,11 @@ import com.you.common.core.constant.Constants;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.utils.StrUtils;
 import com.you.system.domain.model.SysMenu;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class RouterUtil {
 
     /**

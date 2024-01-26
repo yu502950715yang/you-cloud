@@ -1,5 +1,7 @@
 package com.you.common.core.utils;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.lang.management.ManagementFactory;
@@ -11,6 +13,7 @@ import java.util.Date;
 /**
  * 时间工具类
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static String YYYY = "yyyy";
 

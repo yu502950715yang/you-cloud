@@ -1,7 +1,11 @@
 package com.you.common.core.utils.sm3;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
 import java.math.BigInteger;
 
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Util {
     /**
      * 整形转换成网络传输的字节流（字节数组）型数据

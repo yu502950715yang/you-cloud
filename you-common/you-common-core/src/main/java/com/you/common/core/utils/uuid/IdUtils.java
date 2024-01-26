@@ -1,8 +1,12 @@
 package com.you.common.core.utils.uuid;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
 /**
  * ID生成器工具类
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class IdUtils {
     /**
      * 获取随机UUID

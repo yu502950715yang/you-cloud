@@ -2,6 +2,8 @@ package com.you.common.core.utils.text;
 
 
 import com.you.common.core.utils.StrUtils;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -15,6 +17,7 @@ import java.util.Set;
 /**
  * 类型转换器
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Convert {
     /**
      * 转换为字符串<br>

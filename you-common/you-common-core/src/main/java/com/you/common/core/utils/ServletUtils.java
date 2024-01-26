@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.JSON;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
 import com.you.common.core.utils.text.Convert;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,7 @@ import java.util.Map;
 /**
  * 客户端工具类
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServletUtils {
     /**
      * 获取String参数

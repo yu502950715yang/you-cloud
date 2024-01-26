@@ -2,12 +2,15 @@ package com.you.common.core.utils.uuid;
 
 import com.you.common.core.utils.DateUtils;
 import com.you.common.core.utils.StrUtils;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 序列生成类
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Seq {
     // 通用序列类型
     public static final String commSeqType = "COMMON";

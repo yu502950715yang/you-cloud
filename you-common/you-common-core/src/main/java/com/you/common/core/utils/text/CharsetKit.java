@@ -2,6 +2,8 @@ package com.you.common.core.utils.text;
 
 
 import com.you.common.core.utils.StrUtils;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -9,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 字符集工具类
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CharsetKit {
     /**
      * ISO-8859-1
