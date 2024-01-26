@@ -1,8 +1,8 @@
 package com.you.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.you.system.model.SysMenu;
-import com.you.system.qo.MenuQo;
+import com.you.system.domain.model.SysMenu;
+import com.you.system.domain.qo.MenuQo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -2,9 +2,9 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.you.system.bo.SysRoleBo;
+import com.you.system.domain.bo.SysRoleBo;
+import com.you.system.domain.qo.RoleQo;
 import com.you.system.model.SysRole;
-import com.you.system.qo.RoleQo;
 
 import java.util.List;
 

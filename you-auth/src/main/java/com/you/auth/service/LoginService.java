@@ -1,6 +1,6 @@
 package com.you.auth.service;
 
-import com.you.auth.model.User;
+import com.you.auth.domain.model.User;
 
 /**
  * 登录service

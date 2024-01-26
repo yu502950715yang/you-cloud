@@ -1,4 +1,4 @@
-package com.you.system.bo;
+package com.you.system.domain.bo;
 
 import com.you.system.model.SysRole;
 import lombok.Data;

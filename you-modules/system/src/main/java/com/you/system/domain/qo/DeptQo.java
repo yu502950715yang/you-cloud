@@ -1,4 +1,4 @@
-package com.you.system.qo;
+package com.you.system.domain.qo;
 
 import lombok.Data;
 

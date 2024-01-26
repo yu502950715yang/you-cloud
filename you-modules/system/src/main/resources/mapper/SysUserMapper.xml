@@ -56,7 +56,7 @@
         ORDER BY u.create_time
     </select>
 
-    <select id="listPage" resultType="com.you.system.vo.SysUserVo">
+    <select id="listPage" resultType="com.you.system.domain.vo.SysUserVo">
         SELECT u.user_id, u.username, u.nickname, u.phone, u.create_time, u.status, d.dept_name
         FROM sys_user u
         LEFT JOIN sys_dept d ON d.dept_id = u.dept_id

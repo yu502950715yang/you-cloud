@@ -3,13 +3,13 @@ package com.you.system.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.auth.service.AuthService;
+import com.you.system.domain.qo.AuthUserQo;
+import com.you.system.domain.qo.UserQo;
+import com.you.system.domain.vo.SysUserVo;
 import com.you.system.mapper.SysUserMapper;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
-import com.you.system.qo.AuthUserQo;
-import com.you.system.qo.UserQo;
 import com.you.system.service.SysUserService;
-import com.you.system.vo.SysUserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

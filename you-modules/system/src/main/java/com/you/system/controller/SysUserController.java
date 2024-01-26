@@ -4,11 +4,11 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.common.core.model.R;
+import com.you.system.domain.qo.UserQo;
+import com.you.system.domain.vo.SysUserVo;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
-import com.you.system.qo.UserQo;
 import com.you.system.service.SysUserService;
-import com.you.system.vo.SysUserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

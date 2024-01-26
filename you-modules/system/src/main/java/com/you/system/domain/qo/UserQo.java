@@ -1,7 +1,7 @@
-package com.you.system.qo;
+package com.you.system.domain.qo;
 
 import com.you.common.model.PageModel;
-import com.you.system.vo.SysUserVo;
+import com.you.system.domain.vo.SysUserVo;
 import lombok.Data;
 
 /**

@@ -1,11 +1,11 @@
 package com.you.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.you.system.model.SysMenu;
-import com.you.system.qo.MenuQo;
-import com.you.system.vo.ElTree;
-import com.you.system.vo.MenuTree;
-import com.you.system.vo.RouterVo;
+import com.you.system.domain.model.SysMenu;
+import com.you.system.domain.qo.MenuQo;
+import com.you.system.domain.vo.ElTree;
+import com.you.system.domain.vo.MenuTree;
+import com.you.system.domain.vo.RouterVo;
 
 import java.util.List;
 

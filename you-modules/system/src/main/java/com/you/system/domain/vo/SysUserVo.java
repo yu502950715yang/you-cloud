@@ -1,4 +1,4 @@
-package com.you.system.vo;
+package com.you.system.domain.vo;
 
 import com.you.system.model.SysUser;
 import lombok.Data;

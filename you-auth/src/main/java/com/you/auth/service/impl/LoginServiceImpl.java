@@ -3,7 +3,7 @@ package com.you.auth.service.impl;
 import cn.dev33.satoken.stp.SaLoginConfig;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import com.you.auth.model.User;
+import com.you.auth.domain.model.User;
 import com.you.auth.service.LoginService;
 import com.you.common.core.constant.LoginConstants;
 import com.you.common.core.enums.StatusEnum;

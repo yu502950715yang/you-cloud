@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.you.system.mapper.SysMenuMapper">
 
-    <select id="selectMenuTypeMCByUserId" resultType="com.you.system.model.SysMenu">
+    <select id="selectMenuTypeMCByUserId" resultType="com.you.system.domain.model.SysMenu">
         SELECT DISTINCT m.menu_id, m.parent_id, m.menu_name, m.path, m.component, m.query_param, m.visible, m.status,
         m.perms, m.is_frame, m.is_cache, m.menu_type, m.icon, m.order_num, m.create_time
         FROM sys_menu m
@@ -22,7 +22,7 @@
     </select>
 
 
-    <select id="selectMenuByUserId" resultType="com.you.system.model.SysMenu">
+    <select id="selectMenuByUserId" resultType="com.you.system.domain.model.SysMenu">
         SELECT DISTINCT m.menu_id, m.parent_id, m.menu_name, m.path, m.component, m.query_param, m.visible, m.status,
         m.perms, m.is_frame, m.is_cache, m.menu_type, m.icon, m.order_num, m.create_time
         FROM sys_menu m
@@ -40,7 +40,7 @@
         ORDER BY m.parent_id, m.order_num
     </select>
 
-    <select id="selectMenuList" resultType="com.you.system.model.SysMenu">
+    <select id="selectMenuList" resultType="com.you.system.domain.model.SysMenu">
         SELECT menu_id, menu_name, parent_id, order_num, perms, component, status, create_time
         FROM sys_menu
         <where>

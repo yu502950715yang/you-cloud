@@ -1,4 +1,4 @@
-package com.you.auth.model;
+package com.you.auth.domain.model;
 
 import com.you.validation.ValidationGroups;
 import lombok.Getter;

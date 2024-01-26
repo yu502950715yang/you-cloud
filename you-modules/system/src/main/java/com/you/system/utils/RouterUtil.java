@@ -3,7 +3,7 @@ package com.you.system.utils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.utils.StrUtils;
-import com.you.system.model.SysMenu;
+import com.you.system.domain.model.SysMenu;
 import org.apache.commons.lang3.StringUtils;
 
 public class RouterUtil {

@@ -1,8 +1,8 @@
 package com.you.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.you.system.model.SysDept;
-import com.you.system.qo.DeptQo;
+import com.you.system.domain.model.SysDept;
+import com.you.system.domain.qo.DeptQo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

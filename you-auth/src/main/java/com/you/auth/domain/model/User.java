@@ -1,4 +1,4 @@
-package com.you.auth.model;
+package com.you.auth.domain.model;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import lombok.Getter;

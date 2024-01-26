@@ -1,6 +1,6 @@
-package com.you.system.vo;
+package com.you.system.domain.vo;
 
-import com.you.system.model.SysMenu;
+import com.you.system.domain.model.SysMenu;
 import lombok.Data;
 
 import java.util.ArrayList;
