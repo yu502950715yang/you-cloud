@@ -1,4 +1,4 @@
-package com.you.auth.Interceptor;
+package com.you.auth.interceptor;
 
 import cn.dev33.satoken.same.SaSameUtil;
 import feign.RequestInterceptor;
