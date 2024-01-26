@@ -35,6 +35,11 @@ public class UserQo {
     private String createTimeEnd;
 
     /**
+     * 部门查询in 条件
+     */
+    private String deptIdsStr;
+
+    /**
      * 分页
      */
     private PageModel<SysUserVo> page;

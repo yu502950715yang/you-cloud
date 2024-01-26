@@ -71,4 +71,12 @@ public interface SysDeptService extends IService<SysDept> {
      * @return 部门树list
      */
     List<ElTree> selectDeptList();
+
+    /**
+     * 获取所有子部门
+     *
+     * @param deptId 部门id
+     * @return 子部门数据
+     */
+    List<SysDept> getAllChildByDeptId(Long deptId);
 }

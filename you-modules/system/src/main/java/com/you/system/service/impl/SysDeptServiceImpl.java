@@ -39,7 +39,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         if (StatusEnum.DISABLE.getCode().equals(parentDept.getStatus())) {
             throw new CommonException(parentDept.getDeptName() + "已禁用，无法新增子部门");
         }
-        sysDept.setAncestors(parentDept.getAncestors() + "," + parentDept.getDeptId());
+        sysDept.setAncestors(parentDept.getAncestors() + parentDept.getDeptId() + ",");
         sysDept.setCreateTime(LocalDateTime.now());
         sysDept.setCreateBy(LoginUtils.getLoginUserName());
         return deptMapper.insert(sysDept) > 0;
@@ -48,20 +48,22 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean editDept(SysDept sysDept) {
-        SysDept newParentDept = deptMapper.selectById(sysDept.getParentId());
-        if (newParentDept == null) {
-            throw new CommonException(sysDept.getDeptName() + "父部门不存在");
-        }
         SysDept oldDept = deptMapper.selectById(sysDept.getDeptId());
         if (oldDept == null) {
             throw new CommonException(sysDept.getDeptName() + "部门不存在");
         }
-        // 修改所有子部门节点
-        String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getDeptId();
-        String oldAncestors = oldDept.getAncestors();
-        sysDept.setAncestors(newAncestors);
-        // 修改子部门祖级列表
-        updateDeptChildren(sysDept.getDeptId(), newAncestors, oldAncestors);
+        if (oldDept.getParentId() != 0) {
+            SysDept newParentDept = deptMapper.selectById(sysDept.getParentId());
+            if (newParentDept == null) {
+                throw new CommonException(sysDept.getDeptName() + "父部门不存在");
+            }
+            // 修改所有子部门节点
+            String newAncestors = newParentDept.getAncestors() + newParentDept.getDeptId() + ",";
+            String oldAncestors = oldDept.getAncestors();
+            sysDept.setAncestors(newAncestors);
+            // 修改子部门祖级列表
+            updateDeptChildren(sysDept.getDeptId(), newAncestors, oldAncestors);
+        }
         sysDept.setUpdateBy(LoginUtils.getLoginUserName());
         sysDept.setUpdateTime(LocalDateTime.now());
         return deptMapper.updateById(sysDept) > 0;
@@ -108,6 +110,17 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         queryWrapper.eq(SysDept::getDelFlag, DelFlagEnum.NORMAL.getCode());
         List<SysDept> sysDeptList = deptMapper.selectList(queryWrapper);
         return createElTree(sysDeptList, 0L);
+    }
+
+    @Override
+    public List<SysDept> getAllChildByDeptId(Long deptId) {
+        SysDept parentDept = deptMapper.selectById(deptId);
+        if (parentDept == null) {
+            return null;
+        }
+        LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.likeRight(SysDept::getAncestors, parentDept.getAncestors() + deptId + ",");
+        return deptMapper.selectList(queryWrapper);
     }
 
     private List<ElTree> createElTree(List<SysDept> list, long parentId) {
