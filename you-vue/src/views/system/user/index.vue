@@ -29,7 +29,7 @@
          <!--用户数据-->
          <el-col :span="20" :xs="24">
             <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-               <el-form-item label="用户名称" prop="userName">
+               <el-form-item label="用户名称" prop="username">
                   <el-input
                      v-model="queryParams.username"
                      placeholder="请输入用户名称"
@@ -38,7 +38,7 @@
                      @keyup.enter="handleQuery"
                   />
                </el-form-item>
-               <el-form-item label="手机号码" prop="phonenumber">
+               <el-form-item label="手机号码" prop="phone">
                   <el-input
                      v-model="queryParams.phone"
                      placeholder="请输入手机号码"
@@ -474,7 +474,7 @@ function handleExport() {
 /** 用户状态修改  */
 function handleStatusChange(row) {
   let text = row.status === "0" ? "启用" : "停用";
-  proxy.$modal.confirm('确认要"' + text + '""' + row.userName + '"用户吗?').then(function () {
+  proxy.$modal.confirm('确认要"' + text + '""' + row.username + '"用户吗?').then(function () {
     return changeUserStatus(row.userId, row.status);
   }).then(() => {
     proxy.$modal.msgSuccess(text + "成功");
