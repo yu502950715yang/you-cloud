@@ -1,15 +1,16 @@
 package com.you.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.common.core.model.R;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
+import com.you.system.qo.UserQo;
 import com.you.system.service.SysUserService;
+import com.you.system.vo.SysUserVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户controller
@@ -36,5 +37,11 @@ public class SysUserController {
         Long userId = StpUtil.getLoginIdAsLong();
         LoginUser user = sysUserService.getLoginUserByUserId(userId);
         return R.ok(user);
+    }
+
+    @SaCheckPermission("system:user:list")
+    @PostMapping("/list")
+    public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {
+       return R.ok(sysUserService.listPage(qo));
     }
 }

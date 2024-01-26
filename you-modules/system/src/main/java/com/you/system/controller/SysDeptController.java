@@ -6,6 +6,7 @@ import com.you.common.core.model.R;
 import com.you.system.model.SysDept;
 import com.you.system.qo.DeptQo;
 import com.you.system.service.SysDeptService;
+import com.you.system.vo.ElTree;
 import com.you.validation.ValidationGroups;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
@@ -81,5 +82,10 @@ public class SysDeptController {
             return R.ok();
         }
         return R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @GetMapping("/deptTree")
+    public R<List<ElTree>> treeSelect() {
+        return R.ok(deptService.selectDeptList());
     }
 }

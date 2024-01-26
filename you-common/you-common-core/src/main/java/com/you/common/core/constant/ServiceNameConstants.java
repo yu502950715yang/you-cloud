@@ -1,5 +1,8 @@
 package com.you.common.core.constant;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
 /**
  * 服务名称常量
  *
@@ -7,6 +10,7 @@ package com.you.common.core.constant;
  * @since 1.0
  * Create with Intellij IDEA on 2023-04-12 17:16
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceNameConstants {
 
     /**

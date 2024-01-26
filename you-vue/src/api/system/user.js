@@ -1,12 +1,12 @@
 import request from '@/utils/request'
-import { parseStrEmpty } from "@/utils/ruoyi";
+import {parseStrEmpty} from "@/utils/ruoyi";
 
 // 查询用户列表
-export function listUser(query) {
+export function listUser(data) {
   return request({
     url: '/system/user/list',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: data
   })
 }
 
@@ -129,7 +129,7 @@ export function updateAuthRole(data) {
 // 查询部门下拉树结构
 export function deptTreeSelect() {
   return request({
-    url: '/system/user/deptTree',
+    url: '/system/dept/deptTree',
     method: 'get'
   })
 }

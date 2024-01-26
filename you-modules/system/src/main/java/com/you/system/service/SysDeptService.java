@@ -3,6 +3,7 @@ package com.you.system.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.model.SysDept;
 import com.you.system.qo.DeptQo;
+import com.you.system.vo.ElTree;
 
 import java.util.List;
 
@@ -63,4 +64,11 @@ public interface SysDeptService extends IService<SysDept> {
      * @return 结果
      */
     boolean delById(Long deptId);
+
+    /**
+     * 获取部门树前台ElTree展示数据
+     *
+     * @return 部门树list
+     */
+    List<ElTree> selectDeptList();
 }

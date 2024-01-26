@@ -1,16 +1,16 @@
 package com.you.system.bo;
 
 import com.you.system.model.SysRole;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * 角色编辑实体
  */
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class SysRoleBo extends SysRole {
 
     /**

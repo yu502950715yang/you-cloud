@@ -55,4 +55,30 @@
         </if>
         ORDER BY u.create_time
     </select>
+
+    <select id="listPage" resultType="com.you.system.vo.SysUserVo">
+        SELECT u.user_id, u.username, u.nickname, u.phone, u.create_time, u.status, d.dept_name
+        FROM sys_user u
+        LEFT JOIN sys_dept d ON d.dept_id = u.dept_id
+        <where>
+            u.del_flag = 0
+            <if test="qo.deptId!= null">
+                AND u.dept_id = #{qo.deptId}
+            </if>
+            <if test="qo.username!= null and qo.username!=''">
+                AND u.username LIKE CONCAT('%',#{qo.username},'%')
+            </if>
+            <if test="qo.phone!= null and qo.phone!=''">
+                AND u.phone LIKE CONCAT('%',#{qo.phone},'%')
+            </if>
+            <if test="qo.status!= null and qo.status != ''">
+                AND u.status = #{qo.status}
+            </if>
+            <if test="qo.createTimeStart != null and qo.createTimeStart !=''">
+                <if test="qo.createTimeEnd!= null and qo.createTimeEnd !=''">
+                    AND u.create_time BETWEEN #{qo.createTimeStart} AND #{qo.createTimeEnd}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

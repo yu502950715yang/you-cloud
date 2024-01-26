@@ -31,7 +31,7 @@
             <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
                <el-form-item label="用户名称" prop="userName">
                   <el-input
-                     v-model="queryParams.userName"
+                     v-model="queryParams.username"
                      placeholder="请输入用户名称"
                      clearable
                      style="width: 240px"
@@ -40,7 +40,7 @@
                </el-form-item>
                <el-form-item label="手机号码" prop="phonenumber">
                   <el-input
-                     v-model="queryParams.phonenumber"
+                     v-model="queryParams.phone"
                      placeholder="请输入手机号码"
                      clearable
                      style="width: 240px"
@@ -132,10 +132,10 @@
             <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
                <el-table-column type="selection" width="50" align="center" />
                <el-table-column label="用户编号" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
-               <el-table-column label="用户名称" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="用户昵称" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="部门" align="center" key="deptName" prop="dept.deptName" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[4].visible" width="120" />
+               <el-table-column label="用户名称" align="center" key="username" prop="username" v-if="columns[1].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="用户昵称" align="center" key="nickname" prop="nickname" v-if="columns[2].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="部门" align="center" key="deptName" prop="deptName" v-if="columns[3].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="手机号码" align="center" key="phone" prop="phone" v-if="columns[4].visible" width="120" />
                <el-table-column label="状态" align="center" key="status" v-if="columns[5].visible">
                   <template #default="scope">
                      <el-switch
@@ -171,8 +171,8 @@
             <pagination
                v-show="total > 0"
                :total="total"
-               v-model:page="queryParams.pageNum"
-               v-model:limit="queryParams.pageSize"
+               v-model:page="queryParams.page.current"
+               v-model:limit="queryParams.page.size"
                @pagination="getList"
             />
          </el-col>
@@ -330,8 +330,17 @@
 </template>
 
 <script setup name="User">
-import { getToken } from "@/utils/auth";
-import { changeUserStatus, listUser, resetUserPwd, delUser, getUser, updateUser, addUser, deptTreeSelect } from "@/api/system/user";
+import {getToken} from "@/utils/auth";
+import {
+  addUser,
+  changeUserStatus,
+  delUser,
+  deptTreeSelect,
+  getUser,
+  listUser,
+  resetUserPwd,
+  updateUser
+} from "@/api/system/user";
 
 const router = useRouter();
 const { proxy } = getCurrentInstance();
@@ -381,10 +390,15 @@ const columns = ref([
 const data = reactive({
   form: {},
   queryParams: {
-    pageNum: 1,
-    pageSize: 10,
-    userName: undefined,
-    phonenumber: undefined,
+    page : {
+      current: 1,
+      size: 10,
+      orderList: [
+        {column: 'createTime', asc: true}
+      ]
+    },
+    username: undefined,
+    phone: undefined,
     status: undefined,
     deptId: undefined
   },
@@ -419,7 +433,7 @@ function getList() {
   loading.value = true;
   listUser(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
     loading.value = false;
-    userList.value = res.rows;
+    userList.value = res.data.records;
     total.value = res.total;
   });
 };
@@ -430,7 +444,7 @@ function handleNodeClick(data) {
 };
 /** 搜索按钮操作 */
 function handleQuery() {
-  queryParams.value.pageNum = 1;
+  queryParams.value.page.current = 1;
   getList();
 };
 /** 重置按钮操作 */

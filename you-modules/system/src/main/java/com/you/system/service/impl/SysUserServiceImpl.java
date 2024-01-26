@@ -7,7 +7,9 @@ import com.you.system.mapper.SysUserMapper;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
 import com.you.system.qo.AuthUserQo;
+import com.you.system.qo.UserQo;
 import com.you.system.service.SysUserService;
+import com.you.system.vo.SysUserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +40,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public IPage<SysUser> ruleUnallocatedListPage(AuthUserQo qo) {
         return userMapper.ruleUnallocatedListPage(qo.getPage(), qo);
+    }
+
+    @Override
+    public IPage<SysUserVo> listPage(UserQo qo) {
+        return userMapper.listPage(qo.getPage(), qo);
     }
 }

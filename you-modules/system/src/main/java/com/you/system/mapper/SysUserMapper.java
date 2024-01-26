@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.you.system.model.SysUser;
 import com.you.system.qo.AuthUserQo;
+import com.you.system.qo.UserQo;
+import com.you.system.vo.SysUserVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +27,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     IPage<SysUser> ruleAllocatedListPage(@Param("page") Page<SysUser> page, @Param("qo") AuthUserQo qo);
 
     IPage<SysUser> ruleUnallocatedListPage(@Param("page") Page<SysUser> page, @Param("qo") AuthUserQo qo);
+
+    IPage<SysUserVo> listPage(@Param("page") Page<SysUserVo> page, @Param("qo") UserQo qo);
 }

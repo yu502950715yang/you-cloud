@@ -10,11 +10,13 @@ import com.you.system.mapper.SysDeptMapper;
 import com.you.system.model.SysDept;
 import com.you.system.qo.DeptQo;
 import com.you.system.service.SysDeptService;
+import com.you.system.vo.ElTree;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
     @Override
     public List<SysDept> list(DeptQo deptQo) {
-        return deptMapper.selectList(deptQo);
+        return deptMapper.selectForList(deptQo);
     }
 
     @Override
@@ -98,6 +100,29 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
             return true;
         }
         return deptMapper.deleteByDeptId(deptId) > 0;
+    }
+
+    @Override
+    public List<ElTree> selectDeptList() {
+        LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysDept::getDelFlag, DelFlagEnum.NORMAL.getCode());
+        List<SysDept> sysDeptList = deptMapper.selectList(queryWrapper);
+        return createElTree(sysDeptList, 0L);
+    }
+
+    private List<ElTree> createElTree(List<SysDept> list, long parentId) {
+        List<ElTree> returnList = new ArrayList<>();
+        list.forEach(sysDept -> {
+            if (parentId == sysDept.getParentId()) {
+                ElTree elTree = new ElTree();
+                elTree.setId(String.valueOf(sysDept.getDeptId()));
+                elTree.setParentId(String.valueOf(sysDept.getParentId()));
+                elTree.setLabel(sysDept.getDeptName());
+                elTree.setChildren(createElTree(list, sysDept.getDeptId()));
+                returnList.add(elTree);
+            }
+        });
+        return returnList;
     }
 
     /**
