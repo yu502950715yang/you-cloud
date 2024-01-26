@@ -53,8 +53,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (qo.getDeptId() != null) {
             List<SysDept> children = deptService.getAllChildByDeptId(qo.getDeptId());
             String childrenIds = children.stream()
-                    .map(SysDept::getDeptId)
-                    .map(String::valueOf)
+                    .map(d -> String.valueOf(d.getDeptId()))
                     .collect(Collectors.joining(","));
             if (!children.isEmpty()) {
                 qo.setDeptIdsStr(childrenIds + "," + qo.getDeptId());
