@@ -434,7 +434,7 @@ function getList() {
   listUser(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
     loading.value = false;
     userList.value = res.data.records;
-    total.value = res.total;
+    total.value = res.data.total;
   });
 };
 /** 节点单击事件 */
