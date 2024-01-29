@@ -18,7 +18,7 @@
         </where>
     </select>
 
-    <select id="selectList" resultType="com.you.system.domain.model.SysPost">
+    <select id="selectForList" resultType="com.you.system.domain.model.SysPost">
         SELECT post_id ,post_code ,post_name, post_sort, status, create_by, create_time, remark
         FROM sys_post
         <where>

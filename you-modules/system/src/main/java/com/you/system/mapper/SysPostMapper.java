@@ -15,5 +15,5 @@ public interface SysPostMapper extends BaseMapper<SysPost> {
 
     IPage<SysPost> listPage(@Param("page") Page<SysPost> page, @Param("postQo") PostQo postQo);
 
-    List<SysPost> selectList(@Param("postQo") PostQo postQo);
+    List<SysPost> selectForList(@Param("postQo") PostQo postQo);
 }

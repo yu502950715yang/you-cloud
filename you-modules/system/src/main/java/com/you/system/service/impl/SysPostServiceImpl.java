@@ -25,7 +25,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
     @Override
     public List<SysPost> selectList(PostQo qo) {
-        return sysPostMapper.selectList(qo);
+        return sysPostMapper.selectForList(qo);
     }
 
     @Override
