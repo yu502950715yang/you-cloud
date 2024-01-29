@@ -8,7 +8,7 @@
       <div class="avatar-container">
         <el-dropdown @command="handleCommand" class="right-menu-item hover-effect" trigger="click">
           <div class="avatar-wrapper">
-            <div class="text-bottom">欢迎，{{ userStore.name }}</div>
+            <div class="text-bottom">{{ userStore.name }}</div>
             <el-icon><caret-bottom /></el-icon>
           </div>
           <template #dropdown>
