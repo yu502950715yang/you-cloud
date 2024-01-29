@@ -3,6 +3,7 @@ package com.you.system.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.you.common.core.enums.StatusEnum;
 import com.you.system.domain.model.SysPost;
 import com.you.system.domain.qo.PostQo;
 import com.you.system.mapper.SysPostMapper;
@@ -46,5 +47,12 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             queryWrapper.ne(SysPost::getPostId, post.getPostId());
         }
         return sysPostMapper.selectCount(queryWrapper) == 0;
+    }
+
+    @Override
+    public List<SysPost> getAllPost() {
+        LambdaQueryWrapper<SysPost> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysPost::getStatus, StatusEnum.OK.getCode());
+        return sysPostMapper.selectList(queryWrapper);
     }
 }

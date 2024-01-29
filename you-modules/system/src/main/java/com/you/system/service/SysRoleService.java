@@ -82,4 +82,11 @@ public interface SysRoleService extends IService<SysRole> {
      * @return 是否成功
      */
     boolean removeByIds(List<Long> roleIds);
+
+    /**
+     * 获取所有未删除状态为正常的角色(排除超级管理员)
+     *
+     * @return 角色list
+     */
+    List<SysRole> getAllRole();
 }

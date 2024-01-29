@@ -2,93 +2,101 @@ import request from '@/utils/request'
 
 // 查询角色列表
 export function listRole(data) {
-  return request({
-    url: '/system/role/list',
-      method: 'post',
-      data: data
-  })
+    return request({
+        url: '/system/role/list',
+        method: 'post',
+        data: data
+    })
 }
 
 // 查询角色详细
 export function getRole(roleId) {
-  return request({
-    url: '/system/role/' + roleId,
-    method: 'get'
-  })
+    return request({
+        url: '/system/role/' + roleId,
+        method: 'get'
+    })
 }
 
 // 新增角色
 export function addRole(data) {
-  return request({
-    url: '/system/role/save',
-    method: 'post',
-    data: data
-  })
+    return request({
+        url: '/system/role/save',
+        method: 'post',
+        data: data
+    })
 }
 
 // 修改角色
 export function updateRole(data) {
-  return request({
-    url: '/system/role/edit',
-    method: 'post',
-    data: data
-  })
+    return request({
+        url: '/system/role/edit',
+        method: 'post',
+        data: data
+    })
 }
 
 // 角色状态修改
 export function changeRoleStatus(roleId, status) {
-  const data = {
-    roleId,
-    status
-  }
-  return request({
-    url: '/system/role/changeStatus',
-    method: 'post',
-    data: data
-  })
+    const data = {
+        roleId,
+        status
+    }
+    return request({
+        url: '/system/role/changeStatus',
+        method: 'post',
+        data: data
+    })
 }
 
 // 删除角色
 export function delRole(data) {
-  return request({
-    url: '/system/role/remove',
-    method: 'post',
-    data: data
-  })
+    return request({
+        url: '/system/role/remove',
+        method: 'post',
+        data: data
+    })
 }
 
 // 查询角色已授权用户列表
 export function allocatedUserList(query) {
-  return request({
-    url: '/system/role/authUser/allocatedList',
-    method: 'post',
-    data: query
-  })
+    return request({
+        url: '/system/role/authUser/allocatedList',
+        method: 'post',
+        data: query
+    })
 }
 
 // 查询角色未授权用户列表
 export function unallocatedUserList(query) {
-  return request({
-    url: '/system/role/authUser/unallocatedList',
-      method: 'post',
-      data: query
-  })
+    return request({
+        url: '/system/role/authUser/unallocatedList',
+        method: 'post',
+        data: query
+    })
 }
 
 // 取消用户授权角色
 export function authUserCancel(data) {
-  return request({
-    url: '/system/role/authUser/cancel',
-      method: 'post',
-    data: data
-  })
+    return request({
+        url: '/system/role/authUser/cancel',
+        method: 'post',
+        data: data
+    })
 }
 
 // 授权用户选择
 export function authUserSelectAll(data) {
-  return request({
-      url: '/system/role/authUser/select',
-      method: 'post',
-      data: data
-  })
+    return request({
+        url: '/system/role/authUser/select',
+        method: 'post',
+        data: data
+    })
+}
+
+// 获取所有角色
+export function getAllRole() {
+    return request({
+        url: '/system/role/getAll',
+        method: 'get'
+    })
 }

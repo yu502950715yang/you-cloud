@@ -110,4 +110,8 @@ public class SysPostController {
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
+    @GetMapping("/getAll")
+    public R<List<SysPost>> getAll() {
+        return R.ok(sysPostService.getAllPost());
+    }
 }

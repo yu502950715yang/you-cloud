@@ -129,4 +129,9 @@ public class SysRoleController {
         }
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
+
+    @GetMapping("/getAll")
+    public R<List<SysRole>> getAll() {
+        return R.ok(roleService.getAllRole());
+    }
 }

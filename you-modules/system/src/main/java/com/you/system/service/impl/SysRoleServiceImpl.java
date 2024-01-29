@@ -1,9 +1,12 @@
 package com.you.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.common.core.constant.UserConstants;
+import com.you.common.core.enums.DelFlagEnum;
+import com.you.common.core.enums.StatusEnum;
 import com.you.common.core.exception.CommonException;
 import com.you.system.domain.bo.SysRoleBo;
 import com.you.system.domain.qo.RoleQo;
@@ -130,5 +133,14 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             throw new CommonException("角色删除失败");
         }
         return true;
+    }
+
+    @Override
+    public List<SysRole> getAllRole() {
+        LambdaQueryWrapper<SysRole> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysRole::getDelFlag, DelFlagEnum.NORMAL.getCode())
+                .eq(SysRole::getStatus, StatusEnum.OK.getCode())
+                .ne(SysRole::getRoleId, UserConstants.ADMIN_ID);
+        return roleMapper.selectList(queryWrapper);
     }
 }

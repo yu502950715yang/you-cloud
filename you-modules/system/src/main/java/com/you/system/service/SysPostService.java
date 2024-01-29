@@ -27,6 +27,7 @@ public interface SysPostService extends IService<SysPost> {
 
     /**
      * 校验岗位名称是否唯一
+     *
      * @param post 岗位数据
      * @return 结果
      */
@@ -34,8 +35,16 @@ public interface SysPostService extends IService<SysPost> {
 
     /**
      * 校验岗位code是否唯一
+     *
      * @param post 岗位数据
      * @return 结果
      */
     boolean checkPostCodeUnique(SysPost post);
+
+    /**
+     * 获取所有状态为正常的岗位
+     *
+     * @return 岗位list
+     */
+    List<SysPost> getAllPost();
 }
