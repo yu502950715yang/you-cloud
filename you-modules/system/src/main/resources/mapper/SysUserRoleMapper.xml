@@ -29,4 +29,11 @@
             ( #{userId}, #{roleId} )
         </foreach>
     </insert>
+
+    <insert id="insertUserRoles">
+        INSERT INTO sys_user_role (user_id, role_id) VALUES
+        <foreach collection="roleIds" item="roleId" separator=",">
+            ( #{userId}, #{roleId} )
+        </foreach>
+    </insert>
 </mapper>

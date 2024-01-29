@@ -41,4 +41,13 @@ public interface SysUserRoleMapper {
      * @return 保存条数
      */
     int insertUserRole(@Param("roleId") Long roleId, @Param("userIds") List<Long> userIds);
+
+    /**
+     * 保存用户角色对应关系
+     *
+     * @param userId  用户id
+     * @param roleIds 角色id list
+     * @return 保存条数
+     */
+    int insertUserRoles(@Param("userId") Long userId, @Param("roleIds") List<Long> roleIds);
 }

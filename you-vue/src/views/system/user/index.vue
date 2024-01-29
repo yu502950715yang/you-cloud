@@ -196,8 +196,8 @@
       <el-form :model="form" :rules="rules" ref="userRef" label-width="80px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="用户昵称" prop="nickName">
-              <el-input v-model="form.nickName" placeholder="请输入用户昵称" maxlength="30"/>
+            <el-form-item label="用户昵称" prop="nickname">
+              <el-input v-model="form.nickname" placeholder="请输入用户昵称" maxlength="30"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -215,8 +215,8 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="手机号码" prop="phonenumber">
-              <el-input v-model="form.phonenumber" placeholder="请输入手机号码" maxlength="11"/>
+            <el-form-item label="手机号码" prop="phone">
+              <el-input v-model="form.phone" placeholder="请输入手机号码" maxlength="11"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -227,8 +227,8 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="用户名称" prop="userName">
-              <el-input v-model="form.userName" placeholder="请输入用户名称" maxlength="30"/>
+            <el-form-item v-if="form.userId == undefined" label="用户名称" prop="username">
+              <el-input v-model="form.username" placeholder="请输入用户名称" maxlength="30"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -425,13 +425,13 @@ const data = reactive({
     deptId: undefined
   },
   rules: {
-    userName: [{required: true, message: "用户名称不能为空", trigger: "blur"}, {
+    username: [{required: true, message: "用户名称不能为空", trigger: "blur"}, {
       min: 2,
       max: 20,
       message: "用户名称长度必须介于 2 和 20 之间",
       trigger: "blur"
     }],
-    nickName: [{required: true, message: "用户昵称不能为空", trigger: "blur"}],
+    nickname: [{required: true, message: "用户昵称不能为空", trigger: "blur"}],
     password: [{required: true, message: "用户密码不能为空", trigger: "blur"}, {
       min: 5,
       max: 20,
@@ -439,7 +439,7 @@ const data = reactive({
       trigger: "blur"
     }],
     email: [{type: "email", message: "请输入正确的邮箱地址", trigger: ["blur", "change"]}],
-    phonenumber: [{pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的手机号码", trigger: "blur"}]
+    phone: [{pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的手机号码", trigger: "blur"}]
   }
 });
 
@@ -601,10 +601,10 @@ function reset() {
   form.value = {
     userId: undefined,
     deptId: undefined,
-    userName: undefined,
-    nickName: undefined,
+    username: undefined,
+    nickname: undefined,
     password: undefined,
-    phonenumber: undefined,
+    phone: undefined,
     email: undefined,
     sex: undefined,
     status: "0",

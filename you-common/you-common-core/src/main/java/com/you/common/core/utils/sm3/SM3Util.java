@@ -248,14 +248,23 @@ public class SM3Util {
         return tmp;
     }
 
-    public static void main(String[] args) {
+    /**
+     * 加密字符串
+     */
+    public static String encrypt(String str) {
         byte[] md = new byte[32];
-        byte[] msg1 = "admin".getBytes();
-        System.out.println(Util.byteToHex(msg1));
+        byte[] msg = str.getBytes();
         SM3Digest sm3 = new SM3Digest();
-        sm3.update(msg1, 0, msg1.length);
+        sm3.update(msg, 0, msg.length);
         sm3.doFinal(md, 0);
-        String s = new String(Hex.encode(md));
-        System.out.println(s.toUpperCase());
+        return new String(Hex.encode(md));
+    }
+
+
+
+    public static void main(String[] args) {
+        String str = "admin";
+        String encryptStr = encrypt(str);
+        System.out.println(encryptStr);
     }
 }

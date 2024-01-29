@@ -29,4 +29,13 @@ public interface SysUserRoleService {
      * @return 是否成功
      */
     boolean saveUserRole(Long roleId, List<Long> userIds);
+
+    /**
+     * 保存用户角色对应关系
+     *
+     * @param userId  用户id
+     * @param roleIds 角色list
+     * @return 是否成功
+     */
+    boolean saveUserRoles(Long userId, List<Long> roleIds);
 }

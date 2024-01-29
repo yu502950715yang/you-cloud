@@ -3,7 +3,10 @@ package com.you.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.you.auth.utils.LoginUtils;
+import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
+import com.you.system.domain.bo.SysUserBo;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
 import com.you.system.model.LoginUser;
@@ -11,6 +14,8 @@ import com.you.system.model.SysUser;
 import com.you.system.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 /**
  * 用户controller
@@ -43,5 +48,15 @@ public class SysUserController {
     @PostMapping("/list")
     public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {
        return R.ok(sysUserService.listPage(qo));
+    }
+
+    @SaCheckPermission("system:user:add")
+    @PostMapping
+    public R<Void> addUser(@RequestBody SysUserBo user) {
+        // 检查用户名是否唯一
+        sysUserService.checkUsernameUnique(user.getUserId(), user.getUsername());
+        user.setCreateBy(LoginUtils.getLoginUserName());
+        user.setCreateTime(LocalDateTime.now());
+        return sysUserService.save(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 }

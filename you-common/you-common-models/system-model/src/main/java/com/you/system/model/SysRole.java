@@ -24,8 +24,7 @@ import java.time.LocalDateTime;
 @TableName("sys_role")
 public class SysRole {
 
-    @NotNull(message = "角色id不能为空", groups = ValidationGroups.Other.class)
-    @NotNull(message = "角色id不能为空", groups = ValidationGroups.Update.class)
+    @NotNull(message = "角色id不能为空", groups = {ValidationGroups.Other.class, ValidationGroups.Update.class})
     @TableId(value = "role_id", type = IdType.AUTO)
     private Long roleId;
 

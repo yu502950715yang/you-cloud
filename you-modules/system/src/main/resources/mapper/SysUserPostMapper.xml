@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.you.system.mapper.SysUserPostMapper">
+
+    <insert id="insertUserPosts">
+        INSERT INTO sys_user_post (user_id, post_id) VALUES
+        <foreach collection="postIds" item="postId" separator=",">
+            ( #{userId}, #{postId} )
+        </foreach>
+    </insert>
+</mapper>

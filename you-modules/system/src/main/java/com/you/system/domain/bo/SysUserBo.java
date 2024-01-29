@@ -1,0 +1,27 @@
+package com.you.system.domain.bo;
+
+import com.you.system.model.SysUser;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class SysUserBo extends SysUser {
+
+    /**
+     * 部门id
+     */
+    private Long detpId;
+
+    /**
+     * 岗位id list
+     */
+    private List<Long> postIds;
+
+    /**
+     * 角色id list
+     */
+    private List<Long> roleIds;
+}
