@@ -8,6 +8,7 @@ import cn.dev33.satoken.same.SaSameUtil;
 import cn.dev33.satoken.stp.StpLogic;
 import com.alibaba.fastjson2.JSON;
 import com.you.common.core.model.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Create with Intellij IDEA on 2023-04-24 13:20
  */
 @Configuration
+@Slf4j
 public class SaTokenConfigure implements WebMvcConfigurer {
 
     // Sa-Token 整合 jwt (Simple 简单模式)
@@ -40,6 +42,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                     SaSameUtil.checkCurrentRequestToken();
                 })
                 .setError(e -> {
+                    log.error("sa-token权限异常: " + e.getMessage());
                     SaHolder.getResponse().setHeader("Content-Type", "application/json;charset=UTF-8");
                     return JSON.toJSONString(R.fail(e.getMessage()));
                 });

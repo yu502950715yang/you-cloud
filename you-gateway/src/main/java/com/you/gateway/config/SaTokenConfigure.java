@@ -1,12 +1,15 @@
 package com.you.gateway.config;
 
 import cn.dev33.satoken.context.SaHolder;
+import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson2.JSON;
+import com.you.common.core.constant.HttpStatus;
 import com.you.common.core.model.R;
 import com.you.gateway.config.properties.IgnoreWhiteProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,6 +23,7 @@ import java.util.List;
  * Create with Intellij IDEA on 2023-04-18 14:43
  */
 @Configuration
+@Slf4j
 public class SaTokenConfigure {
 
     private final IgnoreWhiteProperties ignoreWhite;
@@ -46,7 +50,11 @@ public class SaTokenConfigure {
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数
                 .setError(e -> {
+                    log.error("sa-token认证异常：{}", e.getMessage());
                     SaHolder.getResponse().setHeader("Content-Type", "application/json;charset=UTF-8");
+                    if (e.getClass().equals(NotLoginException.class)) {
+                        return JSON.toJSONString(R.fail(HttpStatus.UNAUTHORIZED, e.getMessage()));
+                    }
                     return JSON.toJSONString(R.fail(e.getMessage()));
                 });
     }

@@ -1,6 +1,6 @@
 package com.you.common.core.model;
 
-import com.you.common.core.constant.Constants;
+import com.you.common.core.constant.HttpStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,12 +17,12 @@ public class R<T> implements Serializable {
     /**
      * 成功
      */
-    public static final int SUCCESS = Constants.SUCCESS;
+    public static final int SUCCESS = HttpStatus.SUCCESS;
 
     /**
      * 失败
      */
-    public static final int FAIL = Constants.FAIL;
+    public static final int FAIL = HttpStatus.ERROR;
 
     private int code;
 

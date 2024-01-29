@@ -9,9 +9,9 @@ import com.you.common.core.constant.LoginConstants;
 import com.you.common.core.enums.StatusEnum;
 import com.you.common.core.exception.CommonException;
 import com.you.common.core.model.R;
-import com.you.common.core.utils.StrUtils;
 import com.you.system.api.feign.RemoteUserService;
 import com.you.system.model.SysUser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,7 +32,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public User login(String username, String password) {
-        if (StrUtils.isAnyBlank(username, password)) {
+        if (StringUtils.isAnyBlank(username, password)) {
             throw new CommonException("用户名/密码必须填写");
         }
         //查询用户
