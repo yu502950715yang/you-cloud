@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      if (useUserStore().permissions.length === 0) {
+      if (!useUserStore().isGetPermission) {
         isRelogin.show = true
         // 判断当前用户是否已拉取完user_info信息
         useUserStore().getInfo().then(() => {

@@ -9,7 +9,9 @@ const useUserStore = defineStore(
       token: getToken(),
       name: '',
       avatar: '',
-      permissions: []
+      permissions: [],
+      // 是否获取过权限
+      isGetPermission: false
     }),
     actions: {
       // 登录
@@ -29,9 +31,10 @@ const useUserStore = defineStore(
       getInfo() {
         return new Promise((resolve, reject) => {
           getInfo().then(res => {
-              const user = res.data
-              this.permissions = user.permissions
+            const user = res.data
+            this.permissions = user.permissions
             this.name = user.nickname
+            this.isGetPermission = true
             resolve(res)
           }).catch(error => {
             reject(error)
@@ -44,6 +47,7 @@ const useUserStore = defineStore(
           logout(this.token).then(() => {
             this.token = ''
             this.permissions = []
+            this.isGetPermission = false
             removeToken()
             resolve()
           }).catch(error => {
