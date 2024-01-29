@@ -439,6 +439,7 @@ const data = reactive({
       trigger: "blur"
     }],
     email: [{type: "email", message: "请输入正确的邮箱地址", trigger: ["blur", "change"]}],
+    deptId: [{required: true, message: "请选择部门", trigger: ["blur", "change"]}],
     phone: [{pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的手机号码", trigger: "blur"}]
   }
 });

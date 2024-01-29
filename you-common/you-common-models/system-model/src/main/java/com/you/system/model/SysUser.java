@@ -19,6 +19,7 @@ public class SysUser {
     @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
 
+    @NotNull(message = "部门id不能为空", groups = ValidationGroups.Common.class)
     @TableField("dept_id")
     private Long deptId;
 

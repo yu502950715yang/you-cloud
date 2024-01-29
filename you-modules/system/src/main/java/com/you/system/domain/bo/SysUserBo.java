@@ -11,11 +11,6 @@ import java.util.List;
 public class SysUserBo extends SysUser {
 
     /**
-     * 部门id
-     */
-    private Long detpId;
-
-    /**
      * 岗位id list
      */
     private List<Long> postIds;
