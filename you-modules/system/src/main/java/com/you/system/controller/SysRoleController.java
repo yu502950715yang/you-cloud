@@ -40,7 +40,6 @@ public class SysRoleController {
     @PostMapping("/changeStatus")
     @SaCheckPermission("system:role:edit")
     public R<Void> changeStatus(@Validated(ValidationGroups.Other.class) @RequestBody SysRole role) {
-        roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
         if (roleService.updateRoleStatus(role.getRoleId(), role.getStatus())) {
             return R.ok();
         }
@@ -50,7 +49,6 @@ public class SysRoleController {
     @PostMapping("/save")
     @SaCheckPermission("system:role:add")
     public R<Void> save(@Validated(ValidationGroups.Add.class) @RequestBody SysRoleBo role) {
-        roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
         // 校验角色名称唯一
         roleService.checkRoleNameUnique(role.getRoleId(), role.getRoleName());
         // 校验权限字符串唯一
@@ -73,7 +71,6 @@ public class SysRoleController {
     @PostMapping("/edit")
     @SaCheckPermission("system:role:edit")
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysRoleBo role) {
-        roleService.checkRoleAllowed(role.getRoleId(), role.getRoleKey());
         // 校验角色名称唯一
         roleService.checkRoleNameUnique(role.getRoleId(), role.getRoleName());
         // 校验权限字符串唯一
@@ -111,8 +108,6 @@ public class SysRoleController {
     @PostMapping("/authUser/cancel")
     @SaCheckPermission("system:role:edit")
     public R<Void> authUserCancel(@RequestBody AuthUserBo bo) {
-        // 检查是否为管理员角色
-        roleService.checkRoleAllowed(bo.getRoleId(), null);
         if (userRoleService.removeRoleByUserIds(bo.getRoleId(), bo.getUserIds())) {
             return R.ok();
         }
@@ -122,8 +117,6 @@ public class SysRoleController {
     @PostMapping("/authUser/select")
     @SaCheckPermission("system:role:edit")
     public R<Void> authUserSelect(@RequestBody AuthUserBo bo) {
-        // 检查是否为管理员角色
-        roleService.checkRoleAllowed(bo.getRoleId(), null);
         if (userRoleService.saveUserRole(bo.getRoleId(), bo.getUserIds())) {
             return R.ok();
         }

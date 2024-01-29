@@ -34,25 +34,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
     @Override
-    public void checkRoleAllowed(Long roleId, String roleKey) {
-        if (UserConstants.ADMIN_ID.equals(roleId)) {
-            throw new CommonException("不允许操作超级管理员角色");
-        }
-        // 新增不允许使用 管理员标识符
-        if (roleId == null && UserConstants.ADMIN_ROLE_KEY.equals(roleKey)) {
-            throw new CommonException("不允许使用系统内置管理员角色标识符");
-        }
-        // 修改不允许修改 管理员标识符
-        if (roleId != null) {
-            SysRole role = roleMapper.selectById(roleId);
-            // 如果标识符不相等 判断为修改了管理员标识符
-            if (!role.getRoleKey().equals(roleKey) && UserConstants.ADMIN_ROLE_KEY.equals(role.getRoleKey())) {
-                throw new CommonException("不允许修改系统内置管理员角色标识符!");
-            }
-        }
-    }
-
-    @Override
     public boolean updateRoleStatus(Long roleId, String status) {
         return roleMapper.updateState(roleId, status) > 0;
     }
@@ -119,8 +100,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         }
         List<SysRoleBo> roleList = roleMapper.selectByRoleIds(roleIds);
         roleList.forEach(roleBo -> {
-            // 检查所选角色能否删除
-            checkRoleAllowed(roleBo.getRoleId(), null);
             // 检查角色是否关联用户
             if (roleBo.getUserCount() > 0) {
                 throw new CommonException(String.format("%1$s已分配用户,不能删除", roleBo.getRoleName()));

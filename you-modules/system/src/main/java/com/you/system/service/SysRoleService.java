@@ -19,14 +19,6 @@ public interface SysRoleService extends IService<SysRole> {
     IPage<SysRole> listPage(RoleQo roleQo);
 
     /**
-     * 检查是否可以修改角色
-     *
-     * @param roleId  角色id
-     * @param roleKey 权限key
-     */
-    void checkRoleAllowed(Long roleId, String roleKey);
-
-    /**
      * 修改角色状态
      *
      * @param roleId 角色id

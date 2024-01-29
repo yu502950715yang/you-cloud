@@ -106,13 +106,13 @@
          </el-table-column>
          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template #default="scope">
-              <el-tooltip content="修改" placement="top" v-if="scope.row.roleId !== 1">
+              <el-tooltip content="修改" placement="top">
                 <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
               </el-tooltip>
-              <el-tooltip content="删除" placement="top" v-if="scope.row.roleId !== 1">
+              <el-tooltip content="删除" placement="top">
                 <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:role:remove']"></el-button>
               </el-tooltip>
-              <el-tooltip content="分配用户" placement="top" v-if="scope.row.roleId !== 1">
+              <el-tooltip content="分配用户" placement="top">
                 <el-button link type="primary" icon="User" @click="handleAuthUser(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
               </el-tooltip>
             </template>
@@ -187,14 +187,7 @@
 </template>
 
 <script setup>
-import {
-  addRole,
-  changeRoleStatus,
-  delRole,
-  getRole,
-  listRole,
-  updateRole
-} from "@/api/system/role";
+import {addRole, changeRoleStatus, delRole, getRole, listRole, updateRole} from "@/api/system/role";
 import {treeSelect as menuTreeSelect} from "@/api/system/menu";
 import {useRouter} from "vue-router";
 import {parseTime} from "@/utils/ruoyi";
