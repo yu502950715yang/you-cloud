@@ -8,7 +8,7 @@
       <div class="avatar-container">
         <el-dropdown @command="handleCommand" class="right-menu-item hover-effect" trigger="click">
           <div class="avatar-wrapper">
-            <img :src="userStore.avatar" class="user-avatar" />
+            <div class="text-bottom">欢迎，{{ userStore.name }}</div>
             <el-icon><caret-bottom /></el-icon>
           </div>
           <template #dropdown>
@@ -148,6 +148,12 @@ function setLayout() {
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
+
+        .text-bottom {
+          display: table-cell;
+          vertical-align: bottom;
+          height: 40px;
+        }
 
         .user-avatar {
           cursor: pointer;

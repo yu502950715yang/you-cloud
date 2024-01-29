@@ -31,7 +31,7 @@ const useUserStore = defineStore(
           getInfo().then(res => {
               const user = res.data
               this.permissions = user.permissions
-            this.name = user.nickName
+            this.name = user.nickname
             resolve(res)
           }).catch(error => {
             reject(error)
