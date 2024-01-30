@@ -3,21 +3,20 @@
     <template v-for="(item, index) in options">
       <template v-if="values.includes(item.value)">
         <span
-            v-if="item.elTagType == 'default' || item.elTagType == ''"
-            :key="item.value"
-            :index="index"
-            :class="item.elTagClass"
-        >{{ item.label + " " }}</span
+          v-if="item.elTagType == 'default' || item.elTagType == ''"
+          :key="item.value"
+          :index="index"
+          :class="item.elTagClass"
+          >{{ item.label + " " }}</span
         >
         <el-tag
-            v-else
-            :disable-transitions="true"
-            :key="item.value + ''"
-            :index="index"
-            :type="item.elTagType === 'primary' ? '' : item.elTagType"
-            :class="item.elTagClass"
-        >{{ item.label + " " }}
-        </el-tag
+          v-else
+          :disable-transitions="true"
+          :key="item.value + ''"
+          :index="index"
+          :type="item.elTagType === 'primary' ? '' : item.elTagType"
+          :class="item.elTagClass"
+          >{{ item.label + " " }}</el-tag
         >
       </template>
     </template>
