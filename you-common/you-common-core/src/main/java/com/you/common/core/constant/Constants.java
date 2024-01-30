@@ -1,8 +1,12 @@
 package com.you.common.core.constant;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
 /**
  * 通用常量信息
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Constants {
     /**
      * UTF-8 字符集
