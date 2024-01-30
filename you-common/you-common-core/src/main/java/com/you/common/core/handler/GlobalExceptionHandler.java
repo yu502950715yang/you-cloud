@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
      * 自定义异常
      */
     @ExceptionHandler(value = CommonException.class)
-    public R<?> handlerCommonException(CommonException e) {
+    public R<Void> handlerCommonException(CommonException e) {
         log.info(e.getMessage(), e);
         return R.fail(e.getMessage());
     }
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
      * 运行时异常
      */
     @ExceptionHandler(value = RuntimeException.class)
-    public R<?> handlerRuntimeException(Exception e, HttpServletRequest request) {
+    public R<Void> handlerRuntimeException(Exception e, HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         log.error("请求地址'{}'，发生未知异常", requestUri, e);
         return R.fail(e.getMessage());
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
      * 系统异常
      */
     @ExceptionHandler(value = Exception.class)
-    public R<?> handlerException(Exception e, HttpServletRequest request) {
+    public R<Void> handlerException(Exception e, HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         log.error("请求地址'{}'，发生系统异常", requestUri, e);
         return R.fail(e.getMessage());
@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
      * Validated验证异常捕获
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public R<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+    public R<Void> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         log.info("请求地址'{}'，发生参数异常", requestUri, e);
         return R.fail(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage());
@@ -67,7 +67,7 @@ public class GlobalExceptionHandler {
      * Validated验证异常捕获
      */
     @ExceptionHandler(BindException.class)
-    public R<?> handleBindException(BindException e, HttpServletRequest request) {
+    public R<Void> handleBindException(BindException e, HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         log.info("请求地址'{}'，发生参数异常", requestUri, e);
         return R.fail(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage());
