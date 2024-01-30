@@ -1,12 +1,15 @@
 package com.you.system.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.auth.service.AuthService;
+import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.enums.DelFlagEnum;
+import com.you.common.core.enums.StatusEnum;
 import com.you.common.core.exception.CommonException;
 import com.you.common.core.utils.sm3.SM3Util;
 import com.you.system.domain.bo.SysUserBo;
@@ -25,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -121,5 +125,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         updateWrapper.set(SysUser::getDelFlag, DelFlagEnum.DELETE.getCode())
                 .in(SysUser::getUserId, userIds);
         return userMapper.update(null, updateWrapper) > 0;
+    }
+
+    @Override
+    public boolean changeStatus(SysUser sysUser) {
+        if (sysUser.getUserId().equals(UserConstants.ADMIN_ID)) {
+            throw new CommonException("不允许修改超级管理员用户");
+        }
+        sysUser.setUpdateBy(LoginUtils.getLoginUserName());
+        sysUser.setUpdateTime(LocalDateTime.now());
+        boolean result = userMapper.updateById(sysUser) > 0;
+        if (result && sysUser.getStatus().equals(StatusEnum.DISABLE.getCode())) {
+            // 如果是禁用踢出指定用户
+            StpUtil.logout(sysUser.getUserId());
+        }
+        return result;
     }
 }

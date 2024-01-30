@@ -66,7 +66,7 @@ export function changeUserStatus(userId, status) {
   }
   return request({
     url: '/system/user/changeStatus',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }

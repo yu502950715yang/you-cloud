@@ -76,4 +76,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return 是否成功
      */
     boolean removeByIds(List<Long> userIds);
+
+    /**
+     * 修改用户状态
+     *
+     * @param sysUser 用户数据
+     * @return 是否成功
+     */
+    boolean changeStatus(SysUser sysUser);
 }

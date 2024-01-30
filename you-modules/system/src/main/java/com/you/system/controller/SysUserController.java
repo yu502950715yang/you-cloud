@@ -66,4 +66,10 @@ public class SysUserController {
     public R<Void> remove(@RequestBody List<Long> userIds) {
         return sysUserService.removeByIds(userIds) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
+
+    @SaCheckPermission("system:user:edit")
+    @PostMapping("/changeStatus")
+    public R<Void> changeStatus(@RequestBody SysUser sysUser) {
+        return sysUserService.changeStatus(sysUser) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+    }
 }
