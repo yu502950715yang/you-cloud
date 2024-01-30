@@ -1,14 +1,16 @@
 <template>
   <el-menu
-    :default-active="activeMenu"
-    mode="horizontal"
-    @select="handleSelect"
-    :ellipsis="false"
+      :default-active="activeMenu"
+      mode="horizontal"
+      @select="handleSelect"
+      :ellipsis="false"
   >
     <template v-for="(item, index) in topMenus">
       <el-menu-item :style="{'--theme': theme}" :index="item.path" :key="index" v-if="index < visibleNumber"
-        ><svg-icon :icon-class="item.meta.icon" />
-        {{ item.meta.title }}</el-menu-item
+      >
+        <svg-icon :icon-class="item.meta.icon"/>
+        {{ item.meta.title }}
+      </el-menu-item
       >
     </template>
 
@@ -17,11 +19,13 @@
       <template #title>更多菜单</template>
       <template v-for="(item, index) in topMenus">
         <el-menu-item
-          :index="item.path"
-          :key="index"
-          v-if="index >= visibleNumber"
-          ><svg-icon :icon-class="item.meta.icon" />
-          {{ item.meta.title }}</el-menu-item
+            :index="item.path"
+            :key="index"
+            v-if="index >= visibleNumber"
+        >
+          <svg-icon :icon-class="item.meta.icon"/>
+          {{ item.meta.title }}
+        </el-menu-item
         >
       </template>
     </el-sub-menu>
@@ -29,8 +33,8 @@
 </template>
 
 <script setup>
-import { constantRoutes } from "@/router"
-import { isHttp } from '@/utils/validate'
+import {constantRoutes} from "@/router"
+import {isHttp} from '@/utils/validate'
 import useAppStore from '@/store/modules/app'
 import useSettingsStore from '@/store/modules/settings'
 import usePermissionStore from '@/store/modules/permission'
@@ -60,9 +64,9 @@ const topMenus = computed(() => {
     if (menu.hidden !== true) {
       // 兼容顶部栏一级菜单内部跳转
       if (menu.path === "/") {
-          topMenus.push(menu.children[0]);
+        topMenus.push(menu.children[0]);
       } else {
-          topMenus.push(menu);
+        topMenus.push(menu);
       }
     }
   })
@@ -75,10 +79,10 @@ const childrenMenus = computed(() => {
   routers.value.map((router) => {
     for (let item in router.children) {
       if (router.children[item].parentPath === undefined) {
-        if(router.path === "/") {
+        if (router.path === "/") {
           router.children[item].path = "/" + router.children[item].path;
         } else {
-          if(!isHttp(router.children[item].path)) {
+          if (!isHttp(router.children[item].path)) {
             router.children[item].path = router.path + "/" + router.children[item].path;
           }
         }
@@ -98,9 +102,9 @@ const activeMenu = computed(() => {
     const tmpPath = path.substring(1, path.length);
     activePath = "/" + tmpPath.substring(0, tmpPath.indexOf("/"));
     if (!route.meta.link) {
-        appStore.toggleSideBarHide(false);
+      appStore.toggleSideBarHide(false);
     }
-  } else if(!route.children) {
+  } else if (!route.children) {
     activePath = path;
     appStore.toggleSideBarHide(true);
   }
@@ -124,9 +128,9 @@ function handleSelect(key, keyPath) {
     const routeMenu = childrenMenus.value.find(item => item.path === key);
     if (routeMenu && routeMenu.query) {
       let query = JSON.parse(routeMenu.query);
-      router.push({ path: key, query: query });
+      router.push({path: key, query: query});
     } else {
-      router.push({ path: key });
+      router.push({path: key});
     }
     appStore.toggleSideBarHide(true);
   } else {
@@ -145,7 +149,7 @@ function activeRoutes(key) {
       }
     });
   }
-  if(routes.length > 0) {
+  if (routes.length > 0) {
     permissionStore.setSidebarRouters(routes);
   } else {
     appStore.toggleSideBarHide(true);
