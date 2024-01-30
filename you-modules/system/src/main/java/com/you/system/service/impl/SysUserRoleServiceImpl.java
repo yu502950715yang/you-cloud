@@ -45,4 +45,11 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
         }
         return sysUserRoleMapper.insertUserRoles(userId, roleIds) == roleIds.size();
     }
+
+    @Override
+    public void removeByUserIds(List<Long> userIds) {
+        if (userIds != null && !userIds.isEmpty()) {
+            sysUserRoleMapper.deleteByUserIds(userIds);
+        }
+    }
 }

@@ -20,4 +20,11 @@ public class SysUserPostServiceImpl implements SysUserPostService {
         }
         return userPostMapper.insertUserPosts(userId, postIds) == postIds.size();
     }
+
+    @Override
+    public void removeByUserIds(List<Long> userIds) {
+        if (userIds != null && !userIds.isEmpty()) {
+            userPostMapper.deleteByUserIds(userIds);
+        }
+    }
 }

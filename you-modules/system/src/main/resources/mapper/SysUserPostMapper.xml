@@ -8,4 +8,11 @@
             ( #{userId}, #{postId} )
         </foreach>
     </insert>
+
+    <delete id="deleteByUserIds">
+        DELETE FROM sys_user_post WHERE user_id IN
+        <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
 </mapper>

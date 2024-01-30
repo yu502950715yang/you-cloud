@@ -1,9 +1,11 @@
 package com.you.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.auth.service.AuthService;
+import com.you.common.core.constant.UserConstants;
 import com.you.common.core.enums.DelFlagEnum;
 import com.you.common.core.exception.CommonException;
 import com.you.common.core.utils.sm3.SM3Util;
@@ -83,7 +85,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (user.getUserId() != null) {
             // 新增用户角色关联
             userRoleService.saveUserRoles(user.getUserId(), user.getRoleIds());
-            // 新增用户部门关联
+            // 新增用户岗位关联
             userPostService.saveUserPosts(user.getUserId(), user.getPostIds());
         }
         return user.getUserId() != null;
@@ -104,5 +106,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (user != null && !user.getUserId().equals(userId)) {
             throw new CommonException("用户名称已存在");
         }
+    }
+
+    @Override
+    public boolean removeByIds(List<Long> userIds) {
+        if (userIds == null || userIds.isEmpty()) {
+            return true;
+        }
+        if (userIds.contains(UserConstants.ADMIN_ID)) {
+            throw new CommonException("不允许删除超级管理员用户");
+        }
+        // 删除用户
+        LambdaUpdateWrapper<SysUser> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(SysUser::getDelFlag, DelFlagEnum.DELETE.getCode())
+                .in(SysUser::getUserId, userIds);
+        return userMapper.update(null, updateWrapper) > 0;
     }
 }

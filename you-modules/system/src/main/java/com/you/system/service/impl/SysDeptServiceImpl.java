@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -116,7 +117,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
     public List<SysDept> getAllChildByDeptId(Long deptId) {
         SysDept parentDept = deptMapper.selectById(deptId);
         if (parentDept == null) {
-            return null;
+            return Collections.emptyList();
         }
         LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.likeRight(SysDept::getAncestors, parentDept.getAncestors() + deptId + ",");

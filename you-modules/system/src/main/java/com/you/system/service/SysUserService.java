@@ -9,6 +9,8 @@ import com.you.system.domain.vo.SysUserVo;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
 
+import java.util.List;
+
 public interface SysUserService extends IService<SysUser> {
 
     /**
@@ -66,4 +68,12 @@ public interface SysUserService extends IService<SysUser> {
      * @param username 用户名
      */
     void checkUsernameUnique(Long userId, String username);
+
+    /**
+     * 删除用户
+     *
+     * @param userIds 用户id list
+     * @return 是否成功
+     */
+    boolean removeByIds(List<Long> userIds);
 }

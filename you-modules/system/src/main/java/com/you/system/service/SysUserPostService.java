@@ -12,4 +12,11 @@ public interface SysUserPostService {
      * @return 是否成功
      */
     boolean saveUserPosts(Long userId, List<Long> postIds);
+
+    /**
+     * 删除用户与岗位关联信息
+     *
+     * @param userIds 用户id list
+     */
+    void removeByUserIds(List<Long> userIds);
 }

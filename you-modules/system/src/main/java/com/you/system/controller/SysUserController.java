@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 用户controller
@@ -47,7 +48,7 @@ public class SysUserController {
     @SaCheckPermission("system:user:list")
     @PostMapping("/list")
     public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {
-       return R.ok(sysUserService.listPage(qo));
+        return R.ok(sysUserService.listPage(qo));
     }
 
     @SaCheckPermission("system:user:add")
@@ -58,5 +59,11 @@ public class SysUserController {
         user.setCreateBy(LoginUtils.getLoginUserName());
         user.setCreateTime(LocalDateTime.now());
         return sysUserService.save(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @SaCheckPermission("system:user:remove")
+    @PostMapping("/remove")
+    public R<Void> remove(@RequestBody List<Long> userIds) {
+        return sysUserService.removeByIds(userIds) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 }

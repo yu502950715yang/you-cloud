@@ -38,4 +38,10 @@ public interface SysUserRoleService {
      * @return 是否成功
      */
     boolean saveUserRoles(Long userId, List<Long> roleIds);
+
+    /**
+     * 根据用户id删除用户角色对应关系
+     * @param userIds 用户id list
+     */
+    void removeByUserIds(List<Long> userIds);
 }
