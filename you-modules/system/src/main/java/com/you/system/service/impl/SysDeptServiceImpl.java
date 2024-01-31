@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -121,6 +122,16 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         }
         LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.likeRight(SysDept::getAncestors, parentDept.getAncestors() + deptId + ",");
+        return deptMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public List<SysDept> getByDeptIds(Set<Long> deptIds) {
+        if (deptIds == null || deptIds.isEmpty()) {
+            return Collections.emptyList();
+        }
+        LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(SysDept::getDeptId, deptIds);
         return deptMapper.selectList(queryWrapper);
     }
 

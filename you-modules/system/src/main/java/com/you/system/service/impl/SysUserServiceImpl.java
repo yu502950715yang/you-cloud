@@ -2,6 +2,7 @@ package com.you.system.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -68,18 +68,36 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public IPage<SysUserVo> listPage(UserQo qo) {
-        if (qo.getDeptId() != null) {
-            List<SysDept> children = deptService.getAllChildByDeptId(qo.getDeptId());
-            String childrenIds = children.stream()
-                    .map(d -> String.valueOf(d.getDeptId()))
-                    .collect(Collectors.joining(","));
-            if (!children.isEmpty()) {
-                qo.setDeptIdsStr(childrenIds + "," + qo.getDeptId());
-            } else {
-                qo.setDeptIdsStr(String.valueOf(qo.getDeptId()));
+        IPage<SysUserVo> pageData = userMapper.listPage(qo.getPage(), qo);
+        //拼接部门名称
+        concatenateDeptName(pageData.getRecords());
+        return pageData;
+    }
+
+    /**
+     * 拼接部门名称
+     *
+     * @param userVoList 用户列表
+     */
+    private void concatenateDeptName(List<SysUserVo> userVoList) {
+        Set<Long> deptIds = new HashSet<>();
+        userVoList.forEach(sysUserVo -> {
+            if (CharSequenceUtil.isNotBlank(sysUserVo.getDeptAncestors())) {
+                String deptAncestors = sysUserVo.getDeptAncestors().substring(4, sysUserVo.getDeptAncestors().length() - 1);
+                List<String> deptIdList = CharSequenceUtil.split(deptAncestors, ",");
+                deptIdList.add(String.valueOf(sysUserVo.getDeptId()));
+                deptIds.addAll(deptIdList.stream().map(Long::valueOf).collect(Collectors.toList()));
+                sysUserVo.setDeptIds(deptIdList);
             }
+        });
+        List<SysDept> deptList = deptService.getByDeptIds(deptIds);
+        if (deptList != null && !deptList.isEmpty()) {
+            Map<String, String> deptNameMap = deptList.stream().collect(
+                    Collectors.toMap(d -> String.valueOf(d.getDeptId()), SysDept::getDeptName));
+            userVoList.forEach(sysUserVo ->
+                    sysUserVo.setDeptNames(
+                            sysUserVo.getDeptIds().stream().map(deptNameMap::get).collect(Collectors.toList())));
         }
-        return userMapper.listPage(qo.getPage(), qo);
     }
 
     @Transactional(rollbackFor = Exception.class)

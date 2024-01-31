@@ -7,10 +7,12 @@ import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.model.R;
 import com.you.system.domain.bo.SysUserBo;
+import com.you.system.domain.model.SysDept;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
+import com.you.system.service.SysDeptService;
 import com.you.system.service.SysUserService;
 import com.you.validation.ValidationGroups;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 用户controller
@@ -33,6 +36,7 @@ import java.util.List;
 public class SysUserController {
 
     private final SysUserService sysUserService;
+    private final SysDeptService deptService;
 
     @GetMapping("/{username}")
     public R<SysUser> getUserByUsername(@PathVariable("username") String username) {
@@ -50,6 +54,17 @@ public class SysUserController {
     @SaCheckPermission("system:user:list")
     @PostMapping("/list")
     public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {
+        if (qo.getDeptId() != null) {
+            List<SysDept> children = deptService.getAllChildByDeptId(qo.getDeptId());
+            String childrenIds = children.stream()
+                    .map(d -> String.valueOf(d.getDeptId()))
+                    .collect(Collectors.joining(","));
+            if (!children.isEmpty()) {
+                qo.setDeptIdsStr(childrenIds + "," + qo.getDeptId());
+            } else {
+                qo.setDeptIdsStr(String.valueOf(qo.getDeptId()));
+            }
+        }
         return R.ok(sysUserService.listPage(qo));
     }
 

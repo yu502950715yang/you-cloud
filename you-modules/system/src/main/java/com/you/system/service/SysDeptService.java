@@ -6,6 +6,7 @@ import com.you.system.domain.qo.DeptQo;
 import com.you.system.domain.vo.ElTree;
 
 import java.util.List;
+import java.util.Set;
 
 public interface SysDeptService extends IService<SysDept> {
 
@@ -79,4 +80,12 @@ public interface SysDeptService extends IService<SysDept> {
      * @return 子部门数据
      */
     List<SysDept> getAllChildByDeptId(Long deptId);
+
+    /**
+     * 根据部门id获取部门信息
+     *
+     * @param deptIds 部门id
+     * @return 部门信息
+     */
+    List<SysDept> getByDeptIds(Set<Long> deptIds);
 }
