@@ -636,6 +636,7 @@ async function handleAdd() {
   roleOptions.value = roleResponse.data;
   open.value = true;
   title.value = "添加用户";
+  form.value.deptId = queryParams.value.deptId;
   form.value.password = initPassword.value;
 }
 
