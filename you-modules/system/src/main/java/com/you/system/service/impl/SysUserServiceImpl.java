@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -174,5 +175,27 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         sysUserBo.setRoleIds(userRoleService.getRoleIdsByUserId(sysUser.getUserId()));
         sysUserBo.setPostIds(userPostService.getPostIdsByUserId(sysUser.getUserId()));
         return sysUserBo;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean edit(SysUserBo user) {
+        if (user.getUserId().equals(UserConstants.ADMIN_ID)) {
+            throw new CommonException("不允许修改超级管理员用户");
+        }
+        // 删除关联表信息
+        userRoleService.removeByUserIds(Collections.singletonList(user.getUserId()));
+        userPostService.removeByUserIds(Collections.singletonList(user.getUserId()));
+        // 修改用户信息
+        user.setUsername(null);
+        user.setPassword(null);
+        boolean result = userMapper.updateById(user) > 0;
+        if (result) {
+            // 新增用户角色关联
+            userRoleService.saveUserRoles(user.getUserId(), user.getRoleIds());
+            // 新增用户岗位关联
+            userPostService.saveUserPosts(user.getUserId(), user.getPostIds());
+        }
+        return result;
     }
 }

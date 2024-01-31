@@ -23,7 +23,7 @@ public class SysUser {
     @TableField("dept_id")
     private Long deptId;
 
-    @NotNull(message = "用户名称不能为空", groups = ValidationGroups.Common.class)
+    @NotNull(message = "用户名称不能为空", groups = ValidationGroups.Add.class)
     @Length(min = 2, max = 20, message = "用户名称长度必须介于2到20之间", groups = ValidationGroups.Common.class)
     @TableField("username")
     private String username;
@@ -42,7 +42,10 @@ public class SysUser {
     @TableField("phone")
     private String phone;
 
-    @NotNull(message = "密码不能为空", groups = ValidationGroups.Common.class)
+    @TableField("sex")
+    private String sex;
+
+    @NotNull(message = "密码不能为空", groups = ValidationGroups.Add.class)
     @TableField("password")
     private String password;
 

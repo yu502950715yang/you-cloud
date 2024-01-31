@@ -100,4 +100,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return 用户信息
      */
     SysUserBo getUserInfo(Long userId);
+
+    /**
+     * 修改用户
+     *
+     * @param user 用户信息
+     * @return 是否成功
+     */
+    boolean edit(SysUserBo user);
 }

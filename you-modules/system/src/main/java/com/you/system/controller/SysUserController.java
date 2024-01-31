@@ -12,7 +12,9 @@ import com.you.system.domain.vo.SysUserVo;
 import com.you.system.model.LoginUser;
 import com.you.system.model.SysUser;
 import com.you.system.service.SysUserService;
+import com.you.validation.ValidationGroups;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -53,7 +55,7 @@ public class SysUserController {
 
     @SaCheckPermission("system:user:add")
     @PostMapping
-    public R<Void> addUser(@RequestBody SysUserBo user) {
+    public R<Void> addUser(@Validated(ValidationGroups.Add.class) @RequestBody SysUserBo user) {
         // 检查用户名是否唯一
         sysUserService.checkUsernameUnique(user.getUserId(), user.getUsername());
         user.setCreateBy(LoginUtils.getLoginUserName());
@@ -83,5 +85,13 @@ public class SysUserController {
     @GetMapping("/getUserInfo/{userId}")
     public R<SysUserBo> getUserInfo(@PathVariable("userId") Long userId) {
         return R.ok(sysUserService.getUserInfo(userId));
+    }
+
+    @SaCheckPermission("system:user:edit")
+    @PostMapping("/edit")
+    public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysUserBo user) {
+        user.setUpdateBy(LoginUtils.getLoginUserName());
+        user.setUpdateTime(LocalDateTime.now());
+        return sysUserService.edit(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 }
