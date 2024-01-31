@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.you.system.mapper.SysPostMapper">
 
-    <select id="listPage" resultType="com.you.system.domain.model.SysPost">
+    <sql id="selectList">
         SELECT post_id ,post_code ,post_name, post_sort, status, create_by, create_time, remark
         FROM sys_post
         <where>
@@ -16,21 +16,17 @@
                 AND status = #{postQo.status}
             </if>
         </where>
+    </sql>
+
+    <select id="listPage" resultType="com.you.system.domain.model.SysPost">
+        <include refid="selectList"/>
     </select>
 
     <select id="selectForList" resultType="com.you.system.domain.model.SysPost">
-        SELECT post_id ,post_code ,post_name, post_sort, status, create_by, create_time, remark
-        FROM sys_post
-        <where>
-            <if test="postQo.postCode != null and postQo.postCode !=''">
-                AND post_code LIKE CONCAT('%',#{postQo.postCode},'%')
-            </if>
-            <if test="postQo.postName != null and postQo.postName !=''">
-                AND post_name LIKE CONCAT('%',#{postQo.postName},'%')
-            </if>
-            <if test="postQo.status != null and postQo.status !=''">
-                AND status = #{postQo.status}
-            </if>
-        </where>
+        <include refid="selectList"/>
+    </select>
+
+    <select id="selectExcelList" resultType="com.you.system.domain.poi.SysPostExcel">
+        <include refid="selectList"/>
     </select>
 </mapper>

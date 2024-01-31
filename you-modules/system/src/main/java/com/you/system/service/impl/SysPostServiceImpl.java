@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.system.domain.model.SysPost;
+import com.you.system.domain.poi.SysPostExcel;
 import com.you.system.domain.qo.PostQo;
 import com.you.system.mapper.SysPostMapper;
 import com.you.system.service.SysPostService;
@@ -51,5 +52,10 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Override
     public List<SysPost> getAllPost() {
         return this.selectList(new PostQo());
+    }
+
+    @Override
+    public List<SysPostExcel> selectExcelList(PostQo qo) {
+        return sysPostMapper.selectExcelList(qo);
     }
 }

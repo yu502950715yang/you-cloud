@@ -3,6 +3,7 @@ package com.you.system.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.domain.model.SysPost;
+import com.you.system.domain.poi.SysPostExcel;
 import com.you.system.domain.qo.PostQo;
 
 import java.util.List;
@@ -47,4 +48,12 @@ public interface SysPostService extends IService<SysPost> {
      * @return 岗位list
      */
     List<SysPost> getAllPost();
+
+    /**
+     * 根据查询条件获取数据
+     *
+     * @param qo 查询条件
+     * @return 岗位数据
+     */
+    List<SysPostExcel> selectExcelList(PostQo qo);
 }
