@@ -19,4 +19,12 @@ public interface SysUserPostService {
      * @param userIds 用户id list
      */
     void removeByUserIds(List<Long> userIds);
+
+    /**
+     * 根据用户id 获取岗位id list
+     *
+     * @param userId 用户id
+     * @return 岗位id list
+     */
+    List<Long> getPostIdsByUserId(Long userId);
 }

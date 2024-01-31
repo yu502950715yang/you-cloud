@@ -44,4 +44,10 @@
             #{userId}
         </foreach>
     </delete>
+
+    <select id="selectRoleIdsByUserId" resultType="long">
+        SELECT DISTINCT role_id
+        FROM sys_user_role
+        WHERE user_id = #{userId}
+    </select>
 </mapper>

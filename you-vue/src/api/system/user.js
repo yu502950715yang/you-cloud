@@ -13,7 +13,7 @@ export function listUser(data) {
 // 查询用户详细
 export function getUser(userId) {
   return request({
-    url: '/system/user/' + parseStrEmpty(userId),
+    url: '/system/user/getUserInfo/' + parseStrEmpty(userId),
     method: 'get'
   })
 }

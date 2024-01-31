@@ -24,4 +24,12 @@ public interface SysUserPostMapper {
      * @return 删除条数
      */
     int deleteByUserIds(@Param("userIds") List<Long> userIds);
+
+    /**
+     * 根据用户id 获取岗位id list
+     *
+     * @param userId 用户id
+     * @return 岗位id list
+     */
+    List<Long> selectPostIdsByUserId(Long userId);
 }

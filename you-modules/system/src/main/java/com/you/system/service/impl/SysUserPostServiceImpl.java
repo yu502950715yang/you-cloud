@@ -27,4 +27,9 @@ public class SysUserPostServiceImpl implements SysUserPostService {
             userPostMapper.deleteByUserIds(userIds);
         }
     }
+
+    @Override
+    public List<Long> getPostIdsByUserId(Long userId) {
+        return userPostMapper.selectPostIdsByUserId(userId);
+    }
 }

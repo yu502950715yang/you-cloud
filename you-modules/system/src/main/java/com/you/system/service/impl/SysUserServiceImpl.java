@@ -1,6 +1,7 @@
 package com.you.system.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -160,5 +161,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             StpUtil.logout(sysUser.getUserId());
         }
         return result;
+    }
+
+    @Override
+    public SysUserBo getUserInfo(Long userId) {
+        SysUser sysUser = userMapper.selectById(userId);
+        if (sysUser == null) {
+            throw new CommonException("用户不存在");
+        }
+        sysUser.setPassword(null);
+        SysUserBo sysUserBo = BeanUtil.copyProperties(sysUser, SysUserBo.class);
+        sysUserBo.setRoleIds(userRoleService.getRoleIdsByUserId(sysUser.getUserId()));
+        sysUserBo.setPostIds(userPostService.getPostIdsByUserId(sysUser.getUserId()));
+        return sysUserBo;
     }
 }

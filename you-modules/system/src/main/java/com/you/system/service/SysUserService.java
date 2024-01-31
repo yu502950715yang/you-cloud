@@ -92,4 +92,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return 是否成功
      */
     boolean resetPwd(SysUser sysUser);
+
+    /**
+     * 获取用户信息
+     *
+     * @param userId 用户id
+     * @return 用户信息
+     */
+    SysUserBo getUserInfo(Long userId);
 }

@@ -206,7 +206,7 @@
                   v-model="form.deptId"
                   :data="deptOptions"
                   :props="{ value: 'id', label: 'label', children: 'children' }"
-                  value-key="id"
+                  :value-key="id"
                   placeholder="请选择归属部门"
                   check-strictly
               />
@@ -640,19 +640,25 @@ async function handleAdd() {
 }
 
 /** 修改按钮操作 */
-function handleUpdate(row) {
+async function handleUpdate(row) {
   reset();
   const userId = row.userId || ids.value;
-  getUser(userId).then(response => {
-    form.value = response.data;
-    postOptions.value = response.posts;
-    roleOptions.value = response.roles;
-    form.value.postIds = response.postIds;
-    form.value.roleIds = response.roleIds;
-    open.value = true;
-    title.value = "修改用户";
-    form.password = "";
-  });
+
+  const [postResponse, roleResponse, userResponse] = await Promise.all([
+    getAllPost(),
+    getAllRole(),
+    getUser(userId)
+  ])
+
+  form.value = userResponse.data;
+  form.value.deptId = '111'
+  postOptions.value = postResponse.data;
+  roleOptions.value = roleResponse.data;
+  form.value.postIds = userResponse.data.postIds;
+  form.value.roleIds = userResponse.data.roleIds;
+  open.value = true;
+  title.value = "修改用户";
+  form.password = "";
 }
 
 /** 提交按钮 */

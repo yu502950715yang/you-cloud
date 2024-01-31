@@ -78,4 +78,10 @@ public class SysUserController {
     public R<Void> resetPwd(@RequestBody SysUser sysUser) {
         return sysUserService.resetPwd(sysUser) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
+
+    @SaCheckPermission("system:user:edit")
+    @GetMapping("/getUserInfo/{userId}")
+    public R<SysUserBo> getUserInfo(@PathVariable("userId") Long userId) {
+        return R.ok(sysUserService.getUserInfo(userId));
+    }
 }

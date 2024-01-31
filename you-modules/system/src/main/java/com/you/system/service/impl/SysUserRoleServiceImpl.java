@@ -52,4 +52,9 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
             sysUserRoleMapper.deleteByUserIds(userIds);
         }
     }
+
+    @Override
+    public List<Long> getRoleIdsByUserId(Long userId) {
+        return sysUserRoleMapper.selectRoleIdsByUserId(userId);
+    }
 }

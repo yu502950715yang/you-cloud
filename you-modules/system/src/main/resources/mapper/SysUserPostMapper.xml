@@ -15,4 +15,10 @@
             #{userId}
         </foreach>
     </delete>
+
+    <select id="selectPostIdsByUserId" resultType="long">
+        SELECT DISTINCT post_id
+        FROM sys_user_post
+        WHERE user_id = #{userId}
+    </select>
 </mapper>

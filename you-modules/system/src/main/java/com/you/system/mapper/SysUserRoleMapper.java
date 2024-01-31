@@ -58,4 +58,12 @@ public interface SysUserRoleMapper {
      * @return 删除行数
      */
     int deleteByUserIds(@Param("userIds") List<Long> userIds);
+
+    /**
+     * 根据用户id查询角色id
+     *
+     * @param userId 用id
+     * @return 角色id List
+     */
+    List<Long> selectRoleIdsByUserId(Long userId);
 }
