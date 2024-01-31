@@ -84,4 +84,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return 是否成功
      */
     boolean changeStatus(SysUser sysUser);
+
+    /**
+     * 修改用户密码
+     *
+     * @param sysUser 用户数据
+     * @return 是否成功
+     */
+    boolean resetPwd(SysUser sysUser);
 }

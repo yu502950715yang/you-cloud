@@ -141,4 +141,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
         return result;
     }
+
+    @Override
+    public boolean resetPwd(SysUser sysUser) {
+        if (sysUser.getUserId().equals(UserConstants.ADMIN_ID)) {
+            throw new CommonException("不允许修改超级管理员用户");
+        }
+        // 当前登录人id
+        Long updateUserId = StpUtil.getLoginIdAsLong();
+        LambdaUpdateWrapper<SysUser> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(SysUser::getPassword, SM3Util.encrypt(sysUser.getPassword()))
+                .set(SysUser::getUpdateBy, LoginUtils.getLoginUserName())
+                .set(SysUser::getUpdateTime, LocalDateTime.now())
+                .eq(SysUser::getUserId, sysUser.getUserId());
+        boolean result = userMapper.update(null, updateWrapper) > 0;
+        if (result && !updateUserId.equals(sysUser.getUserId())) {
+            // 重置密码后踢人下线
+            StpUtil.logout(sysUser.getUserId());
+        }
+        return result;
+    }
 }

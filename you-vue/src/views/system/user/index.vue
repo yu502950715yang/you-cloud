@@ -547,7 +547,7 @@ function handleAuthRole(row) {
 
 /** 重置密码按钮操作 */
 function handleResetPwd(row) {
-  proxy.$prompt('请输入"' + row.userName + '"的新密码', "提示", {
+  proxy.$prompt('请输入"' + row.username + '"的新密码', "提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     closeOnClickModal: false,
