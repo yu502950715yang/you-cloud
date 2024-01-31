@@ -206,7 +206,7 @@
                   v-model="form.deptId"
                   :data="deptOptions"
                   :props="{ value: 'id', label: 'label', children: 'children' }"
-                  :value-key="id"
+                  value-key="id"
                   placeholder="请选择归属部门"
                   check-strictly
               />
@@ -652,9 +652,9 @@ async function handleUpdate(row) {
   ])
 
   form.value = userResponse.data;
-  form.value.deptId = '111'
   postOptions.value = postResponse.data;
   roleOptions.value = roleResponse.data;
+  form.value.deptId = userResponse.data.deptId + '';
   form.value.postIds = userResponse.data.postIds;
   form.value.roleIds = userResponse.data.roleIds;
   open.value = true;
