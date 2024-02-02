@@ -7,7 +7,7 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson2.JSON;
 import com.you.common.core.constant.HttpStatus;
-import com.you.common.core.model.R;
+import com.you.common.core.domain.R;
 import com.you.gateway.config.properties.IgnoreWhiteProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

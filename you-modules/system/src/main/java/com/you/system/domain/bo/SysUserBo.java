@@ -1,6 +1,6 @@
 package com.you.system.domain.bo;
 
-import com.you.system.model.SysUser;
+import com.you.common.core.domain.model.SysUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

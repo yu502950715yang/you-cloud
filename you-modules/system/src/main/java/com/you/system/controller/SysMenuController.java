@@ -5,7 +5,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.constant.UserConstants;
-import com.you.common.core.model.R;
+import com.you.common.core.domain.R;
 import com.you.common.core.utils.StrUtils;
 import com.you.system.domain.model.SysMenu;
 import com.you.system.domain.qo.MenuQo;

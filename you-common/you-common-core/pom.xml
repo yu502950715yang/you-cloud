@@ -66,5 +66,15 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.you</groupId>
+            <artifactId>you-common-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.you</groupId>
+            <artifactId>you-common-datasource</artifactId>
+        </dependency>
     </dependencies>
 </project>

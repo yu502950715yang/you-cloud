@@ -1,10 +1,10 @@
 package com.you.system.api.feign;
 
 import com.you.common.core.constant.ServiceNameConstants;
-import com.you.common.core.model.R;
+import com.you.common.core.domain.R;
+import com.you.common.core.domain.model.LoginUser;
+import com.you.common.core.domain.model.SysUser;
 import com.you.system.api.failback.RemoteUserFallbackFactory;
-import com.you.system.model.LoginUser;
-import com.you.system.model.SysUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -6,11 +6,11 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.you.auth.domain.model.User;
 import com.you.auth.service.LoginService;
 import com.you.common.core.constant.LoginConstants;
+import com.you.common.core.domain.R;
+import com.you.common.core.domain.model.SysUser;
 import com.you.common.core.enums.StatusEnum;
 import com.you.common.core.exception.CommonException;
-import com.you.common.core.model.R;
 import com.you.system.api.feign.RemoteUserService;
-import com.you.system.model.SysUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

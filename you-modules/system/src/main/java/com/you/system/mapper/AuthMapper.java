@@ -1,4 +1,4 @@
-package com.you.auth.mapper;
+package com.you.system.mapper;
 
 
 import org.apache.ibatis.annotations.Mapper;
@@ -19,7 +19,7 @@ public interface AuthMapper {
 
     List<String> selectAllPerm();
 
-    List<String> selectRolesByUserId(String userId);
+    List<String> selectRolesByUserId(Long userId);
 
 
 }

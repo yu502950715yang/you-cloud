@@ -17,10 +17,5 @@
             <groupId>com.you</groupId>
             <artifactId>you-common-core</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.you</groupId>
-            <artifactId>system-model</artifactId>
-        </dependency>
     </dependencies>
 </project>

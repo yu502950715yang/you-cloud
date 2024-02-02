@@ -2,7 +2,7 @@ package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.you.common.core.constant.Constants;
-import com.you.common.core.model.R;
+import com.you.common.core.domain.R;
 import com.you.system.domain.model.SysDept;
 import com.you.system.domain.qo.DeptQo;
 import com.you.system.domain.vo.ElTree;

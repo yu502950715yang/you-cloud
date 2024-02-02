@@ -1,9 +1,9 @@
 package com.you.system.api.failback;
 
-import com.you.common.core.model.R;
+import com.you.common.core.domain.R;
+import com.you.common.core.domain.model.LoginUser;
+import com.you.common.core.domain.model.SysUser;
 import com.you.system.api.feign.RemoteUserService;
-import com.you.system.model.LoginUser;
-import com.you.system.model.SysUser;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 

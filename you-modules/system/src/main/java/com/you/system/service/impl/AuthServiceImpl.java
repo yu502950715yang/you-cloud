@@ -1,7 +1,8 @@
-package com.you.auth.service;
+package com.you.system.service.impl;
 
-import com.you.auth.mapper.AuthMapper;
 import com.you.common.core.constant.UserConstants;
+import com.you.system.mapper.AuthMapper;
+import com.you.system.service.AuthService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public List<String> getRoles(String userId) {
+    public List<String> getRoles(Long userId) {
+        if (UserConstants.ADMIN_ID.equals(userId)) {
+            return authMapper.selectAllPerm();
+        }
         return authMapper.selectRolesByUserId(userId);
     }
 }

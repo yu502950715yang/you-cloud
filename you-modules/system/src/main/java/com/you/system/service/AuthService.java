@@ -1,4 +1,4 @@
-package com.you.auth.service;
+package com.you.system.service;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface AuthService {
      * @param userId 用户id
      * @return 角色key List
      */
-    List<String> getRoles(String userId);
+    List<String> getRoles(Long userId);
 }

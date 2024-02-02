@@ -1,4 +1,4 @@
-package com.you.common.core.model;
+package com.you.common.core.domain;
 
 import com.you.common.core.constant.HttpStatus;
 import lombok.Getter;

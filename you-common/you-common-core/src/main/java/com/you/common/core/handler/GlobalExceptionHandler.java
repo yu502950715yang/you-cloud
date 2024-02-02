@@ -1,7 +1,7 @@
 package com.you.common.core.handler;
 
+import com.you.common.core.domain.R;
 import com.you.common.core.exception.CommonException;
-import com.you.common.core.model.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;

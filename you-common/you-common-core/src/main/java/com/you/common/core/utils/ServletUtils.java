@@ -2,7 +2,7 @@ package com.you.common.core.utils;
 
 import com.alibaba.fastjson2.JSON;
 import com.you.common.core.constant.Constants;
-import com.you.common.core.model.R;
+import com.you.common.core.domain.R;
 import com.you.common.core.utils.text.Convert;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

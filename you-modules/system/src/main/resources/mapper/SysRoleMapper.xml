@@ -15,7 +15,7 @@
     </resultMap>
 
 
-    <select id="listPage" resultType="com.you.system.model.SysRole">
+    <select id="listPage" resultType="com.you.common.core.domain.model.SysRole">
         SELECT role_id ,role_name ,role_key, role_sort, status, create_time
         FROM sys_role
         <where>

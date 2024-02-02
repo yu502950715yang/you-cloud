@@ -1,6 +1,6 @@
 package com.you.system.controller;
 
-import com.you.common.core.model.R;
+import com.you.common.core.domain.R;
 import com.you.system.domain.model.SysDictData;
 import com.you.system.service.SysDictDataService;
 import lombok.RequiredArgsConstructor;

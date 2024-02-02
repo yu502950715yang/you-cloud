@@ -2,12 +2,12 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.you.common.core.domain.model.LoginUser;
+import com.you.common.core.domain.model.SysUser;
 import com.you.system.domain.bo.SysUserBo;
 import com.you.system.domain.qo.AuthUserQo;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
-import com.you.system.model.LoginUser;
-import com.you.system.model.SysUser;
 
 import java.util.List;
 
