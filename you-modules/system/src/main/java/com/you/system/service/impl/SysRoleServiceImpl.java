@@ -118,4 +118,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         queryWrapper.eq(SysRole::getDelFlag, DelFlagEnum.NORMAL.getCode());
         return roleMapper.selectList(queryWrapper);
     }
+
+
+
+    @Override
+    public List<SysRole> getRoleListByUserId(Long userId) {
+        return roleMapper.selectRoleListByUserId(userId);
+    }
 }

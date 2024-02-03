@@ -51,4 +51,12 @@
             #{id}
         </foreach>
     </select>
+
+
+    <select id="selectRoleListByUserId" resultType="com.you.common.core.domain.model.SysRole">
+        SELECT r.*
+        FROM sys_role r
+                 LEFT JOIN sys_user_role ur ON r.role_id = ur.role_id
+        WHERE ur.user_id = #{userId}
+    </select>
 </mapper>

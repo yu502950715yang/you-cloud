@@ -110,5 +110,19 @@ public interface SysUserService extends IService<SysUser> {
      */
     boolean edit(SysUserBo user);
 
+    /**
+     * 获取导出excel数据
+     *
+     * @param qo 查询条件
+     * @return 数据
+     */
     List<SysUserExcel> selectExcelList(UserQo qo);
+
+    /**
+     * 获取用户基本信息
+     *
+     * @param userId 用户id
+     * @return 用户
+     */
+    SysUser getUserBaseInfo(Long userId);
 }

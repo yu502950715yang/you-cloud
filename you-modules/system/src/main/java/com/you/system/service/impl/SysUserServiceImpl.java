@@ -3,6 +3,7 @@ package com.you.system.service.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.CharSequenceUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -230,5 +231,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                             userExcel.getDeptIds().stream().map(deptNameMap::get).collect(Collectors.toList())));
         }
         return userList;
+    }
+
+    @Override
+    public SysUser getUserBaseInfo(Long userId) {
+        LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.select(SysUser::getUserId, SysUser::getUsername, SysUser::getNickname)
+                .eq(SysUser::getUserId, userId);
+        return userMapper.selectOne(queryWrapper);
     }
 }

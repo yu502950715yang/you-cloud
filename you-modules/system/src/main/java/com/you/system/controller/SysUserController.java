@@ -8,14 +8,17 @@ import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.domain.model.LoginUser;
+import com.you.common.core.domain.model.SysRole;
 import com.you.common.core.domain.model.SysUser;
 import com.you.common.core.exception.CommonException;
 import com.you.system.domain.bo.SysUserBo;
 import com.you.system.domain.model.SysDept;
 import com.you.system.domain.poi.SysUserExcel;
 import com.you.system.domain.qo.UserQo;
+import com.you.system.domain.vo.AuthRole;
 import com.you.system.domain.vo.SysUserVo;
 import com.you.system.service.SysDeptService;
+import com.you.system.service.SysRoleService;
 import com.you.system.service.SysUserService;
 import com.you.validation.ValidationGroups;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +46,7 @@ public class SysUserController {
 
     private final SysUserService sysUserService;
     private final SysDeptService deptService;
+    private final SysRoleService roleService;
 
     @GetMapping("/{username}")
     public R<SysUser> getUserByUsername(@PathVariable("username") String username) {
@@ -137,5 +141,17 @@ public class SysUserController {
         } catch (IOException e) {
             throw new CommonException(e);
         }
+    }
+
+    @SaCheckPermission("system:user:edit")
+    @GetMapping("/authRole/{userId}")
+    public R<AuthRole> authRole(@PathVariable("userId") Long userId) {
+        AuthRole authRole = new AuthRole();
+        SysUser user = sysUserService.getUserBaseInfo(userId);
+        authRole.setUser(user);
+        List<SysRole> roleList = roleService.getRoleListByUserId(userId);
+        authRole.setUserRoleList(roleList);
+        authRole.setRoleList(roleService.getAllRole());
+        return R.ok(authRole);
     }
 }
