@@ -1,0 +1,19 @@
+# 使用官方的RabbitMQ镜像作为基础
+FROM rabbitmq:3.8.14-management
+
+# 设置RabbitMQ的用户和密码
+ENV RABBITMQ_DEFAULT_USER=myuser
+ENV RABBITMQ_DEFAULT_PASS=mypassword
+
+# 在容器启动时自动启用 rabbitmq_management 插件
+RUN rabbitmq-plugins enable rabbitmq_management
+
+# 暴露RabbitMQ的默认端口以及管理界面端口
+EXPOSE 5672
+EXPOSE 15672
+EXPOSE 25672
+EXPOSE 61613
+EXPOSE 1883
+
+# 可选：设置容器启动时运行的命令（如果需要）
+CMD ["rabbitmq-server"]
