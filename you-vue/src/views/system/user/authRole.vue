@@ -5,12 +5,12 @@
          <el-row>
             <el-col :span="8" :offset="2">
                <el-form-item label="用户昵称" prop="nickName">
-                  <el-input v-model="form.nickName" disabled />
+                  <el-input v-model="form.nickname" disabled />
                </el-form-item>
             </el-col>
             <el-col :span="8" :offset="2">
                <el-form-item label="登录账号" prop="userName">
-                  <el-input v-model="form.userName" disabled />
+                  <el-input v-model="form.username" disabled />
                </el-form-item>
             </el-col>
          </el-row>
@@ -58,8 +58,8 @@ const pageSize = ref(10);
 const roleIds = ref([]);
 const roles = ref([]);
 const form = ref({
-  nickName: undefined,
-  userName: undefined,
+  nickname: undefined,
+  username: undefined,
   userId: undefined
 });
 
@@ -95,12 +95,13 @@ function submitForm() {
   if (userId) {
     loading.value = true;
     getAuthRole(userId).then(response => {
-      form.value = response.user;
-      roles.value = response.roles;
+      form.value = response.data.user;
+      roles.value = response.data.roleList;
       total.value = roles.value.length;
+      let userRole = response.data.userRoleList;
       nextTick(() => {
         roles.value.forEach(row => {
-          if (row.flag) {
+          if (userRole.some(item => item.roleId === row.roleId)) {
             proxy.$refs["roleRef"].toggleRowSelection(row);
           }
         });
