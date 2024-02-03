@@ -17,6 +17,7 @@ import com.you.common.core.exception.CommonException;
 import com.you.common.core.utils.sm3.SM3Util;
 import com.you.system.domain.bo.SysUserBo;
 import com.you.system.domain.model.SysDept;
+import com.you.system.domain.poi.SysUserExcel;
 import com.you.system.domain.qo.AuthUserQo;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
@@ -39,6 +40,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private final SysDeptService deptService;
     private final SysUserRoleService userRoleService;
     private final SysUserPostService userPostService;
+
+    private static final String EDIT_ADMIN_ERROR = "不允许修改超级管理员用户";
 
     @Override
     public SysUser getUserByUsername(String username) {
@@ -66,18 +69,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public IPage<SysUserVo> listPage(UserQo qo) {
         IPage<SysUserVo> pageData = userMapper.listPage(qo.getPage(), qo);
         //拼接部门名称
-        concatenateDeptName(pageData.getRecords());
-        return pageData;
-    }
-
-    /**
-     * 拼接部门名称
-     *
-     * @param userVoList 用户列表
-     */
-    private void concatenateDeptName(List<SysUserVo> userVoList) {
         Set<Long> deptIds = new HashSet<>();
-        userVoList.forEach(sysUserVo -> {
+        pageData.getRecords().forEach(sysUserVo -> {
             if (CharSequenceUtil.isNotBlank(sysUserVo.getDeptAncestors())) {
                 String deptAncestors = sysUserVo.getDeptAncestors().substring(4, sysUserVo.getDeptAncestors().length() - 1);
                 List<String> deptIdList = CharSequenceUtil.split(deptAncestors, ",");
@@ -90,10 +83,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (deptList != null && !deptList.isEmpty()) {
             Map<String, String> deptNameMap = deptList.stream().collect(
                     Collectors.toMap(d -> String.valueOf(d.getDeptId()), SysDept::getDeptName));
-            userVoList.forEach(sysUserVo ->
+            pageData.getRecords().forEach(sysUserVo ->
                     sysUserVo.setDeptNames(
                             sysUserVo.getDeptIds().stream().map(deptNameMap::get).collect(Collectors.toList())));
         }
+        return pageData;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -146,7 +140,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public boolean changeStatus(SysUser sysUser) {
         if (sysUser.getUserId().equals(UserConstants.ADMIN_ID)) {
-            throw new CommonException("不允许修改超级管理员用户");
+            throw new CommonException(EDIT_ADMIN_ERROR);
         }
         sysUser.setUpdateBy(LoginUtils.getLoginUserName());
         sysUser.setUpdateTime(LocalDateTime.now());
@@ -161,7 +155,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public boolean resetPwd(SysUser sysUser) {
         if (sysUser.getUserId().equals(UserConstants.ADMIN_ID)) {
-            throw new CommonException("不允许修改超级管理员用户");
+            throw new CommonException(EDIT_ADMIN_ERROR);
         }
         // 当前登录人id
         Long updateUserId = StpUtil.getLoginIdAsLong();
@@ -195,7 +189,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public boolean edit(SysUserBo user) {
         if (user.getUserId().equals(UserConstants.ADMIN_ID)) {
-            throw new CommonException("不允许修改超级管理员用户");
+            throw new CommonException(EDIT_ADMIN_ERROR);
         }
         // 删除关联表信息
         userRoleService.removeByUserIds(Collections.singletonList(user.getUserId()));
@@ -211,5 +205,30 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             userPostService.saveUserPosts(user.getUserId(), user.getPostIds());
         }
         return result;
+    }
+
+    @Override
+    public List<SysUserExcel> selectExcelList(UserQo qo) {
+        List<SysUserExcel> userList = userMapper.selectExcelList(qo);
+        //拼接部门名称
+        Set<Long> deptIds = new HashSet<>();
+        userList.forEach(userExcel -> {
+            if (CharSequenceUtil.isNotBlank(userExcel.getDeptAncestors())) {
+                String deptAncestors = userExcel.getDeptAncestors().substring(4, userExcel.getDeptAncestors().length() - 1);
+                List<String> deptIdList = CharSequenceUtil.split(deptAncestors, ",");
+                deptIdList.add(String.valueOf(userExcel.getDeptId()));
+                deptIds.addAll(deptIdList.stream().map(Long::valueOf).collect(Collectors.toList()));
+                userExcel.setDeptIds(deptIdList);
+            }
+        });
+        List<SysDept> deptList = deptService.getByDeptIds(deptIds);
+        if (deptList != null && !deptList.isEmpty()) {
+            Map<String, String> deptNameMap = deptList.stream().collect(
+                    Collectors.toMap(d -> String.valueOf(d.getDeptId()), SysDept::getDeptName));
+            userList.forEach(userExcel ->
+                    userExcel.setDeptNames(
+                            userExcel.getDeptIds().stream().map(deptNameMap::get).collect(Collectors.toList())));
+        }
+        return userList;
     }
 }

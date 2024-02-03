@@ -4,7 +4,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
-import com.you.common.core.excel.converters.StatusConverter;
+import com.you.common.excel.converters.StatusConverter;
 import lombok.Data;
 
 import java.time.LocalDateTime;

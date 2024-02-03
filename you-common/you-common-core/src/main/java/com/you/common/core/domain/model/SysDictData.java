@@ -1,4 +1,4 @@
-package com.you.system.domain.model;
+package com.you.common.core.domain.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

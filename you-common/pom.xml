@@ -18,6 +18,7 @@
         <module>you-common-core</module>
         <module>you-common-redis</module>
         <module>you-common-datasource</module>
+        <module>you-common-excel</module>
         <module>you-common-auth</module>
         <module>you-common-validation</module>
     </modules>

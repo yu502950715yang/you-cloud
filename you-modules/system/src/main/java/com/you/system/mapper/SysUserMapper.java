@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.you.common.core.domain.model.SysUser;
+import com.you.system.domain.poi.SysUserExcel;
 import com.you.system.domain.qo.AuthUserQo;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * SysUser mapper
@@ -29,4 +32,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     IPage<SysUser> ruleUnallocatedListPage(@Param("page") Page<SysUser> page, @Param("qo") AuthUserQo qo);
 
     IPage<SysUserVo> listPage(@Param("page") Page<SysUserVo> page, @Param("qo") UserQo qo);
+
+    List<SysUserExcel> selectExcelList(@Param("qo") UserQo qo);
 }

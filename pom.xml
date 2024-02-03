@@ -146,6 +146,13 @@
                 <version>${you-clous.version}</version>
             </dependency>
 
+            <!--excel 导入导出-->
+            <dependency>
+                <groupId>com.you</groupId>
+                <artifactId>you-common-excel</artifactId>
+                <version>${you-clous.version}</version>
+            </dependency>
+
             <!--权限认证-->
             <dependency>
                 <groupId>com.you</groupId>
@@ -157,13 +164,6 @@
             <dependency>
                 <groupId>com.you</groupId>
                 <artifactId>you-common-validation</artifactId>
-                <version>${you-clous.version}</version>
-            </dependency>
-
-            <!--公共实体类-->
-            <dependency>
-                <groupId>com.you</groupId>
-                <artifactId>system-model</artifactId>
                 <version>${you-clous.version}</version>
             </dependency>
 

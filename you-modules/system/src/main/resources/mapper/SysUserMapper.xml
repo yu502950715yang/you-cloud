@@ -84,4 +84,31 @@
             </if>
         </where>
     </select>
+
+    <select id="selectExcelList" resultType="com.you.system.domain.poi.SysUserExcel">
+        SELECT u.user_id, u.dept_id, u.username, u.nickname,u.sex, u.phone, u.create_time, u.status, d.dept_name,
+        d.ancestors AS deptAncestors
+        FROM sys_user u
+        LEFT JOIN sys_dept d ON d.dept_id = u.dept_id
+        <where>
+            u.del_flag = 0 AND u.user_id != 1
+            <if test="qo.deptIdsStr!= null and qo.deptIdsStr != ''">
+                AND u.dept_id IN (${qo.deptIdsStr})
+            </if>
+            <if test="qo.username!= null and qo.username!=''">
+                AND u.username LIKE CONCAT('%',#{qo.username},'%')
+            </if>
+            <if test="qo.phone!= null and qo.phone!=''">
+                AND u.phone LIKE CONCAT('%',#{qo.phone},'%')
+            </if>
+            <if test="qo.status!= null and qo.status != ''">
+                AND u.status = #{qo.status}
+            </if>
+            <if test="qo.beginTime != null and qo.beginTime !=''">
+                <if test="qo.endTime!= null and qo.endTime !=''">
+                    AND u.create_time BETWEEN #{qo.beginTime} AND #{qo.endTime}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

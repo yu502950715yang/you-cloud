@@ -1,7 +1,7 @@
 package com.you.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.you.system.domain.model.SysDictData;
+import com.you.common.core.domain.model.SysDictData;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

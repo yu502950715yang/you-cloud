@@ -2,14 +2,17 @@ package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
+import com.alibaba.excel.EasyExcelFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.domain.model.LoginUser;
 import com.you.common.core.domain.model.SysUser;
+import com.you.common.core.exception.CommonException;
 import com.you.system.domain.bo.SysUserBo;
 import com.you.system.domain.model.SysDept;
+import com.you.system.domain.poi.SysUserExcel;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
 import com.you.system.service.SysDeptService;
@@ -19,6 +22,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,6 +60,11 @@ public class SysUserController {
     @SaCheckPermission("system:user:list")
     @PostMapping("/list")
     public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {
+        createUserQo(qo);
+        return R.ok(sysUserService.listPage(qo));
+    }
+
+    private void createUserQo(UserQo qo) {
         if (qo.getDeptId() != null) {
             List<SysDept> children = deptService.getAllChildByDeptId(qo.getDeptId());
             String childrenIds = children.stream()
@@ -65,7 +76,6 @@ public class SysUserController {
                 qo.setDeptIdsStr(String.valueOf(qo.getDeptId()));
             }
         }
-        return R.ok(sysUserService.listPage(qo));
     }
 
     @SaCheckPermission("system:user:add")
@@ -108,5 +118,24 @@ public class SysUserController {
         user.setUpdateBy(LoginUtils.getLoginUserName());
         user.setUpdateTime(LocalDateTime.now());
         return sysUserService.edit(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+    }
+
+    @SaCheckPermission("system:post:export")
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, @RequestBody UserQo qo) {
+        createUserQo(qo);
+        List<SysUserExcel> list = sysUserService.selectExcelList(qo);
+        // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName;
+        try {
+            fileName = URLEncoder.encode("用户", "UTF-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+            EasyExcelFactory.write(response.getOutputStream(), SysUserExcel.class).sheet("用户").doWrite(list);
+        } catch (IOException e) {
+            throw new CommonException(e);
+        }
     }
 }

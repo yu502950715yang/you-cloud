@@ -41,7 +41,7 @@ public class SysPostController {
 
     @SaCheckPermission("system:post:export")
     @PostMapping("/export")
-    public void export(HttpServletResponse response, PostQo qo) {
+    public void export(HttpServletResponse response,@RequestBody PostQo qo) {
         List<SysPostExcel> list = sysPostService.selectExcelList(qo);
         // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
         response.setContentType("application/vnd.ms-excel");

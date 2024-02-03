@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.common.core.domain.model.LoginUser;
 import com.you.common.core.domain.model.SysUser;
 import com.you.system.domain.bo.SysUserBo;
+import com.you.system.domain.poi.SysUserExcel;
 import com.you.system.domain.qo.AuthUserQo;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
@@ -108,4 +109,6 @@ public interface SysUserService extends IService<SysUser> {
      * @return 是否成功
      */
     boolean edit(SysUserBo user);
+
+    List<SysUserExcel> selectExcelList(UserQo qo);
 }

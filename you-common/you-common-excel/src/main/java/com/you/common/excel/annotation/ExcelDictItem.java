@@ -1,6 +1,4 @@
-package com.you.common.core.excel.annotation;
-
-import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+package com.you.common.excel.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,8 +11,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@JacksonAnnotationsInside
-//@JsonSerialize(using = DictItemSerialize.class)
 public @interface ExcelDictItem {
 
     /**
