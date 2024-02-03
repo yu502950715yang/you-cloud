@@ -111,16 +111,16 @@
             >删除
             </el-button>
           </el-col>
-          <el-col :span="1.5">
-            <el-button
-                type="info"
-                plain
-                icon="Upload"
-                @click="handleImport"
-                v-hasPermi="['system:user:import']"
-            >导入
-            </el-button>
-          </el-col>
+          <!--          <el-col :span="1.5">
+                      <el-button
+                          type="info"
+                          plain
+                          icon="Upload"
+                          @click="handleImport"
+                          v-hasPermi="['system:user:import']"
+                      >导入
+                      </el-button>
+                    </el-col>-->
           <el-col :span="1.5">
             <el-button
                 type="warning"
