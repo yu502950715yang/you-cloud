@@ -120,7 +120,7 @@ public class SysUserController {
         return sysUserService.edit(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @SaCheckPermission("system:post:export")
+    @SaCheckPermission("system:user:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response, @RequestBody UserQo qo) {
         createUserQo(qo);
