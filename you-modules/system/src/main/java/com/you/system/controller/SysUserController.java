@@ -154,4 +154,10 @@ public class SysUserController {
         authRole.setRoleList(roleService.getAllRole());
         return R.ok(authRole);
     }
+
+    @SaCheckPermission("system:user:edit")
+    @PostMapping("/authRole")
+    public R<Void> authRole(@RequestBody SysUserBo user) {
+        return sysUserService.updateUserRole(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+    }
 }

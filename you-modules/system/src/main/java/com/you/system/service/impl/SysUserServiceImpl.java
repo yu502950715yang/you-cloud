@@ -240,4 +240,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .eq(SysUser::getUserId, userId);
         return userMapper.selectOne(queryWrapper);
     }
+
+    @Override
+    public boolean updateUserRole(SysUserBo user) {
+        if (user.getUserId() == null) {
+            return false;
+        }
+        userRoleService.removeByUserIds(Collections.singletonList(user.getUserId()));
+        if (user.getRoleIds() != null && !user.getRoleIds().isEmpty()) {
+            return userRoleService.saveUserRoles(user.getUserId(), user.getRoleIds());
+        }
+        return true;
+    }
 }

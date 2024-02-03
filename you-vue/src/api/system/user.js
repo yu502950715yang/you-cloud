@@ -122,8 +122,8 @@ export function getAuthRole(userId) {
 export function updateAuthRole(data) {
   return request({
     url: '/system/user/authRole',
-    method: 'put',
-    params: data
+    method: 'post',
+    data: data
   })
 }
 
