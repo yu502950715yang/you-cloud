@@ -1,5 +1,6 @@
 package com.you.common.core.handler;
 
+import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.exception.CommonException;
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler {
     public R<Void> handlerRuntimeException(Exception e, HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         log.error("请求地址'{}'，发生未知异常", requestUri, e);
-        return R.fail(e.getMessage());
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
     /**
@@ -50,7 +51,7 @@ public class GlobalExceptionHandler {
     public R<Void> handlerException(Exception e, HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         log.error("请求地址'{}'，发生系统异常", requestUri, e);
-        return R.fail(e.getMessage());
+        return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
     /**

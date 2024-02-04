@@ -2,8 +2,8 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.you.common.core.domain.model.LoginUser;
-import com.you.common.core.domain.model.SysUser;
+import com.you.system.api.domain.LoginUser;
+import com.you.system.api.domain.model.SysUser;
 import com.you.system.domain.bo.SysUserBo;
 import com.you.system.domain.poi.SysUserExcel;
 import com.you.system.domain.qo.AuthUserQo;

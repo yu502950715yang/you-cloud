@@ -16,7 +16,7 @@
 
 SET NAMES utf8mb4;
 SET
-FOREIGN_KEY_CHECKS = 0;
+    FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for gen_table
@@ -61,7 +61,7 @@ DROP TABLE IF EXISTS `gen_table_column`;
 CREATE TABLE `gen_table_column`
 (
     `column_id`      bigint(20) NOT NULL COMMENT '编号',
-    `table_id`       bigint(20) DEFAULT NULL COMMENT '归属表编号',
+    `table_id`       bigint(20)   DEFAULT NULL COMMENT '归属表编号',
     `column_name`    varchar(200) DEFAULT NULL COMMENT '列名称',
     `column_comment` varchar(500) DEFAULT NULL COMMENT '列描述',
     `column_type`    varchar(100) DEFAULT NULL COMMENT '列类型',
@@ -77,7 +77,7 @@ CREATE TABLE `gen_table_column`
     `query_type`     varchar(200) DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
     `html_type`      varchar(200) DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
     `dict_type`      varchar(200) DEFAULT '' COMMENT '字典类型',
-    `sort`           int(11) DEFAULT NULL COMMENT '排序',
+    `sort`           int(11)      DEFAULT NULL COMMENT '排序',
     `create_by`      varchar(64)  DEFAULT '' COMMENT '创建者',
     `create_time`    datetime     DEFAULT NULL COMMENT '创建时间',
     `update_by`      varchar(64)  DEFAULT '' COMMENT '更新者',
@@ -146,10 +146,10 @@ DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept`
 (
     `dept_id`     bigint(20) NOT NULL AUTO_INCREMENT COMMENT '部门id',
-    `parent_id`   bigint(20) DEFAULT '0' COMMENT '父部门id',
+    `parent_id`   bigint(20)   DEFAULT '0' COMMENT '父部门id',
     `ancestors`   varchar(500) DEFAULT '' COMMENT '祖级列表',
     `dept_name`   varchar(30)  DEFAULT '' COMMENT '部门名称',
-    `order_num`   int(4) DEFAULT '0' COMMENT '显示顺序',
+    `order_num`   int(4)       DEFAULT '0' COMMENT '显示顺序',
     `leader`      varchar(20)  DEFAULT NULL COMMENT '负责人',
     `phone`       varchar(11)  DEFAULT NULL COMMENT '联系电话',
     `email`       varchar(50)  DEFAULT NULL COMMENT '邮箱',
@@ -160,7 +160,9 @@ CREATE TABLE `sys_dept`
     `update_by`   varchar(64)  DEFAULT '' COMMENT '更新者',
     `update_time` datetime     DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='部门表';
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4 COMMENT ='部门表';
 
 -- ----------------------------
 -- Records of sys_dept
@@ -179,7 +181,7 @@ DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`
 (
     `dict_code`   bigint(20) NOT NULL COMMENT '字典编码',
-    `dict_sort`   int(4) DEFAULT '0' COMMENT '字典排序',
+    `dict_sort`   int(4)       DEFAULT '0' COMMENT '字典排序',
     `dict_label`  varchar(100) DEFAULT '' COMMENT '字典标签',
     `dict_value`  varchar(100) DEFAULT '' COMMENT '字典键值',
     `dict_type`   varchar(100) DEFAULT '' COMMENT '字典类型',
@@ -389,8 +391,8 @@ CREATE TABLE `sys_logininfor`
     `msg`            varchar(255) DEFAULT '' COMMENT '提示消息',
     `login_time`     datetime     DEFAULT NULL COMMENT '访问时间',
     PRIMARY KEY (`info_id`),
-    KEY              `idx_sys_logininfor_s` (`status`),
-    KEY              `idx_sys_logininfor_lt` (`login_time`)
+    KEY `idx_sys_logininfor_s` (`status`),
+    KEY `idx_sys_logininfor_lt` (`login_time`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='系统访问记录';
 
@@ -406,15 +408,15 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`
 (
-    `menu_id`     bigint(20) NOT NULL COMMENT '菜单ID',
+    `menu_id`     bigint(20)  NOT NULL COMMENT '菜单ID',
     `menu_name`   varchar(50) NOT NULL COMMENT '菜单名称',
-    `parent_id`   bigint(20) DEFAULT '0' COMMENT '父菜单ID',
-    `order_num`   int(4) DEFAULT '0' COMMENT '显示顺序',
+    `parent_id`   bigint(20)   DEFAULT '0' COMMENT '父菜单ID',
+    `order_num`   int(4)       DEFAULT '0' COMMENT '显示顺序',
     `path`        varchar(200) DEFAULT '' COMMENT '路由地址',
     `component`   varchar(255) DEFAULT NULL COMMENT '组件路径',
     `query_param` varchar(255) DEFAULT NULL COMMENT '路由参数',
-    `is_frame`    int(1) DEFAULT '1' COMMENT '是否为外链（0是 1否）',
-    `is_cache`    int(1) DEFAULT '0' COMMENT '是否缓存（0缓存 1不缓存）',
+    `is_frame`    int(1)       DEFAULT '1' COMMENT '是否为外链（0是 1否）',
+    `is_cache`    int(1)       DEFAULT '0' COMMENT '是否缓存（0缓存 1不缓存）',
     `menu_type`   char(1)      DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
     `visible`     char(1)      DEFAULT '0' COMMENT '显示状态（0显示 1隐藏）',
     `status`      char(1)      DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
@@ -861,7 +863,7 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_notice`;
 CREATE TABLE `sys_notice`
 (
-    `notice_id`      bigint(20) NOT NULL COMMENT '公告ID',
+    `notice_id`      bigint(20)  NOT NULL COMMENT '公告ID',
     `notice_title`   varchar(50) NOT NULL COMMENT '公告标题',
     `notice_type`    char(1)     NOT NULL COMMENT '公告类型（1通知 2公告）',
     `notice_content` longblob COMMENT '公告内容',
@@ -895,12 +897,12 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_oper_log`;
 CREATE TABLE `sys_oper_log`
 (
-    `oper_id`        bigint(20) NOT NULL COMMENT '日志主键',
+    `oper_id`        bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
     `title`          varchar(50)   DEFAULT '' COMMENT '模块标题',
-    `business_type`  int(2) DEFAULT '0' COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+    `business_type`  varchar(20)   DEFAULT '0' COMMENT '业务类型',
     `method`         varchar(100)  DEFAULT '' COMMENT '方法名称',
     `request_method` varchar(10)   DEFAULT '' COMMENT '请求方式',
-    `operator_type`  int(1) DEFAULT '0' COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
+    `operator_type`  int(1)        DEFAULT '0' COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
     `oper_name`      varchar(50)   DEFAULT '' COMMENT '操作人员',
     `dept_name`      varchar(50)   DEFAULT '' COMMENT '部门名称',
     `oper_url`       varchar(255)  DEFAULT '' COMMENT '请求URL',
@@ -908,13 +910,13 @@ CREATE TABLE `sys_oper_log`
     `oper_location`  varchar(255)  DEFAULT '' COMMENT '操作地点',
     `oper_param`     varchar(2000) DEFAULT '' COMMENT '请求参数',
     `json_result`    varchar(2000) DEFAULT '' COMMENT '返回参数',
-    `status`         int(1) DEFAULT '0' COMMENT '操作状态（0正常 1异常）',
+    `status`         int(1)        DEFAULT '0' COMMENT '操作状态（0正常 1异常）',
     `error_msg`      varchar(2000) DEFAULT '' COMMENT '错误消息',
     `oper_time`      datetime      DEFAULT NULL COMMENT '操作时间',
     PRIMARY KEY (`oper_id`),
-    KEY              `idx_sys_oper_log_bt` (`business_type`),
-    KEY              `idx_sys_oper_log_s` (`status`),
-    KEY              `idx_sys_oper_log_ot` (`oper_time`)
+    KEY `idx_sys_oper_log_bt` (`business_type`),
+    KEY `idx_sys_oper_log_s` (`status`),
+    KEY `idx_sys_oper_log_ot` (`oper_time`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='操作日志记录';
 
@@ -930,7 +932,7 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_oss`;
 CREATE TABLE `sys_oss`
 (
-    `oss_id`        bigint(20) NOT NULL COMMENT '对象存储主键',
+    `oss_id`        bigint(20)   NOT NULL COMMENT '对象存储主键',
     `file_name`     varchar(255) NOT NULL DEFAULT '' COMMENT '文件名',
     `original_name` varchar(255) NOT NULL DEFAULT '' COMMENT '原名',
     `file_suffix`   varchar(10)  NOT NULL DEFAULT '' COMMENT '文件后缀名',
@@ -956,7 +958,7 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_oss_config`;
 CREATE TABLE `sys_oss_config`
 (
-    `oss_config_id` bigint(20) NOT NULL COMMENT '主建',
+    `oss_config_id` bigint(20)  NOT NULL COMMENT '主建',
     `config_key`    varchar(20) NOT NULL DEFAULT '' COMMENT '配置key',
     `access_key`    varchar(255)         DEFAULT '' COMMENT 'accessKey',
     `secret_key`    varchar(255)         DEFAULT '' COMMENT '秘钥',
@@ -1015,10 +1017,10 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_post`;
 CREATE TABLE `sys_post`
 (
-    `post_id`     bigint(20) NOT NULL COMMENT '岗位ID',
+    `post_id`     bigint(20)  NOT NULL COMMENT '岗位ID',
     `post_code`   varchar(64) NOT NULL COMMENT '岗位编码',
     `post_name`   varchar(50) NOT NULL COMMENT '岗位名称',
-    `post_sort`   int(4) NOT NULL COMMENT '显示顺序',
+    `post_sort`   int(4)      NOT NULL COMMENT '显示顺序',
     `status`      char(1)     NOT NULL COMMENT '状态（0正常 1停用）',
     `create_by`   varchar(64)  DEFAULT '' COMMENT '创建者',
     `create_time` datetime     DEFAULT NULL COMMENT '创建时间',
@@ -1053,13 +1055,13 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`
 (
-    `role_id`             bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+    `role_id`             bigint(20)   NOT NULL AUTO_INCREMENT COMMENT '角色ID',
     `role_name`           varchar(30)  NOT NULL COMMENT '角色名称',
     `role_key`            varchar(100) NOT NULL COMMENT '角色权限字符串',
-    `role_sort`           int(4) NOT NULL COMMENT '显示顺序',
+    `role_sort`           int(4)       NOT NULL COMMENT '显示顺序',
     `data_scope`          char(1)      DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
-    `menu_check_strictly` tinyint(1) DEFAULT '1' COMMENT '菜单树选择项是否关联显示',
-    `dept_check_strictly` tinyint(1) DEFAULT '1' COMMENT '部门树选择项是否关联显示',
+    `menu_check_strictly` tinyint(1)   DEFAULT '1' COMMENT '菜单树选择项是否关联显示',
+    `dept_check_strictly` tinyint(1)   DEFAULT '1' COMMENT '部门树选择项是否关联显示',
     `status`              char(1)      NOT NULL COMMENT '角色状态（0正常 1停用）',
     `del_flag`            char(1)      DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
     `create_by`           varchar(64)  DEFAULT '' COMMENT '创建者',
@@ -1127,8 +1129,8 @@ CREATE TABLE `sys_role_menu`
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
-    `user_id`     bigint(20) NOT NULL COMMENT '用户ID',
-    `dept_id`     bigint(20) DEFAULT NULL COMMENT '部门ID',
+    `user_id`     bigint(20)  NOT NULL COMMENT '用户ID',
+    `dept_id`     bigint(20)   DEFAULT NULL COMMENT '部门ID',
     `username`    varchar(30) NOT NULL COMMENT '用户账号',
     `nickname`    varchar(30) NOT NULL COMMENT '用户昵称',
     `user_type`   varchar(10)  DEFAULT 'sys_user' COMMENT '用户类型（sys_user系统用户）',
@@ -1213,13 +1215,13 @@ COMMIT;
 DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`
 (
-    `branch_id`     bigint(20) NOT NULL COMMENT 'branch transaction id',
+    `branch_id`     bigint(20)   NOT NULL COMMENT 'branch transaction id',
     `xid`           varchar(100) NOT NULL COMMENT 'global transaction id',
     `context`       varchar(128) NOT NULL COMMENT 'undo_log context,such as serialization',
     `rollback_info` longblob     NOT NULL COMMENT 'rollback info',
-    `log_status`    int(11) NOT NULL COMMENT '0:normal status,1:defense status',
-    `log_created`   datetime(6) NOT NULL COMMENT 'create datetime',
-    `log_modified`  datetime(6) NOT NULL COMMENT 'modify datetime',
+    `log_status`    int(11)      NOT NULL COMMENT '0:normal status,1:defense status',
+    `log_created`   datetime(6)  NOT NULL COMMENT 'create datetime',
+    `log_modified`  datetime(6)  NOT NULL COMMENT 'modify datetime',
     UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='AT transaction mode undo table';
@@ -1231,7 +1233,7 @@ BEGIN;
 COMMIT;
 
 SET
-FOREIGN_KEY_CHECKS = 1;
+    FOREIGN_KEY_CHECKS = 1;
 
 ALTER TABLE `sys_menu`
     MODIFY COLUMN `menu_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单ID' FIRST;
@@ -1241,3 +1243,12 @@ ALTER TABLE `sys_post`
 
 ALTER TABLE `sys_user`
     MODIFY COLUMN `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID' FIRST;
+
+ALTER TABLE `sys_oper_log`
+    ADD COLUMN `reponse_time` int(11) NULL COMMENT '接口耗时' AFTER `oper_time`;
+
+ALTER TABLE `sys_oper_log`
+    DROP COLUMN `dept_name`;
+
+ALTER TABLE `sys_oper_log`
+    DROP COLUMN `oper_location`;

@@ -21,6 +21,8 @@
         <module>you-common-excel</module>
         <module>you-common-auth</module>
         <module>you-common-validation</module>
+        <module>you-common-log</module>
+        <module>you-common-mq</module>
     </modules>
 
 </project>

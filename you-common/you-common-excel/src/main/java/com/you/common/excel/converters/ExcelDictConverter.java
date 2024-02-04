@@ -7,10 +7,10 @@ import com.alibaba.excel.metadata.data.WriteCellData;
 import com.alibaba.excel.metadata.property.ExcelContentProperty;
 import com.you.common.core.constant.CacheConstants;
 import com.you.common.core.domain.R;
-import com.you.common.core.domain.model.SysDictData;
 import com.you.common.core.utils.text.Convert;
 import com.you.common.excel.annotation.ExcelDictItem;
 import com.you.common.redis.service.RedisService;
+import com.you.system.api.domain.model.SysDictData;
 import com.you.system.api.feign.RemoteDictService;
 
 import java.lang.reflect.Field;

@@ -1,7 +1,7 @@
 package com.you.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.you.common.core.domain.model.SysDictData;
+import com.you.system.api.domain.model.SysDictData;
 
 import java.util.List;
 

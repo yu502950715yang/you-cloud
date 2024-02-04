@@ -1,7 +1,7 @@
 package com.you.system.domain.vo;
 
 import cn.hutool.core.collection.CollUtil;
-import com.you.common.core.domain.model.SysUser;
+import com.you.system.api.domain.model.SysUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

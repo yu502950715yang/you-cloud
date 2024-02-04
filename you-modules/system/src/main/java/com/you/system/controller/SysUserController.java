@@ -7,10 +7,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
-import com.you.common.core.domain.model.LoginUser;
-import com.you.common.core.domain.model.SysRole;
-import com.you.common.core.domain.model.SysUser;
 import com.you.common.core.exception.CommonException;
+import com.you.common.log.annotation.OperLog;
+import com.you.common.log.enums.OperLogTypenum;
+import com.you.system.api.domain.LoginUser;
+import com.you.system.api.domain.model.SysRole;
+import com.you.system.api.domain.model.SysUser;
 import com.you.system.domain.bo.SysUserBo;
 import com.you.system.domain.model.SysDept;
 import com.you.system.domain.poi.SysUserExcel;
@@ -61,6 +63,7 @@ public class SysUserController {
         return R.ok(user);
     }
 
+    @OperLog(title = "用户管理", type = OperLogTypenum.QUERY)
     @SaCheckPermission("system:user:list")
     @PostMapping("/list")
     public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {

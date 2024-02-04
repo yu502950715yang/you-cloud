@@ -1,5 +1,6 @@
-package com.you.common.core.domain.model;
+package com.you.system.api.domain;
 
+import com.you.system.api.domain.model.SysUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

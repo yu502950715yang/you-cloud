@@ -35,11 +35,6 @@
 
         <dependency>
             <groupId>com.you</groupId>
-            <artifactId>you-common-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.you</groupId>
             <artifactId>api-system</artifactId>
         </dependency>
     </dependencies>

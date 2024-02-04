@@ -3,7 +3,7 @@ package com.you.system.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.you.common.core.domain.model.SysRole;
+import com.you.system.api.domain.model.SysRole;
 import com.you.system.domain.bo.SysRoleBo;
 import com.you.system.domain.qo.RoleQo;
 import org.apache.ibatis.annotations.Mapper;

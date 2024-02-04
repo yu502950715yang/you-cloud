@@ -2,7 +2,7 @@ package com.you.system.api.feign;
 
 import com.you.common.core.constant.ServiceNameConstants;
 import com.you.common.core.domain.R;
-import com.you.common.core.domain.model.SysDictData;
+import com.you.system.api.domain.model.SysDictData;
 import com.you.system.api.failback.RemoteAuthFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

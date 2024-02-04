@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.you.system.mapper.SysUserMapper">
 
-    <select id="selectByUsername" resultType="com.you.common.core.domain.model.SysUser">
+    <select id="selectByUsername" resultType="com.you.system.api.domain.model.SysUser">
         SELECT user_id, username, password, status
         FROM sys_user
         WHERE username = #{username}
           AND del_flag = 0
     </select>
 
-    <select id="selectLoginUserByUserId" resultType="com.you.common.core.domain.model.SysUser">
+    <select id="selectLoginUserByUserId" resultType="com.you.system.api.domain.model.SysUser">
         SELECT user_id,
                dept_id,
                username,
@@ -24,7 +24,7 @@
           AND del_flag = 0
     </select>
 
-    <select id="ruleAllocatedListPage" resultType="com.you.common.core.domain.model.SysUser">
+    <select id="ruleAllocatedListPage" resultType="com.you.system.api.domain.model.SysUser">
         SELECT u.user_id, u.username, u.nickname, u.email, u.phone, u.create_time, u.status
         FROM sys_user AS u, sys_user_role AS sur
         <where>
@@ -42,7 +42,7 @@
         ORDER BY u.create_time
     </select>
 
-    <select id="ruleUnallocatedListPage" resultType="com.you.common.core.domain.model.SysUser">
+    <select id="ruleUnallocatedListPage" resultType="com.you.system.api.domain.model.SysUser">
         SELECT u.user_id, u.username, u.nickname, u.email, u.phone, u.create_time, u.status
         FROM sys_user AS u
         WHERE NOT EXISTS (SELECT 1 FROM sys_user_role AS sur WHERE sur.role_id = #{qo.roleId} AND sur.user_id =

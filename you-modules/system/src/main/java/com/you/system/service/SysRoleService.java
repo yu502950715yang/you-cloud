@@ -2,7 +2,7 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.you.common.core.domain.model.SysRole;
+import com.you.system.api.domain.model.SysRole;
 import com.you.system.domain.bo.SysRoleBo;
 import com.you.system.domain.qo.RoleQo;
 

@@ -15,7 +15,7 @@
     </resultMap>
 
 
-    <select id="listPage" resultType="com.you.common.core.domain.model.SysRole">
+    <select id="listPage" resultType="com.you.system.api.domain.model.SysRole">
         SELECT role_id ,role_name ,role_key, role_sort, status, create_time
         FROM sys_role
         <where>
@@ -53,7 +53,7 @@
     </select>
 
 
-    <select id="selectRoleListByUserId" resultType="com.you.common.core.domain.model.SysRole">
+    <select id="selectRoleListByUserId" resultType="com.you.system.api.domain.model.SysRole">
         SELECT r.*
         FROM sys_role r
                  LEFT JOIN sys_user_role ur ON r.role_id = ur.role_id
