@@ -11,6 +11,10 @@ public enum OperLogTypenum {
     QUERY("查询"),
     DOWNLOAD("导出"),
     UPLOAD("导入"),
+    CANCEL_AUTH("取消授权"),
+    AUTH("授权"),
+    ENABLE_DISABLE("启用禁用"),
+    RESET_PWD("重置密码"),
     OTHER("其他"),
     ;
 

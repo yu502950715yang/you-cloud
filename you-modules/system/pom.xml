@@ -37,11 +37,6 @@
 
         <dependency>
             <groupId>com.you</groupId>
-            <artifactId>you-common-auth</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.you</groupId>
             <artifactId>you-common-datasource</artifactId>
         </dependency>
 
