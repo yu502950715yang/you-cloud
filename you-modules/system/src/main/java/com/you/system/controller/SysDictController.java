@@ -40,6 +40,7 @@ public class SysDictController {
         return R.ok(dictTypeService.listPage(qo));
     }
 
+    @OperLog(title = "字典管理", type = OperLogTypenum.INSERT)
     @SaCheckPermission("system:post:add")
     @PostMapping("/type/save")
     public R<Void> saveDictType(@Validated(ValidationGroups.Add.class) @RequestBody SysDictType dictType) {
