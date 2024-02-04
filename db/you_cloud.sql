@@ -1252,3 +1252,6 @@ ALTER TABLE `sys_oper_log`
 
 ALTER TABLE `sys_oper_log`
     DROP COLUMN `oper_location`;
+
+ALTER TABLE `sys_dict_type`
+    MODIFY COLUMN `dict_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典主键' FIRST;

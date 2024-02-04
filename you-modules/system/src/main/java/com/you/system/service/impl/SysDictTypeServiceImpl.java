@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.system.domain.model.SysDictType;
@@ -18,5 +19,15 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
     @Override
     public IPage<SysDictType> listPage(DictTypeQo qo) {
         return sysDictTypeMapper.listPage(qo.getPage(), qo);
+    }
+
+    @Override
+    public boolean checkDictTypeUnique(SysDictType sysDictType) {
+        LambdaQueryWrapper<SysDictType> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysDictType::getDictType, sysDictType.getDictType());
+        if (sysDictType.getDictId() != null) {
+            queryWrapper.ne(SysDictType::getDictId, sysDictType.getDictId());
+        }
+        return sysDictTypeMapper.selectCount(queryWrapper) == 0;
     }
 }
