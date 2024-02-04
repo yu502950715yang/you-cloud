@@ -18,6 +18,9 @@ public class OperLogConsumer {
         this.operLogService = operLogService;
     }
 
+    /**
+     * 消费操作日志
+     */
     @Bean
     public Consumer<SysOperLog> operLogMq() {
         return sysOperLog -> {
