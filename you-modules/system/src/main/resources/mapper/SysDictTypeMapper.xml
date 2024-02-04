@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.you.system.mapper.SysDictTypeMapper">
+
+
+    <select id="listPage" resultType="com.you.system.domain.model.SysDictType">
+        SELECT *
+        FROM sys_dict_type
+        <where>
+            <if test="qo.dictName != null and qo.dictType !=''">
+                AND dict_name LIKE CONCAT('%',#{qo.dictName},'%')
+            </if>
+            <if test="qo.dictType != null and qo.dictType !=''">
+                AND dict_type LIKE CONCAT('%',#{qo.dictType},'%')
+            </if>
+            <if test="qo.status != null and qo.status !=''">
+                AND status = #{qo.status}
+            </if>
+            <if test="qo.beginTime != null and qo.beginTime !=''">
+                <if test="qo.endTime!= null and qo.endTime !=''">
+                    AND create_time BETWEEN #{qo.beginTime} AND #{qo.endTime}
+                </if>
+            </if>
+        </where>
+    </select>
+
+</mapper>
