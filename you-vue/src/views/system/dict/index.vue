@@ -134,8 +134,8 @@
       <pagination
          v-show="total > 0"
          :total="total"
-         v-model:page="queryParams.pageNum"
-         v-model:limit="queryParams.pageSize"
+         v-model:page="queryParams.page.current"
+         v-model:limit="queryParams.page.size"
          @pagination="getList"
       />
 
@@ -173,7 +173,7 @@
 
 <script setup name="Dict">
 import useDictStore from '@/store/modules/dict'
-import { listType, getType, delType, addType, updateType, refreshCache } from "@/api/system/dict/type";
+import {addType, delType, getType, listType, refreshCache, updateType} from "@/api/system/dict/type";
 
 const { proxy } = getCurrentInstance();
 const { sys_normal_disable } = proxy.useDict("sys_normal_disable");
@@ -192,8 +192,13 @@ const dateRange = ref([]);
 const data = reactive({
   form: {},
   queryParams: {
-    pageNum: 1,
-    pageSize: 10,
+    page: {
+      current: 1,
+      size: 10,
+      orderList: [
+        {column: 'createTime', asc: false}
+      ]
+    },
     dictName: undefined,
     dictType: undefined,
     status: undefined
@@ -209,9 +214,9 @@ const { queryParams, form, rules } = toRefs(data);
 /** 查询字典类型列表 */
 function getList() {
   loading.value = true;
-  listType(proxy.addDateRange(queryParams.value, dateRange.value)).then(response => {
-    typeList.value = response.rows;
-    total.value = response.total;
+  listType(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
+    typeList.value = res.data.records;
+    total.value = res.data.total;
     loading.value = false;
   });
 }
