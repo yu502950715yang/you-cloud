@@ -22,4 +22,12 @@ public interface SysDictTypeService extends IService<SysDictType> {
      * @return true or false
      */
     boolean checkDictTypeUnique(SysDictType sysDictType);
+
+    /**
+     * 修改数据字典
+     *
+     * @param sysDictType 字典数据
+     * @return 是否成功
+     */
+    boolean editDictType(SysDictType sysDictType);
 }

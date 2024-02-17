@@ -1,6 +1,7 @@
 package com.you.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.common.core.constant.CacheConstants;
 import com.you.common.core.constant.UserConstants;
@@ -37,5 +38,15 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
             redisService.setCacheObject(redisKey, dictDataList);
         }
         return dictDataList;
+    }
+
+    @Override
+    public void updateDictTypeByDictType(String oldDictType, String newDictType) {
+        String redisKey = redisService.splitRedisKey(CacheConstants.REDIS_SYS_DICT_KEY, oldDictType);
+        redisService.deleteObject(redisKey);
+        LambdaUpdateWrapper<SysDictData> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(SysDictData::getDictType, newDictType)
+                .eq(SysDictData::getDictType, oldDictType);
+        dictDataMapper.update(null, updateWrapper);
     }
 }

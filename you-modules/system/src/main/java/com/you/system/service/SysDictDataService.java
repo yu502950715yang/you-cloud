@@ -14,4 +14,12 @@ public interface SysDictDataService extends IService<SysDictData> {
      * @return 字典数据list
      */
     List<SysDictData> getDictDataByType(String dictType);
+
+    /**
+     * 根据字典类型更新字典数据
+     *
+     * @param oldDictType 旧字典类型
+     * @param newDictType 新字典类型
+     */
+    void updateDictTypeByDictType(String oldDictType, String newDictType);
 }

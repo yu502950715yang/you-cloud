@@ -31,7 +31,7 @@ public class SysDictType {
 
     @NotNull(message = "状态不能为空", groups = ValidationGroups.Common.class)
     @TableField("status")
-    private Integer status;
+    private String status;
 
     @TableField("create_by")
     private String createBy;

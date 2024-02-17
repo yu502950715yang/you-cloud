@@ -51,4 +51,22 @@ public class SysDictController {
         dictType.setCreateTime(LocalDateTime.now());
         return dictTypeService.save(dictType) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
+
+    @SaCheckPermission("system:dict:edit")
+    @GetMapping("/type/info/{dictId}")
+    public R<SysDictType> getDictTypeInfo(@PathVariable Long dictId) {
+        return R.ok(dictTypeService.getById(dictId));
+    }
+
+    @OperLog(title = "字典管理", type = OperLogTypenum.UPDATE)
+    @SaCheckPermission("system:dict:edit")
+    @PostMapping("/type/edit")
+    public R<Void> editDictType(@Validated(ValidationGroups.Update.class) @RequestBody SysDictType dictType) {
+        if (!dictTypeService.checkDictTypeUnique(dictType)) {
+            return R.fail("字典类型已存在");
+        }
+        dictType.setUpdateBy(LoginUtils.getLoginUserName());
+        dictType.setUpdateTime(LocalDateTime.now());
+        return dictTypeService.editDictType(dictType) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+    }
 }
