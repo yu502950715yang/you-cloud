@@ -41,7 +41,7 @@ public class LoginServiceImpl implements LoginService {
             throw new CommonException("账号或密码不正确");
         }
         //接口报错返回错误信息
-        if (R.FAIL == loginUserResult.getCode()) {
+        if (R.ERROR == loginUserResult.getCode()) {
             throw new CommonException(loginUserResult.getMsg());
         }
         SysUser sysUser = loginUserResult.getData();

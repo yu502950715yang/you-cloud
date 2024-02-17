@@ -22,7 +22,7 @@ public class R<T> implements Serializable {
     /**
      * 失败
      */
-    public static final int FAIL = HttpStatus.ERROR;
+    public static final int ERROR = HttpStatus.ERROR;
 
     private int code;
 
@@ -43,19 +43,19 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> fail() {
-        return restResult(null, FAIL, null);
+        return restResult(null, ERROR, null);
     }
 
     public static <T> R<T> fail(String msg) {
-        return restResult(null, FAIL, msg);
+        return restResult(null, ERROR, msg);
     }
 
     public static <T> R<T> fail(T data) {
-        return restResult(data, FAIL, null);
+        return restResult(data, ERROR, null);
     }
 
     public static <T> R<T> fail(T data, String msg) {
-        return restResult(data, FAIL, msg);
+        return restResult(data, ERROR, msg);
     }
 
     public static <T> R<T> fail(int code, String msg) {
