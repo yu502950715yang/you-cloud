@@ -43,7 +43,7 @@ public class ExcelDictConverter implements Converter<String> {
         } else {
             RemoteDictService remoteDictService = SpringUtil.getBean("remoteDictService");
             R<List<SysDictData>> response = remoteDictService.getDictDataByType(dictType);
-            if (R.isSuccess(response)) {
+            if (Boolean.TRUE.equals(R.isSuccess(response))) {
                 sysDictDataList = response.getData();
             }
         }
