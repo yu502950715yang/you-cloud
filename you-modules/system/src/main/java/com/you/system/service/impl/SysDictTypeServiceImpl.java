@@ -3,6 +3,8 @@ package com.you.system.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.you.common.core.constant.CacheConstants;
+import com.you.common.redis.service.RedisService;
 import com.you.system.domain.model.SysDictType;
 import com.you.system.domain.qo.DictTypeQo;
 import com.you.system.mapper.SysDictTypeMapper;
@@ -18,6 +20,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
 
     private final SysDictTypeMapper sysDictTypeMapper;
     private final SysDictDataService dictDataService;
+    private final RedisService redisService;
 
     @Override
     public IPage<SysDictType> listPage(DictTypeQo qo) {
@@ -42,6 +45,12 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
             // 修改字典数据表
             dictDataService.updateDictTypeByDictType(oldData.getDictType(), sysDictType.getDictType());
         }
-        return sysDictTypeMapper.updateById(sysDictType) > 0;
+        boolean flag = sysDictTypeMapper.updateById(sysDictType) > 0;
+        if (flag) {
+            String redisKey = redisService.splitRedisKey(CacheConstants.REDIS_SYS_DICT_KEY, sysDictType.getDictType());
+            // 清除缓存
+            redisService.deleteObject(redisKey);
+        }
+        return flag;
     }
 }
