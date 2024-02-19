@@ -22,27 +22,27 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/dict")
-public class SysDictController {
+@RequestMapping("/dict/type")
+public class SysDictTypeController {
 
     private final SysDictDataService dictDataService;
     private final SysDictTypeService dictTypeService;
 
-    @GetMapping("/type/{dictType}")
+    @GetMapping("/{dictType}")
     public R<List<SysDictData>> getDictDataByType(@PathVariable String dictType) {
         return R.ok(dictDataService.getDictDataByType(dictType));
     }
 
     @OperLog(title = "字典管理", type = OperLogTypenum.QUERY)
     @SaCheckPermission("system:dict:list")
-    @PostMapping("/type/list")
+    @PostMapping("/list")
     public R<IPage<SysDictType>> getDictTypeList(@RequestBody DictTypeQo qo) {
         return R.ok(dictTypeService.listPage(qo));
     }
 
     @OperLog(title = "字典管理", type = OperLogTypenum.INSERT)
     @SaCheckPermission("system:post:add")
-    @PostMapping("/type/save")
+    @PostMapping("/save")
     public R<Void> saveDictType(@Validated(ValidationGroups.Add.class) @RequestBody SysDictType dictType) {
         if (!dictTypeService.checkDictTypeUnique(dictType)) {
             return R.fail("字典类型已存在");
@@ -53,14 +53,14 @@ public class SysDictController {
     }
 
     @SaCheckPermission("system:dict:edit")
-    @GetMapping("/type/info/{dictId}")
+    @GetMapping("/info/{dictId}")
     public R<SysDictType> getDictTypeInfo(@PathVariable Long dictId) {
         return R.ok(dictTypeService.getById(dictId));
     }
 
     @OperLog(title = "字典管理", type = OperLogTypenum.UPDATE)
     @SaCheckPermission("system:dict:edit")
-    @PostMapping("/type/edit")
+    @PostMapping("/edit")
     public R<Void> editDictType(@Validated(ValidationGroups.Update.class) @RequestBody SysDictType dictType) {
         if (!dictTypeService.checkDictTypeUnique(dictType)) {
             return R.fail("字典类型已存在");
