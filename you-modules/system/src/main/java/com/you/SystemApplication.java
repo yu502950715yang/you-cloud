@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @since 1.0
  * Create with Intellij IDEA on 2023-04-11 16:36
  */
-@EnableFeignClients(basePackages = {"com.you"})
+@EnableFeignClients(basePackages = {"com.you.*.api"})
 @SpringBootApplication()
 @MapperScan(basePackages = {"com.you.*.mapper"})
 public class SystemApplication {
