@@ -45,17 +45,18 @@ public class AuthController {
 
     @PostMapping("/login")
     public R<User> login(@Validated(ValidationGroups.Common.class) @RequestBody LoginForm loginForm) {
+        String verifyCodeErrorMsg = "验证码错误";
         if (loginForm.getVerifyCode() == null || loginForm.getVerifyCode().isEmpty()) {
-            throw new CommonException("验证码错误");
+            throw new CommonException(verifyCodeErrorMsg);
         }
         String redisKey = CacheConstants.CAPTCHA_CODE_KEY + loginForm.getVerifyCodeKey();
         Object codeObj = redisService.getCacheObject(redisKey);
         if (codeObj == null) {
-            throw new CommonException("验证码错误");
+            throw new CommonException(verifyCodeErrorMsg);
         }
         String redisCode = codeObj.toString();
         if (!loginForm.getVerifyCode().equals(redisCode)) {
-            throw new CommonException("验证码错误");
+            throw new CommonException(verifyCodeErrorMsg);
         }
         User user = loginService.login(loginForm.getUsername(), loginForm.getPassword());
         return R.ok(user);
