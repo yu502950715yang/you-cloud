@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @since 1.0
  * Create with Intellij IDEA on 2023-04-06 11:19
  */
-@EnableFeignClients(basePackages = {"com.you"})
+@EnableFeignClients(basePackages = {"com.you.**.api"})
 @SpringBootApplication
 public class AuthApplication {
 
