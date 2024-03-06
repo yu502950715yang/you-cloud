@@ -90,3 +90,8 @@ sa-token:
   token-prefix: Bearer
   # jwt秘钥
   jwt-secret-key: 1wewle30skeku3yurfewbfjsdafjk
+
+logging:
+  level:
+    # 设置根logger日志级别
+    root: WARN
