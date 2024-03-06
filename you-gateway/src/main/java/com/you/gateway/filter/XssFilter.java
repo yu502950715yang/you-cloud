@@ -4,6 +4,7 @@ import cn.hutool.http.HtmlUtil;
 import com.you.common.core.utils.StrUtils;
 import com.you.gateway.config.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -85,11 +86,13 @@ public class XssFilter implements GlobalFilter, Ordered {
             headers.set(HttpHeaders.CONTENT_TYPE, "application/json;charset=utf8");
             // 重写ServerHttpRequestDecorator，修改了body和header，重写getBody和getHeaders方法
             newRequest = new ServerHttpRequestDecorator(newRequest) {
+                @NotNull
                 @Override
                 public Flux<DataBuffer> getBody() {
                     return bodyFlux;
                 }
 
+                @NotNull
                 @Override
                 public HttpHeaders getHeaders() {
                     return headers;
