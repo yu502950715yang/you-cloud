@@ -8,7 +8,7 @@ import com.you.common.core.constant.UserConstants;
 import com.you.common.core.domain.R;
 import com.you.common.core.utils.StrUtils;
 import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.domain.model.SysMenu;
 import com.you.system.domain.qo.MenuQo;
 import com.you.system.domain.vo.ElTree;
@@ -51,14 +51,14 @@ public class SysMenuController {
         return R.ok(treeList);
     }
 
-    @OperLog(title = "菜单管理", type = OperLogTypenum.QUERY)
+    @OperLog(title = "菜单管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:menu:list")
     @GetMapping("/list")
     public R<List<SysMenu>> list(MenuQo qo) {
         return R.ok(menuService.selectMenuList(qo));
     }
 
-    @OperLog(title = "菜单管理", type = OperLogTypenum.INSERT)
+    @OperLog(title = "菜单管理", type = OperLogTypEnum.INSERT)
     @SaCheckPermission("system:menu:add")
     @PostMapping
     public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysMenu menu) {
@@ -78,7 +78,7 @@ public class SysMenuController {
     /**
      * 删除菜单
      */
-    @OperLog(title = "菜单管理", type = OperLogTypenum.DELETE)
+    @OperLog(title = "菜单管理", type = OperLogTypEnum.DELETE)
     @SaCheckPermission("system:menu:remove")
     @DeleteMapping("/{menuId}")
     public R<Void> remove(@PathVariable("menuId") Long menuId) {
@@ -100,7 +100,7 @@ public class SysMenuController {
         return R.ok(menuService.getById(menuId));
     }
 
-    @OperLog(title = "菜单管理", type = OperLogTypenum.UPDATE)
+    @OperLog(title = "菜单管理", type = OperLogTypEnum.UPDATE)
     @SaCheckPermission("system:menu:edit")
     @PutMapping
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysMenu menu) {

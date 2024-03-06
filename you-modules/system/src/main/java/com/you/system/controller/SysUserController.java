@@ -9,7 +9,7 @@ import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.exception.CommonException;
 import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.api.domain.LoginUser;
 import com.you.system.api.domain.model.SysRole;
 import com.you.system.api.domain.model.SysUser;
@@ -63,7 +63,7 @@ public class SysUserController {
         return R.ok(user);
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.QUERY)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:user:list")
     @PostMapping("/list")
     public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {
@@ -85,7 +85,7 @@ public class SysUserController {
         }
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.INSERT)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.INSERT)
     @SaCheckPermission("system:user:add")
     @PostMapping
     public R<Void> addUser(@Validated(ValidationGroups.Add.class) @RequestBody SysUserBo user) {
@@ -96,21 +96,21 @@ public class SysUserController {
         return sysUserService.save(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.DELETE)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.DELETE)
     @SaCheckPermission("system:user:remove")
     @PostMapping("/remove")
     public R<Void> remove(@RequestBody List<Long> userIds) {
         return sysUserService.removeByIds(userIds) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.UPDATE)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.UPDATE)
     @SaCheckPermission("system:user:edit")
     @PostMapping("/changeStatus")
     public R<Void> changeStatus(@RequestBody SysUser sysUser) {
         return sysUserService.changeStatus(sysUser) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.RESET_PWD)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.RESET_PWD)
     @SaCheckPermission("system:user:resetPwd")
     @PostMapping("/resetPwd")
     public R<Void> resetPwd(@RequestBody SysUser sysUser) {
@@ -123,7 +123,7 @@ public class SysUserController {
         return R.ok(sysUserService.getUserInfo(userId));
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.UPDATE)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.UPDATE)
     @SaCheckPermission("system:user:edit")
     @PostMapping("/edit")
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysUserBo user) {
@@ -132,7 +132,7 @@ public class SysUserController {
         return sysUserService.edit(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.DOWNLOAD)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.DOWNLOAD)
     @SaCheckPermission("system:user:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response, @RequestBody UserQo qo) {
@@ -164,7 +164,7 @@ public class SysUserController {
         return R.ok(authRole);
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypenum.AUTH)
+    @OperLog(title = "用户管理", type = OperLogTypEnum.AUTH)
     @SaCheckPermission("system:user:edit")
     @PostMapping("/authRole")
     public R<Void> authRole(@RequestBody SysUserBo user) {

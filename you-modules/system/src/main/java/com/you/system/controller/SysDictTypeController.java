@@ -6,7 +6,7 @@ import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.api.domain.model.SysDictData;
 import com.you.system.domain.model.SysDictType;
 import com.you.system.domain.qo.DictTypeQo;
@@ -33,14 +33,14 @@ public class SysDictTypeController {
         return R.ok(dictDataService.getDictDataByType(dictType));
     }
 
-    @OperLog(title = "字典管理", type = OperLogTypenum.QUERY)
+    @OperLog(title = "字典管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:dict:list")
     @PostMapping("/list")
     public R<IPage<SysDictType>> getDictTypeList(@RequestBody DictTypeQo qo) {
         return R.ok(dictTypeService.listPage(qo));
     }
 
-    @OperLog(title = "字典管理", type = OperLogTypenum.INSERT)
+    @OperLog(title = "字典管理", type = OperLogTypEnum.INSERT)
     @SaCheckPermission("system:post:add")
     @PostMapping("/save")
     public R<Void> saveDictType(@Validated(ValidationGroups.Add.class) @RequestBody SysDictType dictType) {
@@ -58,7 +58,7 @@ public class SysDictTypeController {
         return R.ok(dictTypeService.getById(dictId));
     }
 
-    @OperLog(title = "字典管理", type = OperLogTypenum.UPDATE)
+    @OperLog(title = "字典管理", type = OperLogTypEnum.UPDATE)
     @SaCheckPermission("system:dict:edit")
     @PostMapping("/edit")
     public R<Void> editDictType(@Validated(ValidationGroups.Update.class) @RequestBody SysDictType dictType) {

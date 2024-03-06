@@ -6,7 +6,7 @@ import com.you.auth.utils.LoginUtils;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.api.domain.model.SysRole;
 import com.you.system.api.domain.model.SysUser;
 import com.you.system.domain.bo.AuthUserBo;
@@ -33,14 +33,14 @@ public class SysRoleController {
     private final SysUserService userService;
     private final SysUserRoleService userRoleService;
 
-    @OperLog(title = "角色管理", type = OperLogTypenum.QUERY)
+    @OperLog(title = "角色管理", type = OperLogTypEnum.QUERY)
     @PostMapping("/list")
     @SaCheckPermission("system:role:list")
     public R<IPage<SysRole>> listPage(@RequestBody RoleQo qo) {
         return R.ok(roleService.listPage(qo));
     }
 
-    @OperLog(title = "角色管理", type = OperLogTypenum.ENABLE_DISABLE)
+    @OperLog(title = "角色管理", type = OperLogTypEnum.ENABLE_DISABLE)
     @PostMapping("/changeStatus")
     @SaCheckPermission("system:role:edit")
     public R<Void> changeStatus(@Validated(ValidationGroups.Other.class) @RequestBody SysRole role) {
@@ -50,7 +50,7 @@ public class SysRoleController {
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "角色管理", type = OperLogTypenum.INSERT)
+    @OperLog(title = "角色管理", type = OperLogTypEnum.INSERT)
     @PostMapping("/save")
     @SaCheckPermission("system:role:add")
     public R<Void> save(@Validated(ValidationGroups.Add.class) @RequestBody SysRoleBo role) {
@@ -73,7 +73,7 @@ public class SysRoleController {
         return R.ok(roleService.getRoleById(roleId));
     }
 
-    @OperLog(title = "角色管理", type = OperLogTypenum.UPDATE)
+    @OperLog(title = "角色管理", type = OperLogTypEnum.UPDATE)
     @PostMapping("/edit")
     @SaCheckPermission("system:role:edit")
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysRoleBo role) {
@@ -89,7 +89,7 @@ public class SysRoleController {
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "角色管理", type = OperLogTypenum.DELETE)
+    @OperLog(title = "角色管理", type = OperLogTypEnum.DELETE)
     @PostMapping("/remove")
     @SaCheckPermission("system:role:remove")
     public R<Void> remove(@RequestBody List<Long> roleIds) {
@@ -112,7 +112,7 @@ public class SysRoleController {
         return R.ok(userService.ruleUnallocatedListPage(qo));
     }
 
-    @OperLog(title = "角色管理", type = OperLogTypenum.CANCEL_AUTH)
+    @OperLog(title = "角色管理", type = OperLogTypEnum.CANCEL_AUTH)
     @PostMapping("/authUser/cancel")
     @SaCheckPermission("system:role:edit")
     public R<Void> authUserCancel(@RequestBody AuthUserBo bo) {
@@ -122,7 +122,7 @@ public class SysRoleController {
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "角色管理", type = OperLogTypenum.AUTH)
+    @OperLog(title = "角色管理", type = OperLogTypEnum.AUTH)
     @PostMapping("/authUser/select")
     @SaCheckPermission("system:role:edit")
     public R<Void> authUserSelect(@RequestBody AuthUserBo bo) {

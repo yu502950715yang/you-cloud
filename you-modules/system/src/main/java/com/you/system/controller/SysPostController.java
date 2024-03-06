@@ -8,7 +8,7 @@ import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.exception.CommonException;
 import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.domain.excel.SysPostExcel;
 import com.you.system.domain.model.SysPost;
 import com.you.system.domain.qo.PostQo;
@@ -35,14 +35,14 @@ public class SysPostController {
 
     private final SysPostService sysPostService;
 
-    @OperLog(title = "岗位管理", type = OperLogTypenum.QUERY)
+    @OperLog(title = "岗位管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:post:list")
     @PostMapping("/list")
     public R<IPage<SysPost>> list(@RequestBody PostQo qo) {
         return R.ok(sysPostService.listPage(qo));
     }
 
-    @OperLog(title = "岗位管理", type = OperLogTypenum.DOWNLOAD)
+    @OperLog(title = "岗位管理", type = OperLogTypEnum.DOWNLOAD)
     @SaCheckPermission("system:post:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response,@RequestBody PostQo qo) {
@@ -64,7 +64,7 @@ public class SysPostController {
     /**
      * 新增岗位
      */
-    @OperLog(title = "岗位管理", type = OperLogTypenum.INSERT)
+    @OperLog(title = "岗位管理", type = OperLogTypEnum.INSERT)
     @SaCheckPermission("system:post:add")
     @PostMapping
     public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysPost post) {
@@ -81,7 +81,7 @@ public class SysPostController {
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "岗位管理", type = OperLogTypenum.DELETE)
+    @OperLog(title = "岗位管理", type = OperLogTypEnum.DELETE)
     @SaCheckPermission("system:post:remove")
     @DeleteMapping("/{postIds}")
     public R<Void> remove(@PathVariable Long[] postIds) {
@@ -101,7 +101,7 @@ public class SysPostController {
         return R.ok(sysPostService.getById(postId));
     }
 
-    @OperLog(title = "岗位管理", type = OperLogTypenum.UPDATE)
+    @OperLog(title = "岗位管理", type = OperLogTypEnum.UPDATE)
     @SaCheckPermission("system:post:edit")
     @PutMapping
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysPost post) {

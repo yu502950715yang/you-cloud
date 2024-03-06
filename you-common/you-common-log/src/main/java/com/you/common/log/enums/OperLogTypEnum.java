@@ -3,7 +3,7 @@ package com.you.common.log.enums;
 import lombok.Getter;
 
 @Getter
-public enum OperLogTypenum {
+public enum OperLogTypEnum {
 
     INSERT("新增"),
     UPDATE("修改"),
@@ -20,7 +20,7 @@ public enum OperLogTypenum {
 
     private final String msg;
 
-    OperLogTypenum(String msg) {
+    OperLogTypEnum(String msg) {
         this.msg = msg;
     }
 
@@ -29,7 +29,7 @@ public enum OperLogTypenum {
      * @param type
      * @return
      */
-    public static boolean noRecordResponse(OperLogTypenum type) {
+    public static boolean noRecordResponse(OperLogTypEnum type) {
         return type == QUERY || type == DOWNLOAD;
     }
 }

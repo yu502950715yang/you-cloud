@@ -6,7 +6,7 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 import com.you.auth.utils.LoginUtils;
 import com.you.common.core.exception.CommonException;
 import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.common.mq.enums.TopicEnum;
 import com.you.common.mq.producer.ProducerMessage;
 import com.you.system.api.domain.model.SysOperLog;
@@ -66,7 +66,7 @@ public class LogAspect {
             sysLog.setStatus(0);
             sysLog.setOperParam(PARAM_THREADLOCAL.get());
             sysLog.setReponseTime(stopWatch.getTotalTimeMillis());
-            if (!OperLogTypenum.noRecordResponse(operLog.type())) {
+            if (!OperLogTypEnum.noRecordResponse(operLog.type())) {
                 sysLog.setJsonResult(StringUtils.substring(JSON.toJSONString(jsonResult), 0, 2000));
             }
             //发送mq消息
@@ -129,7 +129,7 @@ public class LogAspect {
             // 业务类型
             sysLog.setBusinessType(operLog.type().getMsg());
             //操作类别
-            sysLog.setOperatorType(operLog.operatorType());
+            sysLog.setOperatorType(operLog.operatorType().getCode());
         }
         //方法名称
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.domain.model.SysDept;
 import com.you.system.domain.qo.DeptQo;
 import com.you.system.domain.vo.ElTree;
@@ -25,14 +25,14 @@ public class SysDeptController {
 
     private final SysDeptService deptService;
 
-    @OperLog(title = "部门管理", type = OperLogTypenum.QUERY)
+    @OperLog(title = "部门管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:dept:list")
     @GetMapping("/list")
     public R<List<SysDept>> list(DeptQo qo) {
         return R.ok(deptService.list(qo));
     }
 
-    @OperLog(title = "部门管理", type = OperLogTypenum.INSERT)
+    @OperLog(title = "部门管理", type = OperLogTypEnum.INSERT)
     @SaCheckPermission("system:dept:add")
     @PostMapping
     public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysDept dept) {
@@ -59,7 +59,7 @@ public class SysDeptController {
     /**
      * 修改部门
      */
-    @OperLog(title = "部门管理", type = OperLogTypenum.UPDATE)
+    @OperLog(title = "部门管理", type = OperLogTypEnum.UPDATE)
     @SaCheckPermission("system:dept:edit")
     @PutMapping
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysDept dept) {
@@ -74,7 +74,7 @@ public class SysDeptController {
         return R.fail(Constants.REQUEST_FAIL_MSG);
     }
 
-    @OperLog(title = "部门管理", type = OperLogTypenum.DELETE)
+    @OperLog(title = "部门管理", type = OperLogTypEnum.DELETE)
     @SaCheckPermission("system:dept:remove")
     @DeleteMapping("/{deptId}")
     public R<Void> remove(@PathVariable Long deptId) {

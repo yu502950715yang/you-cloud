@@ -1,6 +1,7 @@
 package com.you.common.log.annotation;
 
-import com.you.common.log.enums.OperLogTypenum;
+import com.you.common.log.enums.OperLogTypEnum;
+import com.you.common.log.enums.OperatorTypeEnum;
 
 import java.lang.annotation.*;
 
@@ -18,10 +19,10 @@ public @interface OperLog {
      */
     String title();
 
-    OperLogTypenum type();
+    OperLogTypEnum type();
 
     /**
      * 操作类别（0其它 1后台用户 2手机端用户）
      */
-    int operatorType() default 1;
+    OperatorTypeEnum operatorType() default OperatorTypeEnum.WEB;
 }
