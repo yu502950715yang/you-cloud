@@ -2,8 +2,8 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.you.system.domain.excel.SysPostExcel;
 import com.you.system.domain.model.SysPost;
-import com.you.system.domain.poi.SysPostExcel;
 import com.you.system.domain.qo.PostQo;
 
 import java.util.List;

@@ -26,7 +26,7 @@
         <include refid="selectList"/>
     </select>
 
-    <select id="selectExcelList" resultType="com.you.system.domain.poi.SysPostExcel">
+    <select id="selectExcelList" resultType="com.you.system.domain.excel.SysPostExcel">
         <include refid="selectList"/>
     </select>
 </mapper>

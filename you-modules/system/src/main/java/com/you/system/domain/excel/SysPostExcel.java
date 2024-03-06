@@ -1,4 +1,4 @@
-package com.you.system.domain.poi;
+package com.you.system.domain.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;

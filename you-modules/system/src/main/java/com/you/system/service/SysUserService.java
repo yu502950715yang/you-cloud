@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.api.domain.LoginUser;
 import com.you.system.api.domain.model.SysUser;
 import com.you.system.domain.bo.SysUserBo;
-import com.you.system.domain.poi.SysUserExcel;
+import com.you.system.domain.excel.SysUserExcel;
 import com.you.system.domain.qo.AuthUserQo;
 import com.you.system.domain.qo.UserQo;
 import com.you.system.domain.vo.SysUserVo;
