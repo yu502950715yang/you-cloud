@@ -1,6 +1,7 @@
 package com.you.gateway.handler;
 
 import com.you.common.core.utils.ServletUtils;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
@@ -24,8 +25,10 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GatewayExceptionHandler.class);
 
+
+    @NotNull
     @Override
-    public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
+    public Mono<Void> handle(ServerWebExchange exchange, @NotNull Throwable ex) {
         ServerHttpResponse response = exchange.getResponse();
         // true已将数据输出到客户端 false未将数据输出到客户端
         if (exchange.getResponse().isCommitted()) {

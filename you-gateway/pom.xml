@@ -64,11 +64,24 @@
         <dependency>
             <groupId>com.you</groupId>
             <artifactId>you-common-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.you</groupId>
+                    <artifactId>you-common-datasource</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-http</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
