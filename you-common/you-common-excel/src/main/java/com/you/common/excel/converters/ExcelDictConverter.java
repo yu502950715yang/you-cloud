@@ -51,11 +51,9 @@ public class ExcelDictConverter implements Converter<String> {
             return new WriteCellData<>("");
         }
 
-        Map<String, SysDictData> dictMap = sysDictDataList.stream().collect(Collectors.toMap(SysDictData::getDictValue, v -> v));
-        String excelData = "";
-        if (dictMap.containsKey(value)) {
-            excelData = dictMap.get(value).getDictLabel();
-        }
+        Map<String, String> dictMap = sysDictDataList.stream()
+                .collect(Collectors.toMap(SysDictData::getDictValue, SysDictData::getDictLabel, (k1, k2) -> k1));
+        String excelData = dictMap.getOrDefault(value, "");
         return new WriteCellData<>(excelData);
     }
 }
