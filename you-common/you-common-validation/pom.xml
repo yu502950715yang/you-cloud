@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>you-common-validation</artifactId>
-
     <description>注解校验模块</description>
 
 

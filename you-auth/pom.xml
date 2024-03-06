@@ -11,9 +11,7 @@
 
     <artifactId>you-auth</artifactId>
 
-    <description>
-        认证中心模块
-    </description>
+    <description>认证中心模块</description>
 
     <dependencies>
         <dependency>

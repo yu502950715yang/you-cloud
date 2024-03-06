@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>you-common-log</artifactId>
+    <description>业务日志</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

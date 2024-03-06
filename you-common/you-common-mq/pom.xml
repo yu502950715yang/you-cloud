@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>you-common-mq</artifactId>
+    <description>mq</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
