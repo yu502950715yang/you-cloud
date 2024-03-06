@@ -5,6 +5,7 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
+import com.you.common.core.constant.DictTypeConstants;
 import com.you.common.excel.annotation.ExcelDictItem;
 import com.you.common.excel.converters.ExcelDictConverter;
 import com.you.common.excel.converters.StatusConverter;
@@ -26,7 +27,7 @@ public class SysUserExcel {
     private String nickname;
 
     @ExcelProperty(value = "性别", converter = ExcelDictConverter.class)
-    @ExcelDictItem(type = "sys_user_sex")
+    @ExcelDictItem(type = DictTypeConstants.SYS_USER_SEX)
     private String sex;
 
     @ExcelProperty(value = "部门")
