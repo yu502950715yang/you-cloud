@@ -7,11 +7,11 @@ spring:
           enabled: true
       routes:
         # 认证中心
-        - id: you-auth
-          uri: lb://you-auth
-          predicates:
+        - id: you-auth #路由标识 要求唯一
+          uri: lb://you-auth #请求最终被转发到的目标地址
+          predicates: #断言数组，即判断条件，如果返回值是boolean，则转发请求到 uri 属性指定的服务中
             - Path=/auth/**
-          filters:
+          filters: #过滤器数组，在请求传递过程中，对请求做一些修改
             - StripPrefix=1
         # 系统模块
         - id: you-system
