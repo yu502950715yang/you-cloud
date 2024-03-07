@@ -1,0 +1,22 @@
+# 使用官方Nacos镜像作为基础镜像
+FROM nacos/nacos-server:v2.2.3
+
+# 设置时区（可选）
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# 如果需要放置自定义配置文件，例如nacos/conf目录下的文件
+COPY conf/application.properties /home/nacos/conf/
+
+# 设置容器启动时执行的命令，这里使用默认的启动脚本
+CMD ["sh", "-c", "/home/nacos/init.sh && exec /usr/local/bin/docker-entrypoint.sh nacos.sh start"]
+
+# 暴露Nacos服务端口
+EXPOSE 8848
+EXPOSE 9555
+EXPOSE 9848
+
+# 可选：若需要挂载持久化存储数据卷
+VOLUME ["/home/nacos/data"]
+
+# 可选：若需要挂载日志数据卷
+VOLUME ["/home/nacos/logs"]
