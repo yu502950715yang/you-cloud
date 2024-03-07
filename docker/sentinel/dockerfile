@@ -1,0 +1,32 @@
+# 使用官方的Java基础镜像作为父镜像
+FROM openjdk:8-jdk-alpine
+
+# 设置维护者信息
+LABEL maintainer="yourname@example.com"
+
+# 环境变量设置
+ENV SENTINEL_VERSION=1.8.3 \
+    APP_HOME=/opt/sentinel
+
+# 更新系统并安装必要的软件包
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash tzdata curl
+
+# 创建应用目录并在其中下载并解压Sentinel
+RUN mkdir -p $APP_HOME && \
+    curl -sSL https://github.com/alibaba/Sentinel/releases/download/${SENTINEL_VERSION}/sentinel-dashboard-${SENTINEL_VERSION}.jar -o ${APP_HOME}/sentinel-dashboard.jar
+
+# 设置工作目录
+WORKDIR $APP_HOME
+
+# 将配置文件（如需）复制到容器内部
+COPY sentinel-dashboard.properties ${APP_HOME}/
+
+# 设置时区
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# 容器启动时运行Sentinel Dashboard
+CMD ["java", "-Dserver.port=8081", "-Dcsp.sentinel.dashboard.server=localhost:8081", "-Dproject.name=sentinel-dashboard", "-jar", "sentinel-dashboard.jar"]
+
+# 暴露端口给宿主机
+EXPOSE 8081
