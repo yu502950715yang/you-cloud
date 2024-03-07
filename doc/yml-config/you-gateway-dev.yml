@@ -3,15 +3,23 @@ spring:
     gateway:
       discovery:
         locator:
+          #表示在通过服务发现（如Eureka或Consul）自动创建路由时，将服务ID转换为小写
           lowerCaseServiceId: true
+          #启用基于服务发现的路由功能。当此选项开启时，Gateway能够根据注册到服务发现组件中的服务实例动态创建路由规则。
           enabled: true
       routes:
         # 认证中心
-        - id: you-auth #路由标识 要求唯一
-          uri: lb://you-auth #请求最终被转发到的目标地址
-          predicates: #断言数组，即判断条件，如果返回值是boolean，则转发请求到 uri 属性指定的服务中
+          #路由标识 要求唯一
+        - id: you-auth
+          #请求将被转发到名为you-auth的服务，这里的lb://前缀表明使用负载均衡器来定位目标服务实例。
+          uri: lb://you-auth
+          #定义了一个断言，意味着所有以/auth/开头的HTTP路径都会匹配这个路由规则。
+          predicates:
             - Path=/auth/**
-          filters: #过滤器数组，在请求传递过程中，对请求做一些修改
+          #过滤器数组
+          filters:
+            #过滤器会从原始请求路径中移除一层路径前缀，例如将 /auth/service/path 转发到实际服务时，只传递 /service/path 给目标服务。
+            #对于you-system系统模块服务：
             - StripPrefix=1
         # 系统模块
         - id: you-system
