@@ -14,7 +14,7 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: 127.0.0.1:8718
+        dashboard: 127.0.0.1:8081
     stream:
       binders:
         myRabbit:
