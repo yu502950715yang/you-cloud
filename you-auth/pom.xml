@@ -49,6 +49,12 @@
         <dependency>
             <groupId>com.you</groupId>
             <artifactId>you-common-auth</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.you</groupId>
+                    <artifactId>you-common-datasource</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
