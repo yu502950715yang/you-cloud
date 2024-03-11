@@ -41,7 +41,7 @@ public class SysDictTypeController {
     }
 
     @OperLog(title = "字典管理", type = OperLogTypEnum.INSERT)
-    @SaCheckPermission("system:post:add")
+    @SaCheckPermission("system:dict:add")
     @PostMapping("/save")
     public R<Void> saveDictType(@Validated(ValidationGroups.Add.class) @RequestBody SysDictType dictType) {
         if (!dictTypeService.checkDictTypeUnique(dictType)) {
