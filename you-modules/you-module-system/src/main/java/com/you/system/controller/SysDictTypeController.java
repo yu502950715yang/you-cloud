@@ -69,4 +69,13 @@ public class SysDictTypeController {
         dictType.setUpdateTime(LocalDateTime.now());
         return dictTypeService.editDictType(dictType) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
     }
+
+    /**
+     * 获取字典选择框列表
+     */
+    @GetMapping("/optionSelect")
+    public R<List<SysDictType>> optionSelect() {
+        List<SysDictType> dictTypes = dictTypeService.list();
+        return R.ok(dictTypes);
+    }
 }
