@@ -2,8 +2,11 @@ package com.you.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.you.system.domain.excel.SysDictTypeExcel;
 import com.you.system.domain.model.SysDictType;
 import com.you.system.domain.qo.DictTypeQo;
+
+import java.util.List;
 
 public interface SysDictTypeService extends IService<SysDictType> {
 
@@ -30,4 +33,11 @@ public interface SysDictTypeService extends IService<SysDictType> {
      * @return 是否成功
      */
     boolean editDictType(SysDictType sysDictType);
+
+    /**
+     * 导出数据
+     * @param qo 查询条件
+     * @return 导出数据
+     */
+    List<SysDictTypeExcel> listForExcel(DictTypeQo qo);
 }
