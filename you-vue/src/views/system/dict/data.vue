@@ -119,8 +119,8 @@
       <pagination
          v-show="total > 0"
          :total="total"
-         v-model:page="queryParams.pageNum"
-         v-model:limit="queryParams.pageSize"
+         v-model:page="queryParams.page.current"
+         v-model:limit="queryParams.page.size"
          @pagination="getList"
       />
 
@@ -208,8 +208,13 @@ const listClassOptions = ref([
 const data = reactive({
   form: {},
   queryParams: {
-    pageNum: 1,
-    pageSize: 10,
+   page: {
+      current: 1,
+      size: 10,
+      orderList: [
+        {column: 'createTime', asc: false}
+      ]
+    },
     dictName: undefined,
     dictType: undefined,
     status: undefined
@@ -242,8 +247,8 @@ function getTypeList() {
 function getList() {
   loading.value = true;
   listData(queryParams.value).then(response => {
-    dataList.value = response.rows;
-    total.value = response.total;
+    dataList.value = response.data.records;
+    total.value = response.data.total;
     loading.value = false;
   });
 }

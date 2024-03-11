@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
 // 查询字典数据列表
-export function listData(query) {
+export function listData(data) {
   return request({
     url: '/system/dict/data/list',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: data
   })
 }
 

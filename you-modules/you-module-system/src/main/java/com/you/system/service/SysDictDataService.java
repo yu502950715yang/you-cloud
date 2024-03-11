@@ -1,7 +1,9 @@
 package com.you.system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.api.domain.model.SysDictData;
+import com.you.system.domain.qo.DictDataQo;
 
 import java.util.List;
 
@@ -22,4 +24,12 @@ public interface SysDictDataService extends IService<SysDictData> {
      * @param newDictType 新字典类型
      */
     void updateDictTypeByDictType(String oldDictType, String newDictType);
+
+    /**
+     * 分页查询
+     *
+     * @param qo 查询条件
+     * @return 分页数据
+     */
+    IPage<SysDictData> listPage(DictDataQo qo);
 }

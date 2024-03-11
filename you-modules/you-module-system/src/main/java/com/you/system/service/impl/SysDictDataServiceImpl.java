@@ -2,12 +2,14 @@ package com.you.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.common.core.constant.CacheConstants;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.utils.text.Convert;
 import com.you.common.redis.service.RedisService;
 import com.you.system.api.domain.model.SysDictData;
+import com.you.system.domain.qo.DictDataQo;
 import com.you.system.mapper.SysDictDataMapper;
 import com.you.system.service.SysDictDataService;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +50,10 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
         updateWrapper.set(SysDictData::getDictType, newDictType)
                 .eq(SysDictData::getDictType, oldDictType);
         dictDataMapper.update(null, updateWrapper);
+    }
+
+    @Override
+    public IPage<SysDictData> listPage(DictDataQo qo) {
+        return dictDataMapper.listPage(qo.getPage(), qo);
     }
 }
