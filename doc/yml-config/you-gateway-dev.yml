@@ -19,7 +19,6 @@ spring:
           #过滤器数组
           filters:
             #过滤器会从原始请求路径中移除一层路径前缀，例如将 /auth/service/path 转发到实际服务时，只传递 /service/path 给目标服务。
-            #对于you-system系统模块服务：
             - StripPrefix=1
         # 系统模块
         - id: you-system
