@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.you.auth.utils.LoginUtils;
 import com.you.common.core.exception.CommonException;
+import com.you.common.core.utils.IpUtils;
 import com.you.common.log.annotation.OperLog;
 import com.you.common.log.enums.OperLogTypEnum;
 import com.you.common.mq.enums.TopicEnum;
@@ -121,7 +122,7 @@ public class LogAspect {
             //请求地址
             sysLog.setOperUrl(request.getRequestURI());
             //主机ip
-            sysLog.setOperIp(request.getRemoteAddr());
+            sysLog.setOperIp(IpUtils.getIpAddr());
         }
         if (operLog != null) {
             //模块标题
