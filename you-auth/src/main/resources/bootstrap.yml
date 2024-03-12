@@ -9,12 +9,15 @@ spring:
     active: @spring.profile@
   cloud:
     nacos:
-      discovery:
-        server-addr: @nacos.server.address@
-        namespace: @nacos.server.namespace@
       config:
         server-addr: @nacos.server.address@
         namespace: @nacos.server.namespace@
+        group: @nacos.config.group@
         file-extension: yml
         shared-configs:
-          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+          - data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            group: @nacos.config.group@
+      discovery:
+        server-addr: @nacos.server.address@
+        namespace: @nacos.server.namespace@
+        group: @nacos.discovery.group@
