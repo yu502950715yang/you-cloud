@@ -45,8 +45,8 @@ public class SaTokenConfigure {
                 .addExclude(whiteArray)
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
-                    // 登录认证：除登录接口都需要认证
-                    SaRouter.match("/**", "/auth/login", StpUtil::checkLogin);
+                    // system模块 所有接口都需要登录
+                    SaRouter.match("/system/**", StpUtil::checkLogin);
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数
                 .setError(e -> {
