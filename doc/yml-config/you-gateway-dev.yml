@@ -1,5 +1,17 @@
 spring:
   cloud:
+    sentinel:
+      # 配置Sentinel控制台地址
+      transport:
+        dashboard: 192.168.0.88:8081
+      scg:
+        fallback:
+          # 设置回退模式为返回自定义响应
+          mode: response
+          # 设置回退时的HTTP状态码
+          response-status: 200
+          # 设置回退时的响应体内容
+          response-body: '{"code":429,"msg":"请求异常"}'
     gateway:
       discovery:
         locator:
