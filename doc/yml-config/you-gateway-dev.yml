@@ -6,12 +6,12 @@ spring:
         dashboard: 192.168.0.88:8081
       scg:
         fallback:
-          # 设置回退模式为返回自定义响应
+          # 指定降级处理的模式为返回响应
           mode: response
-          # 设置回退时的HTTP状态码
+          # 响应状态码
           response-status: 200
-          # 设置回退时的响应体内容
-          response-body: '{"code":429,"msg":"请求异常"}'
+          # 响应信息
+          response-body: '{"code":429,"msg":"请求被限流"}'
     gateway:
       discovery:
         locator:
