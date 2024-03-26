@@ -27,7 +27,7 @@ spring:
               password: mypassword
               virtual-host: /
       bindings: #stream绑定信道
-        #如下定义 会把bean绑定在消费者operLogMq-in-0或者提供者operLogMq-out-0上
+        #如下定义 会把bean绑定在消费者operLogMq-in-0或者提供者operLogMq-out-0上 in相当于消费者 out相当于生产者
         operLogMq-out-0: #输出操作日志
           destination: topic_operLog #mq topic
           group: operLog
@@ -36,6 +36,23 @@ spring:
           destination: topic_operLog
           group: operLog
           binder: myRabbit
+          consumer:
+            maxAttempts: 3 # 尝试消费该消息的最大次数（消息消费失败后，发布者会重新投递）。默认3
+            backOffInitialInterval: 1000 # 重试消费消息的初始化间隔时间。默认1s，即第一次重试消费会在1s后进行
+            backOffMultiplier: 2 # 相邻两次重试之间的间隔时间的倍数。默认2
+            backOffMaxInterval: 10000 # 下一次尝试重试的最大时间间隔，默认为10000ms，即10s
+      rabbit: #stream mq配置
+        bindings:
+          input_channel:
+            consumer:
+              concurrency: 1 #消费者数量
+              max-concurrency: 5 #最大消费者数量
+              durable-subscription: true  #持久化队列
+              recovery-interval: 3000  #3s 重连
+              acknowledge-mode: MANUAL  #手动
+              requeue-rejected: false #是否重新放入队列
+              auto-bind-dlq: true #开启死信队列
+              requeueRejected: true #异常放入死信
 # feign 配置
 feign:
   sentinel:

@@ -27,6 +27,7 @@ import com.you.system.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -81,7 +82,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             }
         });
         List<SysDept> deptList = deptService.getByDeptIds(deptIds);
-        if (deptList != null && !deptList.isEmpty()) {
+        if (!CollectionUtils.isEmpty(deptList)) {
             Map<String, String> deptNameMap = deptList.stream().collect(
                     Collectors.toMap(d -> String.valueOf(d.getDeptId()), SysDept::getDeptName));
             pageData.getRecords().forEach(sysUserVo ->
@@ -97,13 +98,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 新增用户
         user.setPassword(SM3Util.encrypt(user.getPassword()));
         userMapper.insert(user);
-        if (user.getUserId() != null) {
+        boolean result = user.getUserId() != null;
+        if (result) {
             // 新增用户角色关联
             userRoleService.saveUserRoles(user.getUserId(), user.getRoleIds());
             // 新增用户岗位关联
             userPostService.saveUserPosts(user.getUserId(), user.getPostIds());
         }
-        return user.getUserId() != null;
+        return result;
     }
 
     /**

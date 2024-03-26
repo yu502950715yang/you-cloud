@@ -25,6 +25,9 @@ public class OperLogConsumer {
     @Bean
     public Consumer<SysOperLog> operLogMq() {
         return sysOperLog -> {
+            if (sysOperLog == null) {
+                return;
+            }
             log.info("消费操作日志：{}", sysOperLog);
             saveLog(sysOperLog);
         };
