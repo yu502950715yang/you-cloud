@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -93,7 +94,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean removeByIds(List<Long> roleIds) {
-        if (roleIds == null || roleIds.isEmpty()) {
+        if (CollectionUtil.isEmpty(roleIds)) {
             throw new CommonException("请选择要删除的角色");
         }
         List<SysRoleBo> roleList = roleMapper.selectByRoleIds(roleIds);

@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.you.system.mapper.SysUserPostMapper;
 import com.you.system.service.SysUserPostService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class SysUserPostServiceImpl implements SysUserPostService {
 
     @Override
     public boolean saveUserPosts(Long userId, List<Long> postIds) {
-        if (userId == null || postIds == null || postIds.isEmpty()) {
+        if (userId == null || CollectionUtil.isEmpty(postIds)) {
             return false;
         }
         return userPostMapper.insertUserPosts(userId, postIds) == postIds.size();
@@ -23,7 +24,7 @@ public class SysUserPostServiceImpl implements SysUserPostService {
 
     @Override
     public void removeByUserIds(List<Long> userIds) {
-        if (userIds != null && !userIds.isEmpty()) {
+        if (CollectionUtil.isNotEmpty(userIds)) {
             userPostMapper.deleteByUserIds(userIds);
         }
     }

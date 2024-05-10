@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.you.system.mapper.SysUserRoleMapper;
 import com.you.system.service.SysUserRoleService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 
     @Override
     public boolean removeRoleByUserIds(Long roleId, List<Long> userIds) {
-        if (roleId == null || userIds == null || userIds.isEmpty()) {
+        if (roleId == null || CollectionUtil.isEmpty(userIds)) {
             return true;
         }
         return sysUserRoleMapper.deleteRoleByUserIds(roleId, userIds) > 0;
@@ -32,7 +33,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 
     @Override
     public boolean saveUserRole(Long roleId, List<Long> userIds) {
-        if (roleId == null || userIds == null || userIds.isEmpty()) {
+        if (roleId == null || CollectionUtil.isEmpty(userIds)) {
             return true;
         }
         return sysUserRoleMapper.insertUserRole(roleId, userIds) == userIds.size();
@@ -40,7 +41,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 
     @Override
     public boolean saveUserRoles(Long userId, List<Long> roleIds) {
-        if (userId == null || roleIds == null || roleIds.isEmpty()) {
+        if (userId == null || CollectionUtil.isEmpty(roleIds)) {
             return false;
         }
         return sysUserRoleMapper.insertUserRoles(userId, roleIds) == roleIds.size();
@@ -48,7 +49,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 
     @Override
     public void removeByUserIds(List<Long> userIds) {
-        if (userIds != null && !userIds.isEmpty()) {
+        if (CollectionUtil.isNotEmpty(userIds)) {
             sysUserRoleMapper.deleteByUserIds(userIds);
         }
     }

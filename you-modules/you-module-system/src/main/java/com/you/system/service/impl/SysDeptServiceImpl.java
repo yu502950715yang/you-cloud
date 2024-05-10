@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.you.auth.utils.LoginUtils;
@@ -127,7 +128,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
     @Override
     public List<SysDept> getByDeptIds(Set<Long> deptIds) {
-        if (deptIds == null || deptIds.isEmpty()) {
+        if (CollectionUtil.isEmpty(deptIds)) {
             return Collections.emptyList();
         }
         LambdaQueryWrapper<SysDept> queryWrapper = new LambdaQueryWrapper<>();

@@ -1,5 +1,6 @@
 package com.you.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.you.system.mapper.SysRoleMenuMapper;
 import com.you.system.service.SysRoleMenuService;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
 
     @Override
     public void deleteByRoleIds(List<Long> roleIds) {
-        if (roleIds != null && !roleIds.isEmpty()) {
+        if (CollectionUtil.isNotEmpty(roleIds)) {
             sysRoleMenuMapper.deleteByRoleIds(roleIds);
         }
     }

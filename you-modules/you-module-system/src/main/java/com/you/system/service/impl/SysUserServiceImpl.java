@@ -2,6 +2,7 @@ package com.you.system.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -127,7 +128,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public boolean removeByIds(List<Long> userIds) {
-        if (userIds == null || userIds.isEmpty()) {
+        if (CollectionUtil.isEmpty(userIds)) {
             return true;
         }
         if (userIds.contains(UserConstants.ADMIN_ID)) {
