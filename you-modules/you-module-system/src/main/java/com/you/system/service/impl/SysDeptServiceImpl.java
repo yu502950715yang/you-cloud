@@ -136,11 +136,6 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         return deptMapper.selectList(queryWrapper);
     }
 
-    @Override
-    public String getDeptNameByUsername(String username) {
-        return null;
-    }
-
     private List<ElTree> createElTree(List<SysDept> list, long parentId) {
         List<ElTree> returnList = new ArrayList<>();
         list.forEach(sysDept -> {

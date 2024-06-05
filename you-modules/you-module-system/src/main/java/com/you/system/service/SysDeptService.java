@@ -88,12 +88,4 @@ public interface SysDeptService extends IService<SysDept> {
      * @return 部门信息
      */
     List<SysDept> getByDeptIds(Set<Long> deptIds);
-
-    /**
-     * 根据用户名获取部门名称
-     *
-     * @param username 用户名称
-     * @return 部门名称
-     */
-    String getDeptNameByUsername(String username);
 }
