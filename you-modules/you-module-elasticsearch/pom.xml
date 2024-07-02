@@ -65,6 +65,12 @@
         <dependency>
             <groupId>com.you</groupId>
             <artifactId>you-common-log</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.you</groupId>
+                    <artifactId>you-common-datasource</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
