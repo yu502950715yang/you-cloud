@@ -1,0 +1,26 @@
+server:
+  port: 8050
+
+spring:
+  application:
+    # 应用名称
+    name: you-elasticsearch
+  profiles:
+    active: @spring.profile@
+  cloud:
+    nacos:
+      config:
+        server-addr: @nacos.server.address@
+        namespace: @nacos.server.namespace@
+        group: @nacos.config.group@
+        file-extension: yml
+        shared-configs:
+          - data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            group: @nacos.config.group@
+      discovery:
+        server-addr: @nacos.server.address@
+        namespace: @nacos.server.namespace@
+        group: @nacos.discovery.group@
+logging:
+  level:
+    com.example.order.feign: debug

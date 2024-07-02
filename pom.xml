@@ -36,6 +36,7 @@
         <you-clous.version>0.0.1-SNAPSHOT</you-clous.version>
         <hutool.version>5.8.22</hutool.version>
         <alibaba-ttl.version>2.14.2</alibaba-ttl.version>
+        <easy-es.version>2.0.0</easy-es.version>
     </properties>
 
     <dependencyManagement>
@@ -207,6 +208,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
                 <version>${alibaba-ttl.version}</version>
+            </dependency>
+
+            <!-- easy-es -->
+            <dependency>
+                <groupId>org.dromara.easy-es</groupId>
+                <artifactId>easy-es-boot-starter</artifactId>
+                <version>${easy-es.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
