@@ -4,6 +4,9 @@ FROM docker.elastic.co/elasticsearch/elasticsearch:7.16.2
 # 配置环境变量
 ENV discovery.type=single-node
 
+# 添加 IK 分词器插件安装命令
+RUN elasticsearch-plugin install --batch https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.16.2/elasticsearch-analysis-ik-7.16.2.zip
+
 # 暴露默认的端口
 EXPOSE 9200 9300
 
