@@ -26,8 +26,8 @@ public enum OperLogTypEnum {
 
     /**
      * 不记录响应数据
-     * @param type
-     * @return
+     * @param type 类型
+     * @return true不记录响应数据
      */
     public static boolean noRecordResponse(OperLogTypEnum type) {
         return type == QUERY || type == DOWNLOAD;
