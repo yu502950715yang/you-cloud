@@ -256,8 +256,8 @@
                 <nacos.discovery.group>DEV</nacos.discovery.group>
                 <nacos.config.group>DEV</nacos.config.group>
                 <nacos.server.namespace>you-cloud</nacos.server.namespace>
-                <nacos.server.address>192.168.0.88:8848</nacos.server.address>
-                <sentinel.server.address>192.168.0.88:8718</sentinel.server.address>
+                <nacos.server.address>localhost:8848</nacos.server.address>
+                <sentinel.server.address>localhost:8718</sentinel.server.address>
             </properties>
             <activation>
                 <activeByDefault>false</activeByDefault>
