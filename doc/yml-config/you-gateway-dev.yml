@@ -3,7 +3,7 @@ spring:
     sentinel:
       # 配置Sentinel控制台地址
       transport:
-        dashboard: 192.168.0.88:8081
+        dashboard: 127.0.0.1:8081
       scg:
         fallback:
           # 指定降级处理的模式为返回响应
