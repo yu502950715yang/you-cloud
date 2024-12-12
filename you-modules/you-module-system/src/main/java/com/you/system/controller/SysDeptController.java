@@ -25,7 +25,6 @@ public class SysDeptController {
 
     private final SysDeptService deptService;
 
-    @OperLog(title = "部门管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:dept:list")
     @GetMapping("/list")
     public R<List<SysDept>> list(DeptQo qo) {

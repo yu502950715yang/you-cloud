@@ -51,7 +51,6 @@ public class SysMenuController {
         return R.ok(treeList);
     }
 
-    @OperLog(title = "菜单管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:menu:list")
     @GetMapping("/list")
     public R<List<SysMenu>> list(MenuQo qo) {

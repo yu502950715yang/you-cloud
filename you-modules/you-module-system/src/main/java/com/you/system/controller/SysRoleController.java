@@ -33,7 +33,6 @@ public class SysRoleController {
     private final SysUserService userService;
     private final SysUserRoleService userRoleService;
 
-    @OperLog(title = "角色管理", type = OperLogTypEnum.QUERY)
     @PostMapping("/list")
     @SaCheckPermission("system:role:list")
     public R<IPage<SysRole>> listPage(@RequestBody RoleQo qo) {

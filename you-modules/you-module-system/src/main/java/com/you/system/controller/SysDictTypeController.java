@@ -39,7 +39,6 @@ public class SysDictTypeController {
         return R.ok(dictDataService.getDictDataByType(dictType));
     }
 
-    @OperLog(title = "字典管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:dict:list")
     @PostMapping("/list")
     public R<IPage<SysDictType>> getDictTypeList(@RequestBody DictTypeQo qo) {

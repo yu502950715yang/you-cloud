@@ -3,8 +3,6 @@ package com.you.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.common.core.domain.R;
-import com.you.common.log.annotation.OperLog;
-import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.api.domain.model.SysDictData;
 import com.you.system.domain.qo.DictDataQo;
 import com.you.system.service.SysDictDataService;
@@ -21,7 +19,6 @@ public class SysDictDataController {
 
     private final SysDictDataService dictDataService;
 
-    @OperLog(title = "字典管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:dict:list")
     @PostMapping("/list")
     public R<IPage<SysDictData>> list(@RequestBody DictDataQo qo) {

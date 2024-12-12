@@ -63,7 +63,6 @@ public class SysUserController {
         return R.ok(user);
     }
 
-    @OperLog(title = "用户管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:user:list")
     @PostMapping("/list")
     public R<IPage<SysUserVo>> list(@RequestBody UserQo qo) {

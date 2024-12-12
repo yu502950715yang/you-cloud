@@ -35,7 +35,6 @@ public class SysPostController {
 
     private final SysPostService sysPostService;
 
-    @OperLog(title = "岗位管理", type = OperLogTypEnum.QUERY)
     @SaCheckPermission("system:post:list")
     @PostMapping("/list")
     public R<IPage<SysPost>> list(@RequestBody PostQo qo) {
