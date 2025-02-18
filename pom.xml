@@ -240,9 +240,9 @@
                 <spring.profile>dev</spring.profile>
                 <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
                 <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
-                <nacos.server.namespace>public</nacos.server.namespace>
-                <nacos.server.address>192.168.0.24:8848</nacos.server.address>
-                <sentinel.server.address>192.168.0.24:8718</sentinel.server.address>
+                <nacos.server.namespace>you_cloud</nacos.server.namespace>
+                <nacos.server.address>192.168.172.37:8848</nacos.server.address>
+                <sentinel.server.address>192.168.172.37:8718</sentinel.server.address>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>

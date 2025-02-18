@@ -19,7 +19,7 @@ spring:
             group: @nacos.config.group@
       discovery:
         # 服务注册的IP 这是配置是要从docker环境变量中获取宿主机ip，这样nacos注册时才能显示宿主机ip
-        ip: ${HOST_IP}
+        # ip: ${HOST_IP}
         server-addr: @nacos.server.address@
         namespace: @nacos.server.namespace@
         group: @nacos.discovery.group@
