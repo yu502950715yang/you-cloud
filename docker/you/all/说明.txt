@@ -1,0 +1,6 @@
+各个模块需打包好jar包放在对应模块下的jar目录里，jar目录不存在需要手动创建或者修改dockerfile中的jar包位置
+例如
+# 复制jar文件到路径
+COPY ./jar/you-auth.jar /home/you/you-auth.jar
+
+其中“./jar/you-auth.jar”就是对应jar包的路径
