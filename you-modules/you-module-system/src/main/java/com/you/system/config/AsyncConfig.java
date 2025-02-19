@@ -29,7 +29,7 @@ public class AsyncConfig {
                 keepAliveTime,
                 TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(queueCapacity),
-                new ThreadPoolExecutor.CallerRunsPolicy() // 饱和策略
+                new ThreadPoolExecutor.CallerRunsPolicy() // 饱和策略 当线程池和队列都满时，任务将由调用者线程直接执行
         );
     }
 }
