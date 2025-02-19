@@ -2,12 +2,15 @@ package com.you.system.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.you.auth.utils.LoginUtils;
 import com.you.system.domain.model.SysNotice;
 import com.you.system.domain.qo.NoticeQo;
 import com.you.system.mapper.SysNoticeMapper;
 import com.you.system.service.SysNoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service
@@ -18,5 +21,12 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
     @Override
     public IPage<SysNotice> listPage(NoticeQo qo) {
         return noticeMapper.listPage(qo.getPage(), qo);
+    }
+
+    @Override
+    public boolean saveNotice(SysNotice notice) {
+        notice.setCreateBy(LoginUtils.getLoginUserName());
+        notice.setCreateTime(LocalDateTime.now());
+        return noticeMapper.insert(notice) > 0;
     }
 }

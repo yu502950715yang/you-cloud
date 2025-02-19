@@ -18,4 +18,12 @@ public interface SysNoticeService extends IService<SysNotice> {
      * @return 分页数据
      */
     IPage<SysNotice> listPage(NoticeQo qo);
+
+    /**
+     * 新增公告
+     *
+     * @param notice 内容
+     * @return 结果
+     */
+    boolean saveNotice(SysNotice notice);
 }

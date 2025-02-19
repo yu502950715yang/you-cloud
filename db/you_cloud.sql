@@ -1254,3 +1254,6 @@ ALTER TABLE `sys_oper_log`
 
 ALTER TABLE `sys_dict_type`
     MODIFY COLUMN `dict_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典主键' FIRST;
+
+ALTER TABLE `sys_notice`
+    MODIFY COLUMN `notice_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '公告ID' FIRST;
