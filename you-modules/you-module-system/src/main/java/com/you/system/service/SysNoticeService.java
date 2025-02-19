@@ -26,4 +26,12 @@ public interface SysNoticeService extends IService<SysNotice> {
      * @return 结果
      */
     boolean saveNotice(SysNotice notice);
+
+    /**
+     * 根据ID删除通知公告
+     *
+     * @param noticeIds ID List
+     * @return 结果
+     */
+    boolean deleteNoticeByIds(Long[] noticeIds);
 }

@@ -3,16 +3,15 @@ package com.you.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.common.core.domain.R;
+import com.you.common.log.annotation.OperLog;
+import com.you.common.log.enums.OperLogTypEnum;
 import com.you.system.domain.model.SysNotice;
 import com.you.system.domain.qo.NoticeQo;
 import com.you.system.service.SysNoticeService;
 import com.you.validation.ValidationGroups;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 通知公告信息
@@ -30,9 +29,17 @@ public class SysNoticeController {
         return R.ok(noticeService.listPage(qo));
     }
 
+    @OperLog(title = "通知公告", type = OperLogTypEnum.INSERT)
     @SaCheckPermission("system:notice:add")
     @PostMapping
     public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysNotice notice) {
         return noticeService.saveNotice(notice) ? R.ok() : R.fail();
+    }
+
+    @OperLog(title = "通知公告", type = OperLogTypEnum.DELETE)
+    @DeleteMapping("/{noticeIds}")
+    @SaCheckPermission("system:notice:remove")
+    public R<Void> delete(@PathVariable Long[] noticeIds) {
+        return noticeService.deleteNoticeByIds(noticeIds) ? R.ok() : R.fail();
     }
 }
