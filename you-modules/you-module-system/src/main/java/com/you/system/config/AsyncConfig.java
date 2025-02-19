@@ -29,7 +29,9 @@ public class AsyncConfig {
                 keepAliveTime,
                 TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(queueCapacity),
-                new ThreadPoolExecutor.CallerRunsPolicy() // 饱和策略 当线程池和队列都满时，任务将由调用者线程直接执行
+                // 饱和策略 当线程池和队列都满时，任务将由调用者线程直接执行 适用于日志记录任务量不大的场景
+                // DiscardOldestPolicy 当线程池和队列都满时，队列最老的任务会被丢弃 适用于日志记录任务量较大且容忍部分日志丢失的场景
+                new ThreadPoolExecutor.CallerRunsPolicy()
         );
     }
 }
