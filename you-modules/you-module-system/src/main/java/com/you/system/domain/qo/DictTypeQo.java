@@ -1,11 +1,13 @@
 package com.you.system.domain.qo;
 
-import com.you.common.model.PageModel;
+import com.you.common.core.domain.BaseQo;
 import com.you.system.domain.model.SysDictType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class DictTypeQo {
+public class DictTypeQo extends BaseQo<SysDictType> {
 
     /**
      * 字典名称
@@ -25,6 +27,4 @@ public class DictTypeQo {
     private String beginTime;
 
     private String endTime;
-
-    private PageModel<SysDictType> page;
 }

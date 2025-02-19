@@ -1,11 +1,13 @@
 package com.you.system.domain.qo;
 
-import com.you.common.model.PageModel;
+import com.you.common.core.domain.BaseQo;
 import com.you.system.api.domain.model.SysDictData;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class DictDataQo {
+public class DictDataQo extends BaseQo<SysDictData> {
 
     /**
      * 字典类型
@@ -21,6 +23,4 @@ public class DictDataQo {
      * 状态
      */
     private String status;
-
-    private PageModel<SysDictData> page;
 }

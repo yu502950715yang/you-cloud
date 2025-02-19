@@ -1,11 +1,13 @@
 package com.you.system.domain.qo;
 
-import com.you.common.model.PageModel;
+import com.you.common.core.domain.BaseQo;
 import com.you.system.api.domain.model.SysRole;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class RoleQo {
+public class RoleQo extends BaseQo<SysRole> {
 
     private String roleName;
 
@@ -17,6 +19,4 @@ public class RoleQo {
     private String beginTime;
 
     private String endTime;
-
-    private PageModel<SysRole> page;
 }

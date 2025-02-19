@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysNoticeController {
 
     private final SysNoticeService noticeService;
+
     @PostMapping("/list")
     @SaCheckPermission("system:notice:list")
     public R<IPage<SysNotice>> listPage(@RequestBody NoticeQo qo) {

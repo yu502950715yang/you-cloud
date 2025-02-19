@@ -6,5 +6,8 @@ import lombok.Data;
 @Data
 public class BaseQo<T> {
 
+    /**
+     * 分页
+     */
     private PageModel<T> page;
 }

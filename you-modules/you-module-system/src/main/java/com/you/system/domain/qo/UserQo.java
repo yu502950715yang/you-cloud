@@ -1,14 +1,16 @@
 package com.you.system.domain.qo;
 
-import com.you.common.model.PageModel;
+import com.you.common.core.domain.BaseQo;
 import com.you.system.domain.vo.SysUserVo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 用户查询对象
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserQo {
+public class UserQo extends BaseQo<SysUserVo> {
 
     /**
      * 部门id
@@ -38,9 +40,4 @@ public class UserQo {
      * 部门查询in 条件
      */
     private String deptIdsStr;
-
-    /**
-     * 分页
-     */
-    private PageModel<SysUserVo> page;
 }
