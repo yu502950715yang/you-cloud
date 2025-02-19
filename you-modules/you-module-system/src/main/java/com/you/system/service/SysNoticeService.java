@@ -1,10 +1,21 @@
 package com.you.system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.you.system.domain.model.SysNotice;
+import com.you.system.domain.qo.NoticeQo;
 
 /**
  * 通知公告表 服务层
  */
 public interface SysNoticeService extends IService<SysNotice> {
+
+
+    /**
+     * 通知公告分页查询
+     *
+     * @param qo 查询条件
+     * @return 分页数据
+     */
+    IPage<SysNotice> listPage(NoticeQo qo);
 }
