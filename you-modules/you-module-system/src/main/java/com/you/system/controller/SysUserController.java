@@ -5,7 +5,6 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.excel.EasyExcelFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.auth.utils.LoginUtils;
-import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.exception.CommonException;
 import com.you.common.log.annotation.OperLog;
@@ -92,28 +91,28 @@ public class SysUserController {
         sysUserService.checkUsernameUnique(user.getUserId(), user.getUsername());
         user.setCreateBy(LoginUtils.getLoginUserName());
         user.setCreateTime(LocalDateTime.now());
-        return sysUserService.save(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysUserService.save(user));
     }
 
     @OperLog(title = "用户管理", type = OperLogTypEnum.DELETE)
     @SaCheckPermission("system:user:remove")
     @PostMapping("/remove")
     public R<Void> remove(@RequestBody List<Long> userIds) {
-        return sysUserService.removeByIds(userIds) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysUserService.removeByIds(userIds));
     }
 
     @OperLog(title = "用户管理", type = OperLogTypEnum.UPDATE)
     @SaCheckPermission("system:user:edit")
     @PostMapping("/changeStatus")
     public R<Void> changeStatus(@RequestBody SysUser sysUser) {
-        return sysUserService.changeStatus(sysUser) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysUserService.changeStatus(sysUser));
     }
 
     @OperLog(title = "用户管理", type = OperLogTypEnum.RESET_PWD)
     @SaCheckPermission("system:user:resetPwd")
     @PostMapping("/resetPwd")
     public R<Void> resetPwd(@RequestBody SysUser sysUser) {
-        return sysUserService.resetPwd(sysUser) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysUserService.resetPwd(sysUser));
     }
 
     @SaCheckPermission("system:user:edit")
@@ -128,7 +127,7 @@ public class SysUserController {
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysUserBo user) {
         user.setUpdateBy(LoginUtils.getLoginUserName());
         user.setUpdateTime(LocalDateTime.now());
-        return sysUserService.edit(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysUserService.edit(user));
     }
 
     @OperLog(title = "用户管理", type = OperLogTypEnum.DOWNLOAD)
@@ -167,6 +166,6 @@ public class SysUserController {
     @SaCheckPermission("system:user:edit")
     @PostMapping("/authRole")
     public R<Void> authRole(@RequestBody SysUserBo user) {
-        return sysUserService.updateUserRole(user) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysUserService.updateUserRole(user));
     }
 }

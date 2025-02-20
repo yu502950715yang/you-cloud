@@ -3,7 +3,6 @@ package com.you.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.auth.utils.LoginUtils;
-import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.log.annotation.OperLog;
 import com.you.common.log.enums.OperLogTypEnum;
@@ -43,10 +42,7 @@ public class SysRoleController {
     @PostMapping("/changeStatus")
     @SaCheckPermission("system:role:edit")
     public R<Void> changeStatus(@Validated(ValidationGroups.Other.class) @RequestBody SysRole role) {
-        if (roleService.updateRoleStatus(role.getRoleId(), role.getStatus())) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(roleService.updateRoleStatus(role.getRoleId(), role.getStatus()));
     }
 
     @OperLog(title = "角色管理", type = OperLogTypEnum.INSERT)
@@ -60,10 +56,7 @@ public class SysRoleController {
         // 构造新增数据
         role.setCreateTime(LocalDateTime.now());
         role.setCreateBy(LoginUtils.getLoginUserName());
-        if (roleService.save(role)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(roleService.save(role));
     }
 
     @GetMapping("/{roleId}")
@@ -82,20 +75,14 @@ public class SysRoleController {
         roleService.checkRoleKeyUnique(role.getRoleId(), role.getRoleKey());
         role.setUpdateTime(LocalDateTime.now());
         role.setUpdateBy(LoginUtils.getLoginUserName());
-        if (roleService.edit(role)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(roleService.edit(role));
     }
 
     @OperLog(title = "角色管理", type = OperLogTypEnum.DELETE)
     @PostMapping("/remove")
     @SaCheckPermission("system:role:remove")
     public R<Void> remove(@RequestBody List<Long> roleIds) {
-        if (roleService.removeByIds(roleIds)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(roleService.removeByIds(roleIds));
     }
 
 
@@ -115,20 +102,14 @@ public class SysRoleController {
     @PostMapping("/authUser/cancel")
     @SaCheckPermission("system:role:edit")
     public R<Void> authUserCancel(@RequestBody AuthUserBo bo) {
-        if (userRoleService.removeRoleByUserIds(bo.getRoleId(), bo.getUserIds())) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(userRoleService.removeRoleByUserIds(bo.getRoleId(), bo.getUserIds()));
     }
 
     @OperLog(title = "角色管理", type = OperLogTypEnum.AUTH)
     @PostMapping("/authUser/select")
     @SaCheckPermission("system:role:edit")
     public R<Void> authUserSelect(@RequestBody AuthUserBo bo) {
-        if (userRoleService.saveUserRole(bo.getRoleId(), bo.getUserIds())) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(userRoleService.saveUserRole(bo.getRoleId(), bo.getUserIds()));
     }
 
     @GetMapping("/getAll")

@@ -1,5 +1,6 @@
 package com.you.common.core.domain;
 
+import com.you.common.core.constant.Constants;
 import com.you.common.core.constant.HttpStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -68,6 +69,15 @@ public class R<T> implements Serializable {
         apiResult.setData(data);
         apiResult.setMsg(msg);
         return apiResult;
+    }
+
+    public static <T> R<T> okOrFail(boolean success, String msg) {
+        int isSuccess = success ? SUCCESS : ERROR;
+        return  restResult(null, isSuccess, msg);
+    }
+
+    public static <T> R<T> okOrFail(boolean success) {
+        return okOrFail(success, Constants.REQUEST_FAIL_MSG);
     }
 
     public void setCode(int code) {

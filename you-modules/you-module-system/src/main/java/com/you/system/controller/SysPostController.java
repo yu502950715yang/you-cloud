@@ -4,7 +4,6 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.alibaba.excel.EasyExcelFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.auth.utils.LoginUtils;
-import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.exception.CommonException;
 import com.you.common.log.annotation.OperLog;
@@ -74,10 +73,7 @@ public class SysPostController {
         }
         post.setCreateTime(LocalDateTime.now());
         post.setCreateBy(LoginUtils.getLoginUserName());
-        if (sysPostService.save(post)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysPostService.save(post));
     }
 
     @OperLog(title = "岗位管理", type = OperLogTypEnum.DELETE)
@@ -88,10 +84,7 @@ public class SysPostController {
             return R.fail("ID不能为空");
         }
         List<Long> postIdList = Arrays.asList(postIds);
-        if (sysPostService.removeByIds(postIdList)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysPostService.removeByIds(postIdList));
     }
 
     @SaCheckPermission("system:post:query")
@@ -111,10 +104,7 @@ public class SysPostController {
         }
         post.setUpdateTime(LocalDateTime.now());
         post.setUpdateBy(LoginUtils.getLoginUserName());
-        if (sysPostService.updateById(post)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(sysPostService.updateById(post));
     }
 
     @GetMapping("/getAll")

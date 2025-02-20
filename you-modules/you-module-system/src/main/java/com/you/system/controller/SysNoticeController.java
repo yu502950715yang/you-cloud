@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 public class SysNoticeController {
 
     private final SysNoticeService noticeService;
+    
+    private final String operLogTitle = "通知公告";
 
     @PostMapping("/list")
     @SaCheckPermission("system:notice:list")
@@ -29,18 +31,18 @@ public class SysNoticeController {
         return R.ok(noticeService.listPage(qo));
     }
 
-    @OperLog(title = "通知公告", type = OperLogTypEnum.INSERT)
+    @OperLog(title = operLogTitle, type = OperLogTypEnum.INSERT)
     @SaCheckPermission("system:notice:add")
     @PostMapping
     public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysNotice notice) {
-        return noticeService.saveNotice(notice) ? R.ok() : R.fail();
+        return R.okOrFail(noticeService.saveNotice(notice));
     }
 
-    @OperLog(title = "通知公告", type = OperLogTypEnum.DELETE)
+    @OperLog(title = operLogTitle, type = OperLogTypEnum.DELETE)
     @DeleteMapping("/{noticeIds}")
     @SaCheckPermission("system:notice:remove")
     public R<Void> delete(@PathVariable Long[] noticeIds) {
-        return noticeService.deleteNoticeByIds(noticeIds) ? R.ok() : R.fail();
+        return R.okOrFail(noticeService.deleteNoticeByIds(noticeIds));
     }
 
     @GetMapping("/{noticeId}")
@@ -49,10 +51,10 @@ public class SysNoticeController {
         return R.ok(noticeService.getById(noticeId));
     }
 
-    @OperLog(title = "通知公告", type = OperLogTypEnum.UPDATE)
+    @OperLog(title = operLogTitle, type = OperLogTypEnum.UPDATE)
     @PutMapping
     @SaCheckPermission("system:notice:edit")
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysNotice notice) {
-        return noticeService.updateNotice(notice) ? R.ok() : R.fail();
+        return R.okOrFail(noticeService.updateNotice(notice));
     }
 }

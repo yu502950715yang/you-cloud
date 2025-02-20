@@ -3,7 +3,6 @@ package com.you.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import com.you.auth.utils.LoginUtils;
-import com.you.common.core.constant.Constants;
 import com.you.common.core.constant.UserConstants;
 import com.you.common.core.domain.R;
 import com.you.common.core.utils.StrUtils;
@@ -68,10 +67,7 @@ public class SysMenuController {
         }
         menu.setCreateBy(LoginUtils.getLoginUserName());
         menu.setCreateTime(LocalDateTime.now());
-        if (menuService.save(menu)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(menuService.save(menu));
     }
 
     /**
@@ -87,10 +83,7 @@ public class SysMenuController {
         if (roleMenuService.checkMenuInUse(menuId)) {
             return R.fail("菜单已分配,不允许删除");
         }
-        if (menuService.removeById(menuId)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(menuService.removeById(menuId));
     }
 
     @SaCheckPermission("system:menu:query")
@@ -113,9 +106,6 @@ public class SysMenuController {
         }
         menu.setUpdateTime(LocalDateTime.now());
         menu.setUpdateBy(LoginUtils.getLoginUserName());
-        if (menuService.updateById(menu)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(menuService.updateById(menu));
     }
 }

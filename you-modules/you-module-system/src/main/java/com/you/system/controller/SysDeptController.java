@@ -1,7 +1,6 @@
 package com.you.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.log.annotation.OperLog;
 import com.you.common.log.enums.OperLogTypEnum;
@@ -36,10 +35,7 @@ public class SysDeptController {
     @PostMapping
     public R<Void> add(@Validated(ValidationGroups.Add.class) @RequestBody SysDept dept) {
         deptService.checkDeptNameUnique(dept);
-        if (deptService.addDept(dept)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(deptService.addDept(dept));
     }
 
     @GetMapping("/list/exclude/{deptId}")
@@ -67,10 +63,7 @@ public class SysDeptController {
         if (dept.getParentId().equals(deptId)) {
             return R.fail("上级部门不能是自己");
         }
-        if (deptService.editDept(dept)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(deptService.editDept(dept));
     }
 
     @OperLog(title = "部门管理", type = OperLogTypEnum.DELETE)
@@ -83,10 +76,7 @@ public class SysDeptController {
         if (deptService.hasUserByDeptId(deptId)) {
             return R.fail("部门存在用户,不允许删除");
         }
-        if (deptService.delById(deptId)) {
-            return R.ok();
-        }
-        return R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(deptService.delById(deptId));
     }
 
     @GetMapping("/deptTree")

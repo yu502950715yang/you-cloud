@@ -4,7 +4,6 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.alibaba.excel.EasyExcelFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.you.auth.utils.LoginUtils;
-import com.you.common.core.constant.Constants;
 import com.you.common.core.domain.R;
 import com.you.common.core.exception.CommonException;
 import com.you.common.log.annotation.OperLog;
@@ -54,7 +53,7 @@ public class SysDictTypeController {
         }
         dictType.setCreateBy(LoginUtils.getLoginUserName());
         dictType.setCreateTime(LocalDateTime.now());
-        return dictTypeService.save(dictType) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(dictTypeService.save(dictType));
     }
 
     @SaCheckPermission("system:dict:edit")
@@ -72,7 +71,7 @@ public class SysDictTypeController {
         }
         dictType.setUpdateBy(LoginUtils.getLoginUserName());
         dictType.setUpdateTime(LocalDateTime.now());
-        return dictTypeService.editDictType(dictType) ? R.ok() : R.fail(Constants.REQUEST_FAIL_MSG);
+        return R.okOrFail(dictTypeService.editDictType(dictType));
     }
 
     /**
