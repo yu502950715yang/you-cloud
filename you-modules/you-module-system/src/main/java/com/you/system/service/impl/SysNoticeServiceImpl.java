@@ -42,4 +42,11 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
         List<Long> noticeIdList = Arrays.asList(noticeIds);
         return noticeMapper.deleteBatchIds(noticeIdList) == noticeIds.length;
     }
+
+    @Override
+    public boolean updateNotice(SysNotice notice) {
+        notice.setUpdateBy(LoginUtils.getLoginUserName());
+        notice.setUpdateTime(LocalDateTime.now());
+        return noticeMapper.updateById(notice) > 0;
+    }
 }

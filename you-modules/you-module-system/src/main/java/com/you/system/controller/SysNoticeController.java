@@ -42,4 +42,16 @@ public class SysNoticeController {
     public R<Void> delete(@PathVariable Long[] noticeIds) {
         return noticeService.deleteNoticeByIds(noticeIds) ? R.ok() : R.fail();
     }
+
+    @GetMapping("/{noticeId}")
+    @SaCheckPermission("system:notice:query")
+    public R<SysNotice> getInfoById(@PathVariable Long noticeId) {
+        return R.ok(noticeService.getById(noticeId));
+    }
+
+    @PutMapping
+    @SaCheckPermission("system:notice:edit")
+    public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysNotice notice) {
+        return noticeService.updateNotice(notice) ? R.ok() : R.fail();
+    }
 }
