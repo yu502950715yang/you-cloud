@@ -49,6 +49,7 @@ public class SysNoticeController {
         return R.ok(noticeService.getById(noticeId));
     }
 
+    @OperLog(title = "通知公告", type = OperLogTypEnum.UPDATE)
     @PutMapping
     @SaCheckPermission("system:notice:edit")
     public R<Void> edit(@Validated(ValidationGroups.Update.class) @RequestBody SysNotice notice) {
