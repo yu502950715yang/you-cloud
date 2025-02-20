@@ -46,7 +46,7 @@ public class SysNoticeController {
     }
 
     @GetMapping("/{noticeId}")
-    @SaCheckPermission("system:notice:query")
+    @SaCheckPermission("system:notice:list")
     public R<SysNotice> getInfoById(@PathVariable Long noticeId) {
         return R.ok(noticeService.getById(noticeId));
     }
