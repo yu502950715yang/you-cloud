@@ -34,7 +34,7 @@
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <sa-token.version>1.37.0</sa-token.version>
         <you-clous.version>0.0.1-SNAPSHOT</you-clous.version>
-        <hutool.version>5.8.22</hutool.version>
+        <hutool.version>5.8.37</hutool.version>
         <alibaba-ttl.version>2.14.2</alibaba-ttl.version>
         <easy-es.version>2.0.0</easy-es.version>
     </properties>
