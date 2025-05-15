@@ -1,9 +1,15 @@
 package com.you.common.core.utils;
 
 
+import com.you.common.core.domain.IpLocation;
+import org.lionsoul.ip2region.xdb.Searcher;
+
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 获取IP方法
@@ -15,6 +21,32 @@ public class IpUtils {
     public final static String REGX_IP_WILDCARD = "(((\\*\\.){3}\\*)|(" + REGX_0_255 + "(\\.\\*){3})|(" + REGX_0_255 + "\\." + REGX_0_255 + ")(\\.\\*){2}" + "|((" + REGX_0_255 + "\\.){3}\\*))";
     // 匹配网段
     public final static String REGX_IP_SEG = "(" + REGX_IP + "-" + REGX_IP + ")";
+
+    private static final Searcher IP_SEARCHER;
+
+    static {
+        byte[] cBuff;
+        try {
+            String dbPath = Objects.requireNonNull(IpUtils.class.getClassLoader().getResource("ip/ip2region.xdb")).getPath();
+            cBuff = Searcher.loadContentFromFile(dbPath);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load ip2region database", e);
+        }
+
+        try {
+            IP_SEARCHER = Searcher.newWithBuffer(cBuff);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create searcher", e);
+        }
+
+        // 添加关闭钩子以确保资源释放
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                IP_SEARCHER.close();
+            } catch (IOException ignored) {
+            }
+        }));
+    }
 
     /**
      * 获取客户端IP
@@ -315,5 +347,36 @@ public class IpUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取ID地址归属地
+     */
+    public static IpLocation getIpAddress(String ip) {
+        try {
+            long sTime = System.nanoTime();
+            String region = IP_SEARCHER.search(ip);
+            long cost = TimeUnit.NANOSECONDS.toMicros(System.nanoTime() - sTime);
+            System.out.printf("{region: %s, ioCount: %d, took: %d μs}\n", region, IP_SEARCHER.getIOCount(), cost);
+            if (region != null) {
+                String[] regionArr = region.split("\\|");
+                IpLocation ipLocation = new IpLocation();
+                ipLocation.setCountry(regionArr[0]);
+                ipLocation.setArea(regionArr[1]);
+                ipLocation.setProvince(regionArr[2]);
+                ipLocation.setCity(regionArr[3]);
+                ipLocation.setIsp(regionArr[4]);
+                return ipLocation;
+            }
+        } catch (Exception e) {
+            System.out.printf("failed to search(%s): %s\n", ip, e);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getIpAddress("114.114.114.114"));
+        System.out.println(getIpAddress("1.2.3.4"));
+        System.out.println(getIpAddress("111.0.72.130"));
     }
 }

@@ -70,5 +70,11 @@
             <groupId>com.you</groupId>
             <artifactId>you-common-datasource</artifactId>
         </dependency>
+
+        <!-- ip2region-->
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+        </dependency>
     </dependencies>
 </project>
