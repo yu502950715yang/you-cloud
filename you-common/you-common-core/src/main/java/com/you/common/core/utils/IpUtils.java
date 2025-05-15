@@ -358,7 +358,7 @@ public class IpUtils {
             String region = IP_SEARCHER.search(ip);
             long cost = TimeUnit.NANOSECONDS.toMicros(System.nanoTime() - sTime);
             System.out.printf("{region: %s, ioCount: %d, took: %d μs}\n", region, IP_SEARCHER.getIOCount(), cost);
-            if (region != null) {
+            if (region != null && !region.isEmpty()) {
                 String[] regionArr = region.split("\\|");
                 IpLocation ipLocation = new IpLocation();
                 ipLocation.setCountry(regionArr[0]);
