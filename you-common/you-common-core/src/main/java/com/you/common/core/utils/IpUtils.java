@@ -357,7 +357,7 @@ public class IpUtils {
             long sTime = System.nanoTime();
             String region = IP_SEARCHER.search(ip);
             long cost = TimeUnit.NANOSECONDS.toMicros(System.nanoTime() - sTime);
-            System.out.printf("{region: %s, ioCount: %d, took: %d μs}\n", region, IP_SEARCHER.getIOCount(), cost);
+//            System.out.printf("{region: %s, ioCount: %d, took: %d μs}\n", region, IP_SEARCHER.getIOCount(), cost);
             if (region != null && !region.isEmpty()) {
                 String[] regionArr = region.split("\\|");
                 IpLocation ipLocation = new IpLocation();
@@ -375,8 +375,12 @@ public class IpUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(getIpAddress("114.114.114.114"));
-        System.out.println(getIpAddress("1.2.3.4"));
-        System.out.println(getIpAddress("111.0.72.130"));
+        System.out.println(Objects.requireNonNull(getIpAddress("39.144.100.186")).getFullAddress());
+        System.out.println(getIpAddress("39.144.100.186"));
+        System.out.println(getIpAddress("123.173.208.62"));
+        System.out.println(getIpAddress("36.135.85.170"));
+        System.out.println(getIpAddress("39.144.100.186"));
+        System.out.println(getIpAddress("36.135.85.170"));
+        System.out.println(getIpAddress("180.163.29.206"));
     }
 }
