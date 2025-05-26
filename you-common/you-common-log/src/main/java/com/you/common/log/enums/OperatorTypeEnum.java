@@ -8,8 +8,11 @@ import lombok.Getter;
 @Getter
 public enum OperatorTypeEnum {
 
+    // 其他
     OTHER(0),
+    // PC
     WEB(1),
+    // 移动端
     PHONE(2);
 
     private final int code;
