@@ -1,5 +1,6 @@
 package com.you.common.redis.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * create-date: 2023/4/7 9:56
  */
 @Service
+@Slf4j
 public class RedisService {
 
     private final RedisTemplate<String, Object> redisTemplate;
@@ -69,7 +71,7 @@ public class RedisService {
      * @return true=设置成功；false=设置失败
      */
     public boolean expire(final String key, final long timeout, final TimeUnit unit) {
-        return redisTemplate.expire(key, timeout, unit);
+        return Boolean.TRUE.equals(redisTemplate.expire(key, timeout, unit));
     }
 
     /**
@@ -89,7 +91,7 @@ public class RedisService {
      * @param key
      */
     public boolean deleteObject(final String key) {
-        return redisTemplate.delete(key);
+        return Boolean.TRUE.equals(redisTemplate.delete(key));
     }
 
     /**
@@ -98,7 +100,7 @@ public class RedisService {
      * @param collection 多个对象
      * @return
      */
-    public long deleteObject(final Collection collection) {
+    public Long deleteObject(final Collection collection) {
         return redisTemplate.delete(collection);
     }
 
@@ -236,7 +238,7 @@ public class RedisService {
         try {
             return Boolean.TRUE.equals(redisTemplate.hasKey(key));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("redis判断key是否存在异常：{}", e.getMessage());
             return false;
         }
     }
