@@ -1,6 +1,7 @@
 package com.you.gateway.config.properties;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import java.util.List;
  * @since 1.0
  * Create with Intellij IDEA on 2023-04-06 14:01
  */
+@Setter
 @Getter
 @Configuration
 @RefreshScope
@@ -28,7 +30,4 @@ public class IgnoreWhiteProperties {
      */
     private List<String> whiteList = new ArrayList<>();
 
-    public void setWhiteList(List<String> whiteList) {
-        this.whiteList = whiteList;
-    }
 }
